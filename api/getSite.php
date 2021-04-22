@@ -10,7 +10,7 @@ $db_erg = mysqli_query($db, $user_check_query);
 
 if (isset($name)) {
     while ($zeile = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($zeile['name'] === $_GET[$name]) {
+        if ($zeile['name'] === $name) {
             echo json_encode([
                 'name' => $zeile['name'],
                 'subHeadLine' => $zeile['subHeadLine'],
