@@ -26,5 +26,6 @@ if (isset($name)) {
 } else {
     return http_response_code(404);
 }
+header('Content-Type: application/json');
 
 ?>
