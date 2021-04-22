@@ -32,7 +32,7 @@
     </div>
   </div>
   <div class="text-center">
-    <h2 class="text-base text-green-600 font-bold tracking-wide uppercase">YourWeb - {{ new Date().getFullYear() }}</h2>
+    <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a> - {{ new Date().getFullYear() }}</h2>
   </div>
 </template>
 

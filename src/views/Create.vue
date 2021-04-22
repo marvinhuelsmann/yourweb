@@ -58,6 +58,12 @@
                    placeholder="Wohnort"/>
           </div>
           <div class="pt-2">
+            <label for="image" class="sr-only">Bild</label>
+            <input id="image" name="image" autocomplete="image" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Bild URL"/>
+          </div>
+          <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
             <textarea id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -76,17 +82,15 @@
         </div>
 
         <div class="flex items-center justify-between">
-          <div class="flex items-center">
-            <input id="remember_me" name="remember_me" type="checkbox"
-                   class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"/>
-            <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-              Remember me
-            </label>
+          <div class="flex text-sm items-center justify-between">
+            <a href="https://yourweb.monster" @click="setPreview()"
+               class="font-medium text-indigo-600 hover:text-indigo-500">
+              Zurück
+            </a>
           </div>
-
           <div class="text-sm">
-            <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
-              Vorschau ansehen
+            <a href="#preview" @click="setPreview()" class="font-bold text-indigo-600 hover:text-indigo-500">
+              Vorschau {{ this.preview ? "ausbleden" : "ansehen" }}
             </a>
           </div>
         </div>
@@ -103,14 +107,88 @@
       </form>
     </div>
   </div>
+  <div id="preview" class="pb-2" v-if="preview">
+    <Profile is-preview :name='user.name' :text='user.text' :social="socialMedias" :sub-head-line='user.subHeadLine'
+             :place='user.place' :birthday='user.birthday' :img-url='user.image'></Profile>
+    <div class=" text-center">
+      <a href="#preview" @click="getPreviewData()" class="font-bold text-indigo-600 hover:text-indigo-500">
+        Vorschau neu laden
+      </a>
+    </div>
+  </div>
 </template>
 
 <script>
 import {LockClosedIcon} from '@heroicons/vue/solid'
+import Profile from "@/components/Profile";
+import {AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon} from "@heroicons/vue/outline/esm";
+
+
+const socialMedias = [
+  {
+    name: 'Competitive exchange rates',
+    description:
+        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: GlobeAltIcon,
+  },
+  {
+    name: 'No hidden fees',
+    description:
+        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: ScaleIcon,
+  },
+  {
+    name: 'Transfers are instant',
+    description:
+        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: LightningBoltIcon,
+  },
+  {
+    name: 'Mobile notifications',
+    description:
+        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
+    icon: AnnotationIcon,
+  },
+]
 
 export default {
+  data() {
+    return {
+      user: {
+        name: null,
+        subHeadLine: null,
+        color: null,
+        text: null,
+        birthday: null,
+        place: null,
+        image: null
+      },
+      preview: false
+    }
+  },
   components: {
+    Profile,
     LockClosedIcon
   },
+  methods: {
+    setPreview() {
+      this.preview = !this.preview;
+      this.getPreviewData()
+    },
+    getPreviewData() {
+      this.user.name = document.getElementById('name').value;
+      this.user.subHeadLine = document.getElementById('subHeader').value;
+      this.user.color = document.getElementById('color').value;
+      this.user.text = document.getElementById('biography').value;
+      this.user.birthday = document.getElementById('birthday').value;
+      this.user.place = document.getElementById('place').value;
+      this.user.image = document.getElementById('image').value;
+    }
+  },
+  setup() {
+    return {
+      socialMedias,
+    }
+  }
 }
 </script>

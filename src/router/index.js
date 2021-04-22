@@ -3,7 +3,6 @@ import Home from '../views/Home.vue'
 import About from '../views/About.vue'
 import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
-import Preview from '../views/Preview.vue'
 
 const routes = [
     {
@@ -30,11 +29,6 @@ const routes = [
         path: '/u',
         name: 'User',
         component: Profile
-    },
-    {
-        path: '/preview',
-        name: 'Preview',
-        component: Preview
     }
 ]
 
