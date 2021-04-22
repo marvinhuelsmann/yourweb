@@ -5,11 +5,15 @@
     },
     "api/getSite.php": {
       "runtime": "vercel-php@0.4.0"
+    },
+    "api/blog.php": {
+      "runtime": "vercel-php@0.4.0"
     }
   },
   "routes": [
     { "src": "/api/v1/createSite",  "dest": "/api/createSite.php" },
-    { "src": "/api/v1/getSite",  "dest": "/api/getSite.php" }
+    { "src": "/api/v1/getSite",  "dest": "/api/getSite.php" },
+    { "src": "/api/v1/blog.php",  "dest": "/api/blog.php" }
   ]
 }
 
