@@ -2,9 +2,22 @@
   <div class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="lg:text-center">
-        <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block" alt="">
-        <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">{{ name }}</h2>
-        <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
+             alt="">
+        <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }}</h2>
+        <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday !== ''">
+          <h2 class="text-indigo-500 font-semibold">
+            {{ birthday }}
+          </h2>
+          <CakeIcon class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
+        </div>
+        <div class="justify-center text-center flex sm:-mr-2" v-if="place !== ''">
+          <h2 class="text-indigo-500 font-semibold">
+            {{ place }}
+          </h2>
+          <LocationMarkerIcon class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
+        </div>
+        <p class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           {{ subHeadLine }}
         </p>
         <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
@@ -32,7 +45,8 @@
     </div>
   </div>
   <div class="text-center">
-    <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a> - {{ new Date().getFullYear() }}</h2>
+    <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a>
+      - {{ new Date().getFullYear() }}</h2>
   </div>
 </template>
 

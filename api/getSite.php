@@ -1,14 +1,15 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-$name = $_GET['i'];
 $count = false;
 
 $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
 $user_check_query = "SELECT * FROM websites";
 $db_erg = mysqli_query($db, $user_check_query);
 
-if (isset($name)) {
+if (isset($_GET['i'])) {
+    $name = $_GET['i'];
+
     while ($zeile = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
         if ($zeile['id'] === $name) {
             $count = true;

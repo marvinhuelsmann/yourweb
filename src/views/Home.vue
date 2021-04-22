@@ -23,7 +23,7 @@
         </div>
         <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
           <button type="button" formtarget="_top"
-                  onclick="window.location.href='https://twitter.com/intent/tweet?text=yourweb.monster is now starting to developed! #YourWebsite'"
+                  onclick="window.location.href='https://twitter.com/intent/tweet?text=yourweb.monster is now starting to develop! #YourWebsite'"
                   class="-mr-1 flex p-2 rounded-md hover:bg-indigo-500 focus:outline-none focus:ring-2 focus:ring-white sm:-mr-2">
             <span class="sr-only">Dismiss</span>
             <ShareIcon class="h-6 w-6 text-white" aria-hidden="true"/>
