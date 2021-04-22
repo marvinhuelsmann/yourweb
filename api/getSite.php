@@ -13,7 +13,6 @@ if (isset($name)) {
         if ($zeile['name'] === $_GET[$name]) {
             echo json_encode([
                 'name' => $zeile['name'],
-                'biografie' => $zeile['biografie'],
                 'subHeadLine' => $zeile['subHeadLine'],
                 'color' => $zeile['color'],
                 'text' => $zeile['text'],
@@ -24,6 +23,8 @@ if (isset($name)) {
             return;
         }
     }
+} else {
+    return http_response_code(404);
 }
 
 ?>

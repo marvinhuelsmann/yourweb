@@ -13,7 +13,7 @@
   "routes": [
     { "src": "/api/v1/createSite",  "dest": "/api/createSite.php" },
     { "src": "/api/v1/getSite",  "dest": "/api/getSite.php" },
-    { "src": "/api/v1/blog.php",  "dest": "/api/blog.php" }
+    { "src": "/api/v1/blog",  "dest": "/api/blog.php" }
   ]
 }
 

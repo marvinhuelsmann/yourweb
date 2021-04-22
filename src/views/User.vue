@@ -40,7 +40,6 @@ export default {
     return {
       user: {
         name: null,
-        biografie: null,
         subHeadLine: null,
         color: null,
         text: null,
