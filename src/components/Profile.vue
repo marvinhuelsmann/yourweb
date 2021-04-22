@@ -2,7 +2,7 @@
   <div class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="lg:text-center">
-        <img class="object-center md:object-top xl:w-1/5 ..." :src='imgUrl' style="display: inline-block" alt="">
+        <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block" alt="">
         <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">{{ name }}</h2>
         <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           {{ subHeadLine }}
