@@ -15,7 +15,7 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" action="#" method="POST">
+      <form class="mt-8 space-y-6" :action='createWebsite'>
         <input type="hidden" name="remember" value="true"/>
         <div class="rounded-md shadow-sm -space-y-px">
           <h2 class="py-4 mt-6 text-center text-3xl font-medium text-gray-900">
@@ -95,7 +95,7 @@
           </div>
         </div>
 
-        <div>
+        <div v-if="!codeInvalid">
           <button type="submit" @click="createWebsite"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -164,7 +164,8 @@ export default {
         place: null,
         image: null
       },
-      preview: false
+      preview: false,
+      codeInvalid: false
     }
   },
   components: {
@@ -191,7 +192,9 @@ export default {
       this.getPreviewData()
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
       + "&place=" + this.user.place + "&image=" + this.user.image).catch(error => {
-        if (error)
+        if (error.status === 404) {
+          this.codeInvalid = true;
+        } else if (error)
           console.error(error)
       })
     }
