@@ -15,7 +15,7 @@
           </a>
         </p>
       </div>
-      <form class="mt-8 space-y-6" :action='createWebsite'>
+      <form class="mt-8 space-y-6">
         <input type="hidden" name="remember" value="true"/>
         <div class="rounded-md shadow-sm -space-y-px">
           <h2 class="py-4 mt-6 text-center text-3xl font-medium text-gray-900">
@@ -96,7 +96,7 @@
         </div>
 
         <div v-if="!codeInvalid">
-          <button type="submit" @click="createWebsite"
+          <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
@@ -162,7 +162,8 @@ export default {
         text: null,
         birthday: null,
         place: null,
-        image: null
+        image: null,
+        email: null
       },
       preview: false,
       codeInvalid: false
@@ -179,7 +180,7 @@ export default {
     },
     getPreviewData() {
       this.user.code = document.getElementById('password').value;
-      this.user.name = document.getElementById('email-address').value;
+      this.user.email = document.getElementById('email-address').value;
       this.user.name = document.getElementById('name').value;
       this.user.subHeadLine = document.getElementById('subHeader').value;
       this.user.color = document.getElementById('color').value;
@@ -191,7 +192,7 @@ export default {
     createWebsite() {
       this.getPreviewData()
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-      + "&place=" + this.user.place + "&image=" + this.user.image).catch(error => {
+      + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
         if (error.status === 404) {
           this.codeInvalid = true;
         } else if (error)

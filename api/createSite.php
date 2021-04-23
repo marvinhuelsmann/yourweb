@@ -43,7 +43,6 @@ if (isset($_GET['code']) &&
         echo json_encode([
             'error' => mysqli_error($db)
         ]);
-        return http_response_code(404);
     }
 }
 
