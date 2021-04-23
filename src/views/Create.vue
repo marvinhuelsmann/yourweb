@@ -166,7 +166,8 @@ export default {
         email: null
       },
       preview: false,
-      codeInvalid: false
+      codeInvalid: false,
+      success: false
     }
   },
   components: {
@@ -204,6 +205,8 @@ export default {
           console.log("code is invalid!");
         } else if (error)
           console.error(error)
+      }).finally(() => {
+        window.location.href = "https://yourweb.monster/u?i=" + this.user.name;
       })
     }
   },

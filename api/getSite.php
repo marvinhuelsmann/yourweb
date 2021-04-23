@@ -11,7 +11,7 @@ if (isset($_GET['i'])) {
     $name = $_GET['i'];
 
     while ($zeile = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($zeile['id'] === $name) {
+        if ($zeile['id'] === $name || $zeile['name'] === $name) {
             $count = true;
             echo json_encode([
                 'name' => $zeile['name'],
