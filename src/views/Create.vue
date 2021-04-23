@@ -95,7 +95,7 @@
           </div>
         </div>
 
-        <div v-if="!codeInvalid">
+        <div v-if="!codeValid">
           <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -173,6 +173,11 @@ export default {
     Profile,
     LockClosedIcon
   },
+  computed: {
+    codeValid() {
+      return this.codeInvalid
+    }
+  },
   methods: {
     setPreview() {
       this.preview = !this.preview;
@@ -190,11 +195,13 @@ export default {
       this.user.image = document.getElementById('image').value;
     },
     createWebsite() {
+      event.preventDefault();
       this.getPreviewData()
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
       + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
-        if (error.status === 404) {
+        if (error.status === 203) {
           this.codeInvalid = true;
+          console.log("code is invalid!");
         } else if (error)
           console.error(error)
       })

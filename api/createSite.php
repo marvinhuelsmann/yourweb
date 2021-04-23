@@ -25,7 +25,7 @@ if (isset($_GET['code']) &&
     $ip = getIp();
 
     if ($code !== '500') {
-        return http_response_code(404);
+        return http_response_code(203);
     }
 
     $sql = "INSERT INTO `websites` (`ip`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`)
@@ -38,7 +38,7 @@ if (isset($_GET['code']) &&
         echo json_encode([
             'success' => 'Site is created!'
         ]);
-        return;
+        return http_response_code(201);
     } else {
         echo json_encode([
             'error' => mysqli_error($db)
