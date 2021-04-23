@@ -35,14 +35,19 @@ if (isset($_GET['code']) &&
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
       '" . mysqli_real_escape_string($db, $image) . "');";
     if (mysqli_query($db, $sql)) {
+        echo json_encode([
+            'success' => 'Site is created!'
+        ]);
         return;
     } else {
         echo json_encode([
             'error' => mysqli_error($db)
         ]);
+        return http_response_code(404);
     }
-
 }
+
+header('Content-Type: application/json');
 
 function getIp()
 {
