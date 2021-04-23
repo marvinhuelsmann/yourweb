@@ -104,8 +104,7 @@
               <span class="block text-green-600 xl:inline">für jeden Menschen kinderleicht</span>
             </h1>
             <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-              fugiat veniam occaecat fugiat aliqua.
+              Mit der mini oder Max Seite sind deine Kreativität keine Grenzen gesetzt! Ob mit viel Text oder weniger... Sie wird dir gefallen.
             </p>
 
 
