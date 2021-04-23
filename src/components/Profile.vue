@@ -5,13 +5,13 @@
         <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
              alt="">
         <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }}</h2>
-        <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday !== ''">
+        <div class="justify-center lg:text-center lg:flex pt-2 sm:-mr-2" v-if="birthday !== ''">
           <h2 class="text-indigo-500 font-semibold">
             {{ birthday }}
           </h2>
           <CakeIcon class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
         </div>
-        <div class="justify-center text-center flex sm:-mr-2" v-if="place !== ''">
+        <div class="justify-center lg:text-center lg:flex sm:-mr-2" v-if="place !== ''">
           <h2 class=" text-indigo-500 font-semibold">
             {{ place }}
           </h2>
