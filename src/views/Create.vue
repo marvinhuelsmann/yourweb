@@ -96,7 +96,10 @@
             </a>
           </div>
         </div>
-        <div v-if="!codeValid">
+        <div v-if="loading" class="justify-center flex">
+            <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+        </div>
+        <div v-else-if="!codeValid">
           <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -110,7 +113,7 @@
             Dein Beta Code war ungültig, probiere es später erneut!
           </p>
         </div>
-        <div class="justify-center flex" v-if="preview && !codeValid">
+        <div class="justify-center flex" v-if="preview && !codeValid && !loading">
           <ArrowDownIcon class="animate-bounce h-10 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         </div>
       </form>
@@ -123,7 +126,7 @@
 </template>
 
 <script>
-import {LockClosedIcon, ArrowDownIcon} from '@heroicons/vue/solid'
+import {LockClosedIcon, ArrowDownIcon, ClockIcon} from '@heroicons/vue/solid'
 import Profile from "@/components/Profile";
 
 export default {
@@ -149,7 +152,8 @@ export default {
   components: {
     Profile,
     LockClosedIcon,
-    ArrowDownIcon
+    ArrowDownIcon,
+    ClockIcon
   },
   computed: {
     codeValid() {

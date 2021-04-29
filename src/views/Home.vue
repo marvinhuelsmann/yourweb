@@ -16,7 +16,7 @@
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="#"
+          <a href="https://twitter.com/marvhuelsmann" target="_blank"
              class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-indigo-50">
             Erfahre mehr
           </a>
@@ -129,7 +129,7 @@
     </div>
     <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
       <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-           src="../assets/images/MBPStart.png"
+           src="../assets/images/banner.png"
            alt=""/>
     </div>
   </Popover>
