@@ -61,7 +61,7 @@
               <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                            class="font-medium text-gray-500 hover:text-gray-900">{{ item.name }}
               </router-link>
-              <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
+              <a @click="authenticate" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
             </div>
           </nav>
         </div>
@@ -88,7 +88,7 @@
                     item.name
                   }}</a>
               </div>
-              <a href="#"
+              <a @click="authenticate"
                  class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                 Log In
               </a>
@@ -104,7 +104,8 @@
               <span class="block text-green-600 xl:inline">für jeden Menschen kinderleicht</span>
             </h1>
             <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Mit der mini oder Max Seite sind deine Kreativität keine Grenzen gesetzt! Ob mit viel Text oder weniger... Sie wird dir gefallen.
+              Mit der mini oder Max Seite sind deine Kreativität keine Grenzen gesetzt! Ob mit viel Text oder weniger...
+              Sie wird dir gefallen.
             </p>
 
 
@@ -178,6 +179,7 @@
 <script>
 import {Popover, PopoverButton, PopoverPanel} from '@headlessui/vue'
 import {MenuIcon, XIcon, SpeakerphoneIcon, ShareIcon} from '@heroicons/vue/outline'
+import {store} from "@/store";
 
 const navigation = [
   {name: 'Blog', href: '/blog'},
@@ -197,6 +199,23 @@ export default {
   setup() {
     return {
       navigation,
+    }
+  },
+  computed: {
+    user() {
+      return store.state.user
+    }
+  },
+  methods: {
+    authenticate() {
+      window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.de/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+    },
+    getOneGamingName() {
+      if (this.user != null) {
+        return this.user?.name
+      } else {
+        return ""
+      }
     }
   }
 }

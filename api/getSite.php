@@ -10,17 +10,18 @@ $db_erg = mysqli_query($db, $user_check_query);
 if (isset($_GET['i'])) {
     $name = $_GET['i'];
 
-    while ($zeile = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($zeile['id'] === $name || $zeile['name'] === $name) {
+    while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
+        if ($row['id'] === $name || $row['name'] === $name) {
             $count = true;
+
             echo json_encode([
-                'name' => $zeile['name'],
-                'subHeadLine' => $zeile['subHeadLine'],
-                'color' => $zeile['color'],
-                'text' => $zeile['text'],
-                'birthday' => $zeile['birthday'],
-                'place' => $zeile['place'],
-                'image' => $zeile['image']
+                'name' => $row['name'],
+                'subHeadLine' => $row['subHeadLine'],
+                'color' => $row['color'],
+                'text' => $row['text'],
+                'birthday' => $row['birthday'],
+                'place' => $row['place'],
+                'image' => $row['image']
             ]);
             return;
         }

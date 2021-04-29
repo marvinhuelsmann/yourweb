@@ -1,6 +1,6 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home.vue'
-import About from '../views/About.vue'
+import Auth from '../components/Auth.vue'
 import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
 
@@ -11,9 +11,9 @@ const routes = [
         component: Home
     },
     {
-        path: '/about',
-        name: 'About',
-        component: About,
+        path: '/auth/callback',
+        name: 'Auth',
+        component: Auth
     },
     {
         path: '/create',

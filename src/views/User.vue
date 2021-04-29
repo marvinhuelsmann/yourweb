@@ -1,10 +1,10 @@
 <template>
   <div v-if="isLoaded">
     <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
-             :social='socialMedias' :name='user.name' :img-url='user.image'></Profile>
+             :name='user.name' :img-url='user.image'></Profile>
   </div>
   <div v-else-if="isNotCorrectLoading">
-  <h1>Error 404 user not found!</h1>
+    <h1>Error 404 user not found!</h1>
   </div>
   <div v-else>
     <div class="animate-pulse flex space-x-4">
@@ -22,34 +22,6 @@
 
 <script>
 import Profile from '../components/Profile.vue'
-import {AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon} from "@heroicons/vue/outline/esm";
-
-const socialMedias = [
-  {
-    name: 'Competitive exchange rates',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: GlobeAltIcon,
-  },
-  {
-    name: 'No hidden fees',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Transfers are instant',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: LightningBoltIcon,
-  },
-  {
-    name: 'Mobile notifications',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: AnnotationIcon,
-  },
-]
 
 export default {
   name: "User",
@@ -66,11 +38,6 @@ export default {
       },
       isLoaded: false,
       isNotCorrectLoading: false
-    }
-  },
-  setup() {
-    return {
-      socialMedias,
     }
   },
   mounted() {

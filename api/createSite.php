@@ -21,7 +21,6 @@ if (isset($_GET['code']) &&
     $place = $_GET['place'];
     $image = $_GET['image'];
     $email = $_GET['email'];
-
     $ip = getIp();
 
     if ($code !== '500') {
@@ -34,6 +33,7 @@ if (isset($_GET['code']) &&
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
       '" . mysqli_real_escape_string($db, $image) . "');";
+
     if (mysqli_query($db, $sql)) {
         echo json_encode([
             'success' => 'Site is created!'
@@ -44,6 +44,7 @@ if (isset($_GET['code']) &&
             'error' => mysqli_error($db)
         ]);
     }
+
 }
 
 header('Content-Type: application/json');

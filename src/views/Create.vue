@@ -2,7 +2,7 @@
   <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <img class="mx-auto h-12 w-auto" src="https://tailwindui.com/img/logos/workflow-mark-indigo-600.svg"
+        <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
              alt="Workflow"/>
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
           mini Monster Seite erstellen
@@ -21,10 +21,12 @@
           <h2 class="py-4 mt-6 text-center text-3xl font-medium text-gray-900">
             Vorbereitung:
           </h2>
-         <div>
-              <label for="email-address" class="sr-only">Email address</label>
-              <input id="email-address" name="email" type="email" autocomplete="email" required="" class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm" placeholder="Email Adresse*" />
-            </div>
+          <div>
+            <label for="email-address" class="sr-only">Email address</label>
+            <input id="email-address" name="email" type="email" autocomplete="email" required=""
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Email Adresse*"/>
+          </div>
           <div>
             <label for="password" class="sr-only">Code</label>
             <input id="password" name="password" type="password" autocomplete="current-password" required=""
@@ -41,43 +43,44 @@
           </div>
           <div class="">
             <label for="name" class="sr-only">Name</label>
-            <input id="name" name="name" autocomplete="name" required="" type="text"
+            <input v-on:input="setPreview(true)" id="name" name="name" autocomplete="name" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Name*"/>
           </div>
           <div class="pt-2">
             <label for="birthday" class="sr-only">Geburtstag</label>
-            <input id="birthday" name="birthday" autocomplete="birthday" required="" type="text"
+            <input v-on:input="setPreview(true)" id="birthday" name="birthday" autocomplete="birthday" required=""
+                   type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Geburtstag"/>
           </div>
           <div class="pt-2">
             <label for="place" class="sr-only">Wohnort</label>
-            <input id="place" name="place" autocomplete="place" required="" type="text"
+            <input v-on:input="setPreview(true)" id="place" name="place" autocomplete="place" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Wohnort"/>
           </div>
           <div class="pt-2">
             <label for="image" class="sr-only">Bild</label>
-            <input id="image" name="image" autocomplete="image" required="" type="text"
+            <input v-on:input="setPreview(true)" id="image" name="image" autocomplete="image" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Bild URL"/>
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea id="subHeader" name="subHeader" autocomplete="subHeader" required=""
+            <textarea v-on:input="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Zwischenüberschrift*"/>
           </div>
           <div class="pt-2">
             <label for="biography" class="sr-only">Biografie</label>
-            <textarea id="biography" name="biography" autocomplete="biography" required=""
+            <textarea v-on:input="setPreview(true)" id="biography" name="biography" autocomplete="biography" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Biographie*"/>
           </div>
           <div class="pt-2">
             <label for="color" class="">Lieblingsfarbe: </label>
-            <input id="color" name="color" autocomplete="color" type="color" required="" class="" placeholder="Farbe:"/>
+            <input  v-on:input="setPreview(true)" id="color" name="color" autocomplete="color" type="color" required="" class="" placeholder="Farbe:"/>
           </div>
         </div>
 
@@ -89,7 +92,7 @@
             </a>
           </div>
           <div class="text-sm">
-            <a href="#preview" @click="setPreview()" class="font-bold text-indigo-600 hover:text-indigo-500">
+            <a href="#preview" @click="setPreview(!this.preview)" class="font-bold text-indigo-600 hover:text-indigo-500">
               Vorschau {{ this.preview ? "ausbleden" : "ansehen" }}
             </a>
           </div>
@@ -104,52 +107,26 @@
             Erstellen
           </button>
         </div>
+        <div v-else>
+          <p class=" text-center text-sm text-gray-600">
+            Dein Beta Code war ungültig, probiere es später erneut!
+          </p>
+        </div>
+        <div class="justify-center flex" v-if="preview && !codeValid">
+          <ArrowDownIcon class="animate-bounce h-10 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
+        </div>
       </form>
     </div>
   </div>
-  <div id="preview" class="pb-2" v-if="preview">
-    <Profile is-preview :name='user.name' :text='user.text' :social="socialMedias" :sub-head-line='user.subHeadLine'
+  <div id="preview" class="pb-3" v-if="preview">
+    <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
              :place='user.place' :birthday='user.birthday' :img-url='user.image'></Profile>
-    <div class=" text-center">
-      <a href="#preview" @click="getPreviewData()" class=" font-bold text-indigo-600 hover:text-indigo-500">
-        Vorschau neu laden
-      </a>
-    </div>
   </div>
 </template>
 
 <script>
-import {LockClosedIcon} from '@heroicons/vue/solid'
+import {LockClosedIcon, ArrowDownIcon} from '@heroicons/vue/solid'
 import Profile from "@/components/Profile";
-import {AnnotationIcon, GlobeAltIcon, LightningBoltIcon, ScaleIcon} from "@heroicons/vue/outline/esm";
-
-
-const socialMedias = [
-  {
-    name: 'Competitive exchange rates',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: GlobeAltIcon,
-  },
-  {
-    name: 'No hidden fees',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: ScaleIcon,
-  },
-  {
-    name: 'Transfers are instant',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: LightningBoltIcon,
-  },
-  {
-    name: 'Mobile notifications',
-    description:
-        'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis ratione.',
-    icon: AnnotationIcon,
-  },
-]
 
 export default {
   data() {
@@ -172,7 +149,8 @@ export default {
   },
   components: {
     Profile,
-    LockClosedIcon
+    LockClosedIcon,
+    ArrowDownIcon
   },
   computed: {
     codeValid() {
@@ -180,8 +158,8 @@ export default {
     }
   },
   methods: {
-    setPreview() {
-      this.preview = !this.preview;
+    setPreview(preview) {
+      this.preview = preview;
       this.getPreviewData()
     },
     getPreviewData() {
@@ -198,8 +176,14 @@ export default {
     createWebsite() {
       event.preventDefault();
       this.getPreviewData()
+
+      if (this.user.code != null || this.user.code !== '') {
+        this.codeInvalid = true;
+        return;
+      }
+
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-      + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
         if (error.status === 203) {
           this.codeInvalid = true;
           console.log("code is invalid!");
@@ -208,11 +192,6 @@ export default {
       }).finally(() => {
         window.location.href = "https://yourweb.monster/u?i=" + this.user.name;
       })
-    }
-  },
-  setup() {
-    return {
-      socialMedias,
     }
   }
 }
