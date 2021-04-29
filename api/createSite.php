@@ -45,6 +45,8 @@ if (isset($_GET['code']) &&
         ]);
     }
 
+} else {
+    return http_response_code(400);
 }
 
 header('Content-Type: application/json');

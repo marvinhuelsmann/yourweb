@@ -83,7 +83,6 @@
             <input  v-on:input="setPreview(true)" id="color" name="color" autocomplete="color" type="color" required="" class="" placeholder="Farbe:"/>
           </div>
         </div>
-
         <div class="flex items-center justify-between">
           <div class="flex text-sm items-center justify-between">
             <a href="https://yourweb.monster" @click="setPreview()"
@@ -97,7 +96,6 @@
             </a>
           </div>
         </div>
-
         <div v-if="!codeValid">
           <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
@@ -143,6 +141,7 @@ export default {
         email: null
       },
       preview: false,
+      loading: false,
       codeInvalid: false,
       success: false
     }
@@ -174,14 +173,12 @@ export default {
       this.user.image = document.getElementById('image').value;
     },
     createWebsite() {
-      event.preventDefault();
-      this.getPreviewData()
-
-      if (this.user.code != null || this.user.code !== '') {
+      if (this.user.code == null || this.user.code === '') {
         this.codeInvalid = true;
         return;
       }
 
+      this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
         if (error.status === 203) {
@@ -190,6 +187,7 @@ export default {
         } else if (error)
           console.error(error)
       }).finally(() => {
+        this.loading = false;
         window.location.href = "https://yourweb.monster/u?i=" + this.user.name;
       })
     }
