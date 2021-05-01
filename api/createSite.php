@@ -43,8 +43,8 @@ if (isset($_GET['code']) &&
                 echo json_encode([
                     'id' => $row['id']
                 ]);
-            return http_response_code(201);
-        }
+                return;
+            }
         }
     } else {
         echo json_encode([
