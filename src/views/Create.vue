@@ -196,7 +196,7 @@ export default {
         } else if (error)
           console.error(error)
       }).finally(() => {
-        fetch('https://yourweb.monster/api/v1/getID?name=' + this.name + "&text=" + this.text).then(result => {
+        fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
           result.json().then(result => {
             this.userIdentify = result
           }).finally(() => {
