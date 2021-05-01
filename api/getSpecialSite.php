@@ -1,10 +1,8 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-$count = false;
-
 $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
-$user_check_query = "SELECT * FROM websites ORDER BY rand()";
+$user_check_query = "SELECT * FROM websites ORDER BY rand() LIMIT 1";
 $db_erg = mysqli_query($db, $user_check_query);
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
@@ -17,9 +15,9 @@ $db_erg = mysqli_query($db, $user_check_query);
                 'place' => $row['place'],
                 'image' => $row['image']
             ]);
+        header('Content-Type: application/json');
     }
 
 
-header('Content-Type: application/json');
 
 ?>
