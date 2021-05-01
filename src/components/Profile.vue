@@ -24,7 +24,6 @@
           {{ text }}
         </p>
       </div>
-
       <!--  <div class="mt-10">
           <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
             <div v-for="social in social" :key="social.name" class="relative">
@@ -65,7 +64,7 @@
       </div>
     </div>
   </div>
-  <div class="text-center">
+  <div v-if="showAdvertise" class="text-center">
     <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a>
       - {{ new Date().getFullYear() }}</h2>
   </div>
@@ -90,7 +89,8 @@ export default {
     birthday: String,
     text: String,
     social: Map,
-    imgUrl: String
+    imgUrl: String,
+    showAdvertise: Boolean
   },
   components: {
     LocationMarkerIcon,

@@ -123,7 +123,7 @@
   </div>
   <div id="preview" class="pb-3" v-if="preview">
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
-             :place='user.place' :birthday='user.birthday' :img-url='user.image'></Profile>
+             :place='user.place' :birthday='user.birthday' :img-url='user.image' show-advertise></Profile>
   </div>
 </template>
 
