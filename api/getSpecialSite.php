@@ -15,7 +15,6 @@ $db_erg = mysqli_query($db, $user_check_query);
                 'place' => $row['place'],
                 'image' => $row['image']
             ]);
-        header('Content-Type: application/json');
     }
 
 
