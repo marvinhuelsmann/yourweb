@@ -1,10 +1,12 @@
 <template>
   <div>
     <div class="mt-1 mr-3">
-    <router-link to="/">
-      <XIcon class="w-10 h-10" aria-hidden="false"/>
-    </router-link>
-      <HeartIcon class="w-10 h-10" aria-hidden="false"/>
+      <router-link to="/">
+        <XIcon class="w-10 h-10" aria-hidden="false"/>
+      </router-link>
+      <router-link :to='"/"  + user.id'>
+        <ClipboardCopyIcon class="w-10 h-10" aria-hidden="false"/>
+      </router-link>
     </div>
     <div v-if="isLoaded">
       <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
@@ -14,6 +16,11 @@
             class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"
             v-on:click="reload">
           nächste Seite
+        </button>
+        <button
+            class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-white hover:bg-red-300 text-black"
+            v-on:click="reload">
+          <HeartIcon class="h-8"/>
         </button>
       </div>
     </div>
@@ -26,25 +33,26 @@
           </span>
       </div>
     </div>
-      <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
-        <p class="text-sm text-center justify-center flex text-gray-500">
-          Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
-        </p>
+    <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
+      <p class="text-sm text-center justify-center flex text-gray-500">
+        Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
+      </p>
     </div>
   </div>
 </template>
 
 <script>
 import Profile from "@/components/Profile";
-import {HeartIcon, XIcon, ShieldExclamationIcon} from "@heroicons/vue/outline/esm";
+import {HeartIcon, XIcon, ShieldExclamationIcon, ClipboardCopyIcon} from "@heroicons/vue/outline/esm";
 
 export default {
   name: "Community",
   // eslint-disable-next-line vue/no-unused-components
-  components: {Profile, ShieldExclamationIcon, HeartIcon, XIcon},
+  components: {Profile, ShieldExclamationIcon, HeartIcon, XIcon, ClipboardCopyIcon},
   data() {
     return {
       user: {
+        id: null,
         name: null,
         subHeadLine: null,
         color: null,

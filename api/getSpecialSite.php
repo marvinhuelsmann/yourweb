@@ -7,6 +7,7 @@ $db_erg = mysqli_query($db, $user_check_query);
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             echo json_encode([
+                'id' => $row['id'],
                 'name' => $row['name'],
                 'subHeadLine' => $row['subHeadLine'],
                 'color' => $row['color'],
