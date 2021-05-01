@@ -34,11 +34,18 @@ if (isset($_GET['code']) &&
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
       '" . mysqli_real_escape_string($db, $image) . "');";
 
+    $user_check_query = "SELECT * FROM websites";
+    $db_erg = mysqli_query($db, $user_check_query);
+
     if (mysqli_query($db, $sql)) {
-        echo json_encode([
-            'success' => 'Site is created!'
-        ]);
-        return http_response_code(201);
+        while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
+            if ($row['name'] === $name && $row['text'] === $text) {
+                echo json_encode([
+                    'id' => $row['id']
+                ]);
+            return http_response_code(201);
+        }
+        }
     } else {
         echo json_encode([
             'error' => mysqli_error($db)

@@ -20,9 +20,9 @@
         <p class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           {{ subHeadLine }}
         </p>
-          <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
-            {{ text }}
-          </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          {{ text }}
+        </p>
       </div>
 
       <!--  <div class="mt-10">
@@ -45,7 +45,25 @@
     </div>
   </div>
   <div v-else>
-    <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">Diese Seite wurde leider nicht gefunden!</h2>
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="mt-6 lg:text-center">
+        <h2 class="text-base text-green-900 pt-1 font-bold tracking-wide uppercase">Diese Seite wurde leider nicht
+          gefunden!</h2>
+        <p class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+          Dieser Nutzer besitzt keine YourWeb Seite
+        </p>
+        <p class="mt-4 max-w-2xl text-xl text-gray-500 lg:mx-auto">
+          Erstelle dir noch heute deine eigene Seite! Mit der mini oder Max Seite sind deine Kreativität keine Grenzen
+          gesetzt! Ob mit viel Text oder weniger... Sie wird dir gefallen.
+        </p>
+        <div class="mt-3 mb-4 justify-center flex">
+          <button
+              class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700" v-on:click="goHome">
+            Zurück zum Start
+          </button>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="text-center">
     <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a>
@@ -85,6 +103,11 @@ export default {
     LightningBoltIcon,
     // eslint-disable-next-line vue/no-unused-components
     ScaleIcon
+  },
+  methods: {
+    goHome() {
+      window.location.href = "https://yourweb.monster";
+    }
   }
 }
 </script>
