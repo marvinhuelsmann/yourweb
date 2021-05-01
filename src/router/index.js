@@ -4,6 +4,7 @@ import Auth from '../components/Auth.vue'
 import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
+import Blog from '../views/Blog.vue'
 
 const routes = [
     {
@@ -37,9 +38,14 @@ const routes = [
         component: Profile
     },
     {
+        path: '/blog',
+        name: 'Block',
+        component: Blog
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
-        component: () => import('../views/User.vue')
+        component: Profile
     }
 ]
 

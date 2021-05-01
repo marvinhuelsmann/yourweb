@@ -4,7 +4,7 @@ export const store = {
     },
     mutations: {
         SET_USER(user) {
-            this.user = user
+            store.state.user = user
         }
     },
     actions: {},
