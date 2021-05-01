@@ -4,6 +4,7 @@
     <router-link to="/">
       <XIcon class="w-10 h-10" aria-hidden="false"/>
     </router-link>
+      <HeartIcon class="w-10 h-10" aria-hidden="false"/>
     </div>
     <div v-if="isLoaded">
       <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
@@ -35,11 +36,12 @@
 
 <script>
 import Profile from "@/components/Profile";
-import {XIcon} from "@heroicons/vue/outline/esm";
+import {HeartIcon, XIcon, ShieldExclamationIcon} from "@heroicons/vue/outline/esm";
 
 export default {
   name: "Community",
-  components: {Profile, XIcon},
+  // eslint-disable-next-line vue/no-unused-components
+  components: {Profile, ShieldExclamationIcon, HeartIcon, XIcon},
   data() {
     return {
       user: {
