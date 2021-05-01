@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoaded">
     <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
-             :name='user.name' :img-url='user.image' show-advertise></Profile>
+             :name='user.name' :img-url='user.image' show-advertise :redirect=redirect></Profile>
   </div>
   <div v-else-if="isNotCorrectLoading">
     <h1>Error 404 user not found!</h1>
@@ -37,7 +37,8 @@ export default {
         image: null
       },
       isLoaded: false,
-      isNotCorrectLoading: false
+      isNotCorrectLoading: false,
+      redirect: window.location.search.substr(1)
     }
   },
   mounted() {
@@ -58,6 +59,18 @@ export default {
       this.isLoaded = true;
     })
 
+  },
+  methods: {
+    findGetParameter(parameterName) {
+      let result = null,
+          tmp = [];
+      const items = location.search.substr(1).split("&");
+      for (let index = 0; index < items.length; index++) {
+        tmp = items[index].split("=");
+        if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+      }
+      return result;
+    }
   },
   components: {
     Profile

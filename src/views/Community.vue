@@ -4,7 +4,7 @@
       <router-link to="/">
         <XIcon class="w-10 h-10" aria-hidden="false"/>
       </router-link>
-      <router-link :to='"/"  + user.id'>
+      <router-link :to='"/"  + user.id + "?redirect=community"'>
         <ClipboardCopyIcon class="w-10 h-10" aria-hidden="false"/>
       </router-link>
     </div>

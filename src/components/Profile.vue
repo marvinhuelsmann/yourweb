@@ -1,4 +1,9 @@
 <template>
+  <div v-if="redirect !== '' && redirect != null" class="mt-1 mr-3">
+    <router-link :to="'https://yourweb.monster/' + redirect.replace('redirect=', '')">
+      <RewindIcon class="w-10 h-10" aria-hidden="false"/>
+    </router-link>
+  </div>
   <div v-if="name != null" class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="lg:text-center">
@@ -77,7 +82,8 @@ import {
   AnnotationIcon,
   GlobeAltIcon,
   LightningBoltIcon,
-  ScaleIcon
+  ScaleIcon,
+  RewindIcon
 } from '@heroicons/vue/outline'
 
 export default {
@@ -90,7 +96,8 @@ export default {
     text: String,
     social: Map,
     imgUrl: String,
-    showAdvertise: Boolean
+    showAdvertise: Boolean,
+    redirect: String
   },
   components: {
     LocationMarkerIcon,
@@ -102,7 +109,8 @@ export default {
     // eslint-disable-next-line vue/no-unused-components
     LightningBoltIcon,
     // eslint-disable-next-line vue/no-unused-components
-    ScaleIcon
+    ScaleIcon,
+    RewindIcon
   },
   methods: {
     goHome() {
