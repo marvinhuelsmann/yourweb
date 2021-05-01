@@ -1,5 +1,5 @@
 <template>
-  <div class="py-14 bg-white">
+  <div v-if="name != null" class="py-14 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="lg:text-center">
         <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
@@ -11,7 +11,7 @@
           </h2>
           <CakeIcon v-if="birthday !== ''" class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
         </div>
-        <div class="justify-center lg:text-center lg:flex sm:-mr-2" v-if="place !== ''">
+        <div class="justify-center lg:text-center lg:flex sm:-mr-2" v-if="place !== null">
           <h2 class=" text-indigo-500 font-semibold">
             {{ place }}
           </h2>
@@ -43,6 +43,9 @@
           </dl>
         </div>-->
     </div>
+  </div>
+  <div v-else>
+    <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">Diese Seite wurde leider nicht gefunden!</h2>
   </div>
   <div class="text-center">
     <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a>

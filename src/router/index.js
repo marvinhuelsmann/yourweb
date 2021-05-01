@@ -35,6 +35,11 @@ const routes = [
         path: '/u',
         name: 'User',
         component: Profile
+    },
+    {
+        path: "/:pathMatch(.*)*",
+        name: '404',
+        component: () => import('../views/User.vue')
     }
 ]
 

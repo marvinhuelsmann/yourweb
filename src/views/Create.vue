@@ -201,7 +201,7 @@ export default {
             this.userIdentify = result
           }).finally(() => {
             this.loading = false;
-            window.location.href = "https://yourweb.monster/u?i=" + this.userIdentify.id;
+            window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
           })
         }).catch(error => {
           console.error(error)
