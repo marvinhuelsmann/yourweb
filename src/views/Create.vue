@@ -195,14 +195,19 @@ export default {
           console.log("code is invalid!");
         } else if (error)
           console.error(error)
-      }).then(result => {
-        result.json().then(result => {
-          this.userIdentify = result
-        })
       }).finally(() => {
-        window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+        fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
+          result.json().then(result => {
+            this.userIdentify = result
+          }).finally(() => {
             this.loading = false;
+            window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+          })
+        }).catch(error => {
+          console.error(error)
+        })
       })
+
     }
   }
 }
