@@ -29,7 +29,7 @@ export default {
   mounted() {
     fetch('https://yourweb.monster/api/v1/getCommunity').then(result => {
       result.json().then(result => {
-        this.userIdentify = result
+        this.user = result
       }).finally(() => {
         this.isLoaded = true
       })
