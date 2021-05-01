@@ -185,7 +185,8 @@ import {store} from "@/store";
 
 const navigation = [
   {name: 'Blog', href: '/blog'},
-  {name: 'Community', href: '/community'}
+  {name: 'Community', href: '/community'},
+  {name: 'Suchen', href: '/search'},
 ]
 
 export default {
