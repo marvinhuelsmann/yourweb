@@ -1,8 +1,10 @@
 <template>
   <div>
+    <div class="mt-1 mr-3">
     <router-link to="/">
-      <XIcon class="mt-1 mr-3 w-10 h-10" aria-hidden="false"/>
+      <XIcon class="w-10 h-10" aria-hidden="false"/>
     </router-link>
+    </div>
     <div v-if="isLoaded">
       <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
                :name='user.name' :img-url='user.image'></Profile>
@@ -13,6 +15,20 @@
           nächste Seite
         </button>
       </div>
+    </div>
+    <div v-else>
+      <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
+            integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
+      <div class="w-full h-full fixed block top-0 right-10 bg-white opacity-75 z-50">
+          <span class="text-purple-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style="top: 30%">
+            <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+          </span>
+      </div>
+    </div>
+      <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
+        <p class="text-sm text-center justify-center flex text-gray-500">
+          Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
+        </p>
     </div>
   </div>
 </template>
