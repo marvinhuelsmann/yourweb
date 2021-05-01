@@ -80,7 +80,8 @@
           </div>
           <div class="pt-2">
             <label for="color" class="">Lieblingsfarbe: </label>
-            <input  v-on:input="setPreview(true)" id="color" name="color" autocomplete="color" type="color" required="" class="" placeholder="Farbe:"/>
+            <input v-on:input="setPreview(true)" id="color" name="color" autocomplete="color" type="color" required=""
+                   class="" placeholder="Farbe:"/>
           </div>
         </div>
         <div class="flex items-center justify-between">
@@ -91,13 +92,14 @@
             </a>
           </div>
           <div class="text-sm">
-            <a href="#preview" @click="setPreview(!this.preview)" class="font-bold text-indigo-600 hover:text-indigo-500">
+            <a href="#preview" @click="setPreview(!this.preview)"
+               class="font-bold text-indigo-600 hover:text-indigo-500">
               Vorschau {{ this.preview ? "ausbleden" : "ansehen" }}
             </a>
           </div>
         </div>
         <div v-if="loading" class="justify-center flex">
-            <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+          <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
         </div>
         <div v-else-if="!codeValid">
           <button type="submit" @click="createWebsite()"
@@ -132,6 +134,9 @@ import Profile from "@/components/Profile";
 export default {
   data() {
     return {
+      userIdentify: {
+        id: null
+      },
       user: {
         code: null,
         name: null,
@@ -191,8 +196,16 @@ export default {
         } else if (error)
           console.error(error)
       }).finally(() => {
-        this.loading = false;
-        window.location.href = "https://yourweb.monster/u?i=" + this.user.name;
+        fetch('https://yourweb.monster/api/v1/getID?name=' + this.name + "&text=" + this.text).then(result => {
+          result.json().then(result => {
+            this.userIdentify = result
+          }).finally(() => {
+            this.loading = false;
+            window.location.href = "https://yourweb.monster/u?i=" + this.userIdentify.id;
+          })
+        }).catch(error => {
+          console.error(error)
+        })
       })
     }
   }

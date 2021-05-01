@@ -3,6 +3,7 @@ import Home from '../views/Home.vue'
 import Auth from '../components/Auth.vue'
 import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
+import Community from '../views/Community.vue'
 
 const routes = [
     {
@@ -19,6 +20,11 @@ const routes = [
         path: '/create',
         name: 'Create',
         component: Create,
+    },
+    {
+        path: '/community',
+        name: 'Community',
+        component: Community,
     },
     {
         path: '/user',

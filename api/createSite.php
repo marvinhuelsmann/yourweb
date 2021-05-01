@@ -23,7 +23,7 @@ if (isset($_GET['code']) &&
     $email = $_GET['email'];
     $ip = getIp();
 
-    if ($code !== '500') {
+    if ($code !== '500' || $name !== '' || $name != null) {
         return http_response_code(203);
     }
 
