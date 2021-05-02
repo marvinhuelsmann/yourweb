@@ -23,7 +23,7 @@ if (isset($_GET['i'])) {
                 'place' => $row['place'],
                 'image' => $row['image']
             ]);
-            return;
+            return http_response_code(200);
         }
     }
 

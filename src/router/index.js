@@ -5,6 +5,7 @@ import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
 import Blog from '../views/Blog.vue'
+import Search from '../views/Search.vue'
 
 const routes = [
     {
@@ -41,6 +42,11 @@ const routes = [
         path: '/blog',
         name: 'Block',
         component: Blog
+    },
+    {
+        path: "/search",
+        name: 'Suchen',
+        component: Search
     },
     {
         path: "/:pathMatch(.*)*",
