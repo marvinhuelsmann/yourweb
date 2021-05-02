@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {CheckIcon, ArrowDownIcon, ClockIcon} from '@heroicons/vue/solid'
+import {CheckIcon, ClockIcon} from '@heroicons/vue/solid'
 
 export default {
   data() {
@@ -77,7 +77,6 @@ export default {
   },
   components: {
     CheckIcon,
-    ArrowDownIcon,
     ClockIcon
   },
   computed: {
