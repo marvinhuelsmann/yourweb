@@ -77,7 +77,6 @@ export default {
   },
   components: {
     CheckIcon,
-    // eslint-disable-next-line vue/no-unused-components
     ArrowDownIcon,
     ClockIcon
   },
@@ -89,21 +88,22 @@ export default {
   methods: {
     openSite() {
       this.user.name = document.getElementById('name').value;
+      this.siteInvalid = false
+      this.loading = true
 
-      this.loading = true;
       fetch('https://yourweb.monster/api/v1/getSite?i=' + this.user.name).then(result => {
         result.json().then(result => {
           this.user = result
         }).finally(() => {
           this.loading = false;
           if (result.status === 200) {
-            window.location.href = "https://yourweb.monster/" + this.user.name;
+            window.location.href = "https://yourweb.monster/" + this.user.name  + "?redirect=Search";
           } else {
             this.siteInvalid = true
           }
-
         })
       })
+
     }
   }
 }
