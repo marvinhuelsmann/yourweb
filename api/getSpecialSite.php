@@ -1,7 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-getUser(isset($_GET['oldUser']) ?? $_GET['oldUser']);
+getUser(!isset($_GET['oldUser']) ? '' : $_GET['oldUser']);
 
 function getUser($userID)
 {
