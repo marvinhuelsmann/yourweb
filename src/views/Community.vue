@@ -70,7 +70,7 @@ export default {
   methods: {
     reload() {
       this.isLoaded = false
-      fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id).then(result => {
+      fetch('https://yourweb.monster/api/v1/getCommunity' + this.user.id != null ? "?oldUser=" + this.user.id : "").then(result => {
         result.json().then(result => {
           this.user = result
         }).finally(() => {

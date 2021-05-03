@@ -1,8 +1,7 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-    getUser(isset($_GET['oldUser']) ?? $_GET['oldUser']);
-
+getUser(isset($_GET['oldUser']) ?? $_GET['oldUser']);
 
 function getUser($userID)
 {
@@ -13,7 +12,7 @@ function getUser($userID)
     $alreadyFind = false;
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($row != $userID && !$alreadyFind) {
+        if ($row['id'] !== $userID && !$alreadyFind) {
             $alreadyFind = true;
             echo json_encode([
                 'id' => $row['id'],
