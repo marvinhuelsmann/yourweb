@@ -10,7 +10,7 @@
         <p class="mt-2 text-center text-sm text-gray-600">
           Oder
           {{ ' ' }}
-          <a href="#" class="font-medium text-indigo-600 hover:text-indigo-500">
+          <a href="/create" class="font-medium text-indigo-600 hover:text-indigo-500">
             erstelle dir deine eigene mini Monster Seite
           </a>
         </p>
@@ -96,7 +96,7 @@ export default {
         }).finally(() => {
           this.loading = false;
           if (result.status === 200) {
-            window.location.href = "https://yourweb.monster/" + this.user.name  + "?redirect=Search";
+            window.location.href = "https://yourweb.monster/" + this.user.name  + "?redirect=search";
           } else {
             this.siteInvalid = true
           }

@@ -1,11 +1,20 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-$db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
-$user_check_query = "SELECT * FROM websites ORDER BY rand() LIMIT 1";
-$db_erg = mysqli_query($db, $user_check_query);
+    getUser(isset($_GET['oldUser']) ?? $_GET['oldUser']);
+
+
+function getUser($userID)
+{
+    $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+    $user_check_query = "SELECT * FROM websites ORDER BY rand()";
+    $db_erg = mysqli_query($db, $user_check_query);
+
+    $alreadyFind = false;
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
+        if ($row != $userID && !$alreadyFind) {
+            $alreadyFind = true;
             echo json_encode([
                 'id' => $row['id'],
                 'name' => $row['name'],
@@ -16,8 +25,9 @@ $db_erg = mysqli_query($db, $user_check_query);
                 'place' => $row['place'],
                 'image' => $row['image']
             ]);
+        }
     }
-
+}
 
 
 ?>
