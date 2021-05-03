@@ -12,7 +12,7 @@ function getUser($userID)
     $alreadyFind = false;
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($row['id'] !== $userID && !$alreadyFind || $userID === '') {
+        if ($row['id'] !== $userID && $alreadyFind == false || $userID === '') {
             $alreadyFind = true;
             echo json_encode([
                 'id' => $row['id'],
