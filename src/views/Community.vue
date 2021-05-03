@@ -70,15 +70,27 @@ export default {
   methods: {
     reload() {
       this.isLoaded = false
-      fetch('https://yourweb.monster/api/v1/getCommunity' + this.user.id != null || this.user.id !== "null" ? "?oldUser=" + this.user.id : "").then(result => {
-        result.json().then(result => {
-          this.user = result
-        }).finally(() => {
-          this.isLoaded = true
+      if (this.user.id != null && this.user.id !== 'null') {
+        fetch('https://yourweb.monster/api/v1/getCommunity').then(result => {
+          result.json().then(result => {
+            this.user = result
+          }).finally(() => {
+            this.isLoaded = true
+          })
+        }).catch(error => {
+          console.error(error)
         })
-      }).catch(error => {
-        console.error(error)
-      })
+      } else {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id).then(result => {
+          result.json().then(result => {
+            this.user = result
+          }).finally(() => {
+            this.isLoaded = true
+          })
+        }).catch(error => {
+          console.error(error)
+        })
+      }
     }
   }
 }
