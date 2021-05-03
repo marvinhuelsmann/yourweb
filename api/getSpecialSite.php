@@ -24,6 +24,8 @@ function getUser($userID)
                 'place' => $row['place'],
                 'image' => $row['image']
             ]);
+        } else if ($alreadyFind) {
+            return;
         }
     }
 }
