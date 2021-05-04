@@ -17,12 +17,21 @@
             v-on:click="reload">
           nächste Seite
         </button>
-        <button
-            class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-white hover:bg-red-300 text-black"
-            v-on:click="sendLike">
-          <HeartIcon class="h-8"/>
-          {{ getLikes }}
-        </button>
+        <div v-if="hasLiked">
+          <button
+              class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-red-400 text-black">
+            <HeartIcon class="h-8"/>
+            {{ getLikes }}
+          </button>
+        </div>
+        <div v-else>
+          <button
+              class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-white hover:bg-red-300 text-black"
+              v-on:click="sendLike">
+            <HeartIcon class="h-8"/>
+            {{ getLikes }}
+          </button>
+        </div>
       </div>
     </div>
     <div v-else>
@@ -33,6 +42,11 @@
             <i class="fas fa-circle-notch fa-spin fa-5x"></i>
           </span>
       </div>
+    </div>
+    <div v-if="hasLiked">
+      <p class="text-sm text-center justify-center flex text-gray-500">
+        Du hast dieser Website bereits dein Herz gegeben!
+      </p>
     </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
@@ -63,7 +77,8 @@ export default {
         image: null,
         likes: null
       },
-      isLoaded: false
+      isLoaded: false,
+      alreadyLike: false
     }
   },
   computed: {
@@ -73,6 +88,9 @@ export default {
       } else {
         return "0";
       }
+    },
+    hasLiked() {
+      return this.alreadyLike;
     }
   },
   mounted() {
@@ -80,6 +98,7 @@ export default {
   },
   methods: {
     reload() {
+      this.alreadyLike = false
       this.isLoaded = false
       if (this.user.id === null || this.user.id === "null") {
         fetch('https://yourweb.monster/api/v1/getCommunity').then(result => {
@@ -106,8 +125,14 @@ export default {
     sendLike() {
       fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.user.name).catch(error => {
         console.error(error)
-      }).finally(() => {
-        this.user.likes++;
+      }).then(response => {
+        console.log(response.status); // returns 200
+        if (response.status === 200) {
+          this.user.likes++;
+        } else {
+          this.alreadyLike = true
+          console.log("like")
+        }
       })
     }
   }
