@@ -106,6 +106,8 @@ export default {
     sendLike() {
       fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.user.name).catch(error => {
         console.error(error)
+      }).finally(() => {
+        this.user.likes++;
       })
     }
   }
