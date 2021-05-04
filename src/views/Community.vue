@@ -19,8 +19,9 @@
         </button>
         <button
             class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-white hover:bg-red-300 text-black"
-            v-on:click="reload">
+            v-on:click="sendLike">
           <HeartIcon class="h-8"/>
+          {{ getLikes }}
         </button>
       </div>
     </div>
@@ -65,6 +66,15 @@ export default {
       isLoaded: false
     }
   },
+  computed: {
+    getLikes() {
+      if (this.user.likes != null) {
+        return this.user.likes;
+      } else {
+        return "0";
+      }
+    }
+  },
   mounted() {
     this.reload()
   },
@@ -92,6 +102,11 @@ export default {
           console.error(error)
         })
       }
+    },
+    sendLike() {
+      fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.user.name).catch(error => {
+        console.error(error)
+      })
     }
   }
 }
