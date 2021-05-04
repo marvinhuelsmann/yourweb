@@ -22,7 +22,8 @@ function getUser($userID)
                 'text' => $row['text'],
                 'birthday' => $row['birthday'],
                 'place' => $row['place'],
-                'image' => $row['image']
+                'image' => $row['image'],
+                'likes' => $row['likes']
             ]);
         } else if ($alreadyFind) {
             return;

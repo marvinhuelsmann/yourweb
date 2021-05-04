@@ -184,7 +184,6 @@ import {MenuIcon, XIcon, SpeakerphoneIcon, ShareIcon} from '@heroicons/vue/outli
 import {store} from "@/store";
 
 const navigation = [
-  {name: 'Blog', href: '/blog'},
   {name: 'Community', href: '/community'},
   {name: 'Suchen', href: '/search'},
 ]

@@ -59,7 +59,8 @@ export default {
         text: null,
         birthday: null,
         place: null,
-        image: null
+        image: null,
+        likes: null
       },
       isLoaded: false
     }

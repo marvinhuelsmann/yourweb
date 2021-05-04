@@ -4,7 +4,6 @@ import Auth from '../components/Auth.vue'
 import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
-import Blog from '../views/Blog.vue'
 import Search from '../views/Search.vue'
 
 const routes = [
@@ -37,11 +36,6 @@ const routes = [
         path: '/u',
         name: 'User',
         component: Profile
-    },
-    {
-        path: '/blog',
-        name: 'Block',
-        component: Blog
     },
     {
         path: "/search",
