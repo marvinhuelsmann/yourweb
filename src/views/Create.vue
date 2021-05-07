@@ -191,6 +191,7 @@ export default {
       this.user.image = document.getElementById('image').value;
     },
     createWebsite() {
+      this.getPreviewData()
       if (this.user.code == null || this.user.code === '') {
         this.codeInvalid = true;
         return;

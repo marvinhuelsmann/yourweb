@@ -18,9 +18,9 @@
             v-on:click="reload">
           nächste Seite
         </button>
-        <div v-if="hasLiked">
+        <div v-if="isLoveButtonRed">
           <button
-              class="px-9 py-4  rounded-sm block sm:w-auto border-red-100 bg-red-400 text-black">
+              class="px-9 py-4 rounded-sm block sm:w-auto border-red-100 bg-red-400 text-black">
             <HeartIcon class="h-8"/>
             {{ getLikes }}
           </button>
@@ -80,10 +80,12 @@ export default {
         birthday: null,
         place: null,
         image: null,
-        likes: null
+        likes: null,
+        hasUserLiked: null
       },
       isLoaded: false,
-      alreadyLike: false
+      alreadyLike: false,
+      loveButtonRed: false,
     }
   },
   computed: {
@@ -98,7 +100,10 @@ export default {
       return store.state.user
     },
     hasLiked() {
-      return this.alreadyLike;
+      return this.alreadyLike
+    },
+    isLoveButtonRed() {
+      return this.loveButtonRed
     }
   },
   mounted() {
@@ -107,7 +112,10 @@ export default {
   methods: {
     reload() {
       this.alreadyLike = false
+      this.loveButtonRed = false
       this.isLoaded = false
+
+
       if (this.user.id === null || this.user.id === "null") {
         fetch('https://yourweb.monster/api/v1/getCommunity').then(result => {
           result.json().then(result => {
@@ -119,10 +127,13 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "?fromID=" + this.userOneGamingID.id).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
+            if (this.user.hasUserLiked) {
+              this.loveButtonRed = true
+            }
             this.isLoaded = true
           })
         }).catch(error => {
@@ -140,6 +151,7 @@ export default {
           } else {
             this.alreadyLike = true
           }
+          this.loveButtonRed = true
         })
       } else {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
