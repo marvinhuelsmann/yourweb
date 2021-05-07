@@ -29,23 +29,6 @@
           {{ text }}
         </p>
       </div>
-      <!--  <div class="mt-10">
-          <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
-            <div v-for="social in social" :key="social.name" class="relative">
-              <div v-if="social.name !== ''">
-                <dt>
-                  <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
-                    <component :is="social.icon" class="h-6 w-6" aria-hidden="true"/>
-                  </div>
-                  <p class="ml-16 text-lg leading-6 font-medium text-gray-900">{{ social.name }}</p>
-                </dt>
-                <dd class="mt-2 ml-16 text-base text-gray-500">
-                  {{ social.description }}
-                </dd>
-              </div>
-            </div>
-          </dl>
-        </div>-->
     </div>
   </div>
   <div v-else>
@@ -75,8 +58,8 @@
       <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a
           href="https://yourweb.monster">YourWeb</a>
         - {{ new Date().getFullYear() }} -</h2>
-      <a :href='"https://twitter.com/intent/tweet?text=https://yourweb.monster/" + id + " have create a site with &hashtags=YourWebsite"'>
-        <ShareIcon class="h-7 text-green-700 "></ShareIcon>
+      <a :href='"https://twitter.com/intent/tweet?text=https://yourweb.monster/" + id + " " + name +  " have create a site with &hashtags=YourWebsite"'>
+        <ShareIcon class="h-7 text-green-700"></ShareIcon>
       </a>
     </div>
   </div>

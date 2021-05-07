@@ -39,7 +39,6 @@
              fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polygon points="50,0 100,0 50,100 0,100"/>
         </svg>
-
         <div class="relative pt-6 px-4 sm:px-6 lg:px-8">
           <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
@@ -61,8 +60,7 @@
               <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                            class="font-medium text-gray-500 hover:text-gray-900">{{ item.name }}
               </router-link>
-                <a v-if="user === null" @click="authenticate" class="font-medium text-indigo-600 hover:text-indigo-500">Log in</a>
-                <p v-else class="font-medium text-green-600 hover:text-green-500">{{ user.name}}</p>
+              <a href="#" @click="authenticate" class="font-medium text-indigo-600 hover:text-indigo-500"> {{ signIn }}</a>
             </div>
           </nav>
         </div>
@@ -89,11 +87,10 @@
                     item.name
                   }}</a>
               </div>
-              <a v-if="user === null" @click="authenticate"
+              <a href="https://dfgdfg" @click="authenticate"
                  class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
-                Log In
+                {{ signIn }}
               </a>
-              <p v-else class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100"> {{ getOneGamingName() }}</p>
             </div>
           </PopoverPanel>
         </transition>
@@ -166,7 +163,8 @@
           <span class="block">Monster Websites</span>
         </h2>
         <p class="text-base text-gray-500 sm:text-lg sm:max-w-xl  md:text-xl">
-          © {{ new Date().getFullYear() }} - Marvin Hülsmann / <a href="https://marvhuelsmann.de/data" class="shadow-xl bg-blue-100 transition-colors">Impressum</a>
+          © {{ new Date().getFullYear() }} - Marvin Hülsmann / <a href="https://marvhuelsmann.de/data"
+                                                                  class="shadow-xl bg-blue-100 transition-colors">Impressum</a>
           Um weiteres von mir zu erfahren besuche meine <a class="bg-green-100 shadow-xl transition-colors ease-in-out"
                                                            href="https://marvhuelsmann.de">Portofolio Seite</a>.
         </p>
@@ -206,15 +204,26 @@ export default {
   computed: {
     user() {
       return store.state.user
+    },
+    signIn() {
+      if (this.user != null) {
+        return this.user.name
+      } else {
+        return "Anmelden"
+      }
     }
   },
   methods: {
     authenticate() {
-      window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+      if (this.user === null) {
+        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+      } else {
+        window.location = "https://yourweb.monster/dashboard/home"
+      }
     },
     getOneGamingName() {
       if (this.user != null) {
-        return this.user?.name
+        return this.user.name
       } else {
         return ""
       }
