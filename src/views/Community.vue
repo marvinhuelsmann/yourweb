@@ -9,7 +9,8 @@
       </router-link>
     </div>
     <div v-if="isLoaded">
-      <Profile :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
+      <Profile :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
+               :place='user.place'
                :name='user.name' :img-url='user.image'></Profile>
       <div class="mt-3 mb-4 justify-center flex">
         <button
@@ -44,9 +45,9 @@
       </div>
     </div>
     <div v-if="hasLiked">
-        <p class="text-sm text-center justify-center flex text-blue-700">
-          Du hast dieser Website bereits dein Herz gegeben!
-        </p>
+      <p class="text-sm text-center justify-center flex text-blue-700">
+        Du hast dieser Website bereits dein Herz gegeben!
+      </p>
     </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
@@ -62,6 +63,7 @@
 <script>
 import Profile from "@/components/Profile";
 import {HeartIcon, XIcon, ShieldExclamationIcon, ClipboardCopyIcon} from "@heroicons/vue/outline/esm";
+import {store} from "@/store";
 
 export default {
   name: "Community",
@@ -91,6 +93,9 @@ export default {
       } else {
         return "0";
       }
+    },
+    userOneGamingID() {
+      return store.state.user
     },
     hasLiked() {
       return this.alreadyLike;
@@ -126,17 +131,19 @@ export default {
       }
     },
     sendLike() {
-      fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.user.name).catch(error => {
-        console.error(error)
-      }).then(response => {
-        console.log(response.status); // returns 200
-        if (response.status === 200) {
-          this.user.likes++;
-        } else {
-          this.alreadyLike = true
-          console.log("like")
-        }
-      })
+      if (this.userOneGamingID != null) {
+        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.userOneGamingID.id).catch(error => {
+          console.error(error)
+        }).then(response => {
+          if (response.status === 200) {
+            this.user.likes++;
+          } else {
+            this.alreadyLike = true
+          }
+        })
+      } else {
+        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+      }
     }
   }
 }

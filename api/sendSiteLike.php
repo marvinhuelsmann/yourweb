@@ -12,7 +12,7 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
     $user = $_GET['user'];
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($row['fromLike'] === $user) {
+        if ($row['fromLike'] === $user && $row['userID'] === $id) {
             $count = true;
         }
     }

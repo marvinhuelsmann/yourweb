@@ -43,6 +43,11 @@ const routes = [
         component: Search
     },
     {
+        path: "/dashboard/home",
+        name: 'Dashboard Home',
+        component: () => import('../views/dashboard/Home.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
         component: Profile

@@ -1,5 +1,5 @@
 <template>
-  <div class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div v-if="userOneGamingID != null" class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
@@ -25,7 +25,7 @@
             <label for="email-address" class="sr-only">Email address</label>
             <input id="email-address" name="email" type="email" autocomplete="email" required=""
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Email Adresse*"/>
+                   placeholder="Email*" :value="this.userOneGamingID.email"/>
           </div>
           <div>
             <label for="password" class="sr-only">Code</label>
@@ -45,26 +45,26 @@
             <label for="name" class="sr-only">Name</label>
             <input v-on:input="setPreview(true)" id="name" name="name" autocomplete="name" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Name*"/>
+                   placeholder="Name*" :value="this.userOneGamingID.name"/>
           </div>
           <div class="pt-2">
             <label for="birthday" class="sr-only">Geburtstag</label>
             <input v-on:input="setPreview(true)" id="birthday" name="birthday" autocomplete="birthday" required=""
                    type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Geburtstag"/>
+                   placeholder="Geburtstag" :value="this.userOneGamingID.birthday"/>
           </div>
           <div class="pt-2">
             <label for="place" class="sr-only">Wohnort</label>
             <input v-on:input="setPreview(true)" id="place" name="place" autocomplete="place" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Wohnort"/>
+                   placeholder="Wohnort" :value="this.userOneGamingID.location"/>
           </div>
           <div class="pt-2">
             <label for="image" class="sr-only">Bild</label>
             <input v-on:input="setPreview(true)" id="image" name="image" autocomplete="image" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Bild URL"/>
+                   placeholder="Bild URL" :value="this.userOneGamingID.avatar"/>
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
@@ -130,6 +130,7 @@
 <script>
 import {LockClosedIcon, ArrowDownIcon, ClockIcon} from '@heroicons/vue/solid'
 import Profile from "@/components/Profile";
+import {store} from "@/store";
 
 export default {
   data() {
@@ -163,6 +164,14 @@ export default {
   computed: {
     codeValid() {
       return this.codeInvalid
+    },
+    userOneGamingID() {
+      return store.state.user
+    }
+  },
+  mounted() {
+    if (this.userOneGamingID === null) {
+      window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
     }
   },
   methods: {
@@ -172,7 +181,6 @@ export default {
     },
     getPreviewData() {
       this.user.code = document.getElementById('password').value;
-      this.user.email = document.getElementById('email-address').value;
       this.user.name = document.getElementById('name').value;
       this.user.subHeadLine = document.getElementById('subHeader').value;
       this.user.color = document.getElementById('color').value;

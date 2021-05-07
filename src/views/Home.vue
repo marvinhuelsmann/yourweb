@@ -213,19 +213,20 @@ export default {
       }
     }
   },
+  mounted() {
+    if (this.user === null) {
+      if(localStorage.getItem('users')) {
+        this.$forceUpdate();
+        document.location.reload(true)
+      }
+    }
+  },
   methods: {
     authenticate() {
       if (this.user === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
       } else {
-        window.location = "https://yourweb.monster/dashboard/home"
-      }
-    },
-    getOneGamingName() {
-      if (this.user != null) {
-        return this.user.name
-      } else {
-        return ""
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb.monster/dashboard/home'
       }
     }
   }

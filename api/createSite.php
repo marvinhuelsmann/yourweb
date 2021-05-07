@@ -23,16 +23,18 @@ if (isset($_GET['code']) &&
     $email = $_GET['email'];
     $ip = getIp();
 
+    $likes = 0;
+
     if ($code !== '500') {
         return http_response_code(203);
     }
 
-    $sql = "INSERT INTO `websites` (`ip`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`)
+    $sql = "INSERT INTO `websites` (`ip`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
  VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $name) . "', '" . mysqli_real_escape_string($db, $code) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
-      '" . mysqli_real_escape_string($db, $image) . "');";
+      '" . mysqli_real_escape_string($db, $image) . "', '" . mysqli_real_escape_string($db, $likes) . "' );";
 
     $user_check_query = "SELECT * FROM websites";
     $db_erg = mysqli_query($db, $user_check_query);
