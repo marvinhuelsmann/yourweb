@@ -105,6 +105,13 @@ export default {
     },
     isLoveButtonRed() {
       return this.loveButtonRed
+    },
+    oneGamingUserID() {
+      if (this.userOneGamingID != null) {
+        return this.userOneGamingID.id
+      } else {
+        return "123456789"
+      }
     }
   },
   mounted() {
@@ -117,7 +124,7 @@ export default {
       this.isLoaded = false
 
       if (this.user.id === null || this.user.id === "null") {
-        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.userOneGamingID.id).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.oneGamingUserID).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -130,7 +137,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.userOneGamingID.id).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" +this.oneGamingUserID).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -152,7 +159,7 @@ export default {
       }
 
       if (this.userOneGamingID != null) {
-        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.userOneGamingID.id).catch(error => {
+        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID).catch(error => {
           console.error(error)
         }).then(response => {
           if (response.status === 200) {
