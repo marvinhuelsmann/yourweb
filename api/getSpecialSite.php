@@ -18,11 +18,12 @@ function getUser($userID, $fromID)
             $db_erg = mysqli_query($db, $user_check_query);
 
             while ($inRow = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-                if ($inRow['userID'] === $row['id'] && $inRow['fromLike'] === $_GET['fromID']) {
+                if ($inRow['userID'] === $row['id'] && $inRow['fromLike'] === $fromID) {
                     $likeFind = true;
                 }
             }
             $alreadyFind = true;
+
                 echo json_encode([
                     'id' => $row['id'],
                     'name' => $row['name'],

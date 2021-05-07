@@ -115,9 +115,8 @@ export default {
       this.loveButtonRed = false
       this.isLoaded = false
 
-
       if (this.user.id === null || this.user.id === "null") {
-        fetch('https://yourweb.monster/api/v1/getCommunity').then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.userOneGamingID.id).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
