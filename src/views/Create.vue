@@ -182,6 +182,7 @@ export default {
     getPreviewData() {
       this.user.code = document.getElementById('password').value;
       this.user.name = document.getElementById('name').value;
+      this.user.email = document.getElementById('email-address').value;
       this.user.subHeadLine = document.getElementById('subHeader').value;
       this.user.color = document.getElementById('color').value;
       this.user.text = document.getElementById('biography').value;
