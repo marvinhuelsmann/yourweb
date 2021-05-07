@@ -130,7 +130,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "?fromID=" + this.userOneGamingID.id).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.userOneGamingID.id).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
