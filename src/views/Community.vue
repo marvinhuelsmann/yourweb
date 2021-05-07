@@ -20,6 +20,7 @@
         </button>
         <div v-if="isLoveButtonRed">
           <button
+              v-on:click="sendLike"
               class="px-9 py-4 rounded-sm block sm:w-auto border-red-100 bg-red-400 text-black">
             <HeartIcon class="h-8"/>
             {{ getLikes }}
@@ -120,6 +121,9 @@ export default {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
+            if (this.user.hasUserLiked) {
+              this.loveButtonRed = true
+            }
             this.isLoaded = true
           })
         }).catch(error => {
@@ -141,6 +145,12 @@ export default {
       }
     },
     sendLike() {
+      if (this.loveButtonRed) {
+        this.alreadyLike = true
+
+        return
+      }
+
       if (this.userOneGamingID != null) {
         fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.userOneGamingID.id).catch(error => {
           console.error(error)
