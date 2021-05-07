@@ -166,7 +166,7 @@
           <span class="block">Monster Websites</span>
         </h2>
         <p class="text-base text-gray-500 sm:text-lg sm:max-w-xl  md:text-xl">
-          © {{ new Date().getFullYear() }} - Marvin Hülsmann /
+          © {{ new Date().getFullYear() }} - Marvin Hülsmann / <a href="https://marvhuelsmann.de/data" class="shadow-xl bg-blue-100 transition-colors">Impressum</a>
           Um weiteres von mir zu erfahren besuche meine <a class="bg-green-100 shadow-xl transition-colors ease-in-out"
                                                            href="https://marvhuelsmann.de">Portofolio Seite</a>.
         </p>

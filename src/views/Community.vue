@@ -52,6 +52,9 @@
       <p class="text-sm text-center justify-center flex text-gray-500">
         Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
       </p>
+      <p class="text-sm text-center justify-center flex text-gray-500">
+        2021 YourWeb Pre Build - SNAPSHOT 0.7
+      </p>
     </div>
   </div>
 </template>
