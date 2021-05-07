@@ -62,7 +62,8 @@
         </p>
         <div class="mt-3 mb-4 justify-center flex">
           <button
-              class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700" v-on:click="goHome">
+              class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"
+              v-on:click="goHome">
             Zurück zum Start
           </button>
         </div>
@@ -70,8 +71,14 @@
     </div>
   </div>
   <div v-if="showAdvertise" class="text-center">
-    <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a href="https://yourweb.monster">YourWeb</a>
-      - {{ new Date().getFullYear() }}</h2>
+    <div class="justify-center text-center flex">
+      <h2 class="text-base text-green-600 font-bold tracking-wide uppercase"><a
+          href="https://yourweb.monster">YourWeb</a>
+        - {{ new Date().getFullYear() }} -</h2>
+      <a :href='"https://twitter.com/intent/tweet?text=https://yourweb.monster/" + id + " have create a site with &hashtags=YourWebsite"'>
+        <ShareIcon class="h-7 text-green-700 "></ShareIcon>
+      </a>
+    </div>
   </div>
 </template>
 
@@ -83,12 +90,14 @@ import {
   GlobeAltIcon,
   LightningBoltIcon,
   ScaleIcon,
-  RewindIcon
+  RewindIcon,
+  ShareIcon
 } from '@heroicons/vue/outline'
 
 export default {
   name: "Profile",
   props: {
+    id: String,
     name: String,
     subHeadLine: String,
     place: String,
@@ -110,6 +119,7 @@ export default {
     LightningBoltIcon,
     // eslint-disable-next-line vue/no-unused-components
     ScaleIcon,
+    ShareIcon,
     RewindIcon
   },
   methods: {

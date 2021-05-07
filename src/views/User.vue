@@ -1,6 +1,6 @@
 <template>
   <div v-if="isLoaded">
-    <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
+    <Profile :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
              :name='user.name' :img-url='user.image' show-advertise :redirect=redirect></Profile>
   </div>
   <div v-else-if="isNotCorrectLoading">
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       user: {
+        id: null,
         name: null,
         subHeadLine: null,
         color: null,

@@ -63,6 +63,7 @@ export default {
   data() {
     return {
       user: {
+        id: null,
         name: null,
         subHeadLine: null,
         color: null,

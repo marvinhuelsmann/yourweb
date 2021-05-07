@@ -15,6 +15,7 @@ if (isset($_GET['i'])) {
             $count = true;
 
             echo json_encode([
+                'id' => $row['id'],
                 'name' => $row['name'],
                 'subHeadLine' => $row['subHeadLine'],
                 'color' => $row['color'],

@@ -9,7 +9,7 @@
       </router-link>
     </div>
     <div v-if="isLoaded">
-      <Profile :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
+      <Profile :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
                :name='user.name' :img-url='user.image'></Profile>
       <div class="mt-3 mb-4 justify-center flex">
         <button
@@ -44,9 +44,9 @@
       </div>
     </div>
     <div v-if="hasLiked">
-      <p class="text-sm text-center justify-center flex text-gray-500">
-        Du hast dieser Website bereits dein Herz gegeben!
-      </p>
+        <p class="text-sm text-center justify-center flex text-blue-700">
+          Du hast dieser Website bereits dein Herz gegeben!
+        </p>
     </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
