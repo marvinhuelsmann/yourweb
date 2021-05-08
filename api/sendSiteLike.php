@@ -1,6 +1,7 @@
 <?php
-require 'util/config.php';
 header('Access-Control-Allow-Origin: *');
+
+require 'util/config.php';
 
 $count = false;
 
