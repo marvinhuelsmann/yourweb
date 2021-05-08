@@ -5,7 +5,7 @@ require 'util/config.php';
 
 $count = false;
 
-if (isValidToken() == 200) {
+//if (isValidToken() == 200) {
 
     $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
     $user_check_query = "SELECT * FROM yourweb_likes";
@@ -37,9 +37,10 @@ if (isValidToken() == 200) {
         return http_response_code(404);
     };
 
-} else {
+/*} else {
     return http_response_code(401);
 }
+*/
 
 
 ?>
