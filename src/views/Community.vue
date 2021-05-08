@@ -100,6 +100,9 @@ export default {
     userOneGamingID() {
       return store.state.user
     },
+    tokenOneGamingID() {
+      return store.state.user
+    },
     hasLiked() {
       return this.alreadyLike
     },
@@ -137,7 +140,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" +this.oneGamingUserID).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.oneGamingUserID).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -154,24 +157,26 @@ export default {
     sendLike() {
       if (this.loveButtonRed) {
         this.alreadyLike = true
-
         return
       }
 
-      if (this.userOneGamingID != null) {
-        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID).catch(error => {
-          console.error(error)
-        }).then(response => {
-          if (response.status === 200) {
-            this.user.likes++;
-          } else {
-            this.alreadyLike = true
-          }
-          this.loveButtonRed = true
-        })
-      } else {
-        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+      if (store.mutations.refreshSession === 200) {
+        if (this.userOneGamingID != null) {
+          fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID + "&token=" + this.tokenOneGamingID).catch(error => {
+            console.error(error)
+          }).then(response => {
+            if (response.status === 200) {
+              this.user.likes++;
+            } else {
+              this.alreadyLike = true
+            }
+            this.loveButtonRed = true
+          })
+        } else {
+          window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+        }
       }
+
     }
   }
 }

@@ -87,7 +87,7 @@
                     item.name
                   }}</a>
               </div>
-              <a href="https://dfgdfg" @click="authenticate"
+              <a href="#" @click="authenticate"
                  class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                 {{ signIn }}
               </a>
