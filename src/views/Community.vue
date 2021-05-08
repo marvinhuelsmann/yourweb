@@ -167,15 +167,16 @@ export default {
             headers: {
               'Authorization': 'Bearer ' + this.tokenOneGamingID
             }.catch(error => {
-            console.error(error)
-          }).then(response => {
-            console.log("h")
-            if (response.status === 200) {
-              this.user.likes++;
-            } else {
-              this.alreadyLike = true
-            }
-            this.loveButtonRed = true
+              console.error(error)
+            }).then(response => {
+              console.log("h")
+              if (response.status === 200) {
+                this.user.likes++;
+              } else {
+                this.alreadyLike = true
+              }
+              this.loveButtonRed = true
+            })
           })
         } else {
           window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
