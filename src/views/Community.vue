@@ -101,7 +101,7 @@ export default {
       return store.state.user
     },
     tokenOneGamingID() {
-      return store.state.user
+      return store.state.token
     },
     hasLiked() {
       return this.alreadyLike
@@ -160,11 +160,13 @@ export default {
         return
       }
 
-      if (store.mutations.refreshSession === 200) {
+      if (store.mutations.refreshSession() === 200) {
         if (this.userOneGamingID != null) {
+          console.log("h")
           fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID + "&token=" + this.tokenOneGamingID).catch(error => {
             console.error(error)
           }).then(response => {
+            console.log("h")
             if (response.status === 200) {
               this.user.likes++;
             } else {
@@ -176,7 +178,6 @@ export default {
           window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
         }
       }
-
     }
   }
 }
