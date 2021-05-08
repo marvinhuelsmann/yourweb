@@ -163,7 +163,10 @@ export default {
       if (store.mutations.refreshSession() === 200) {
         if (this.userOneGamingID != null) {
           console.log("h")
-          fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID + "&token=" + this.tokenOneGamingID).catch(error => {
+          fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID, {
+            headers: {
+              'Authorization': 'Bearer ' + this.tokenOneGamingID
+            }.catch(error => {
             console.error(error)
           }).then(response => {
             console.log("h")
