@@ -35,8 +35,7 @@ if (isValidToken() == 200) {
 
     } else {
         return http_response_code(404);
-    }
-    header('Content-Type: application/json');
+    };
 
 } else {
     return http_response_code(401);
