@@ -69,7 +69,7 @@
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea onchange="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
+            <textarea v-on:input="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Zwischenüberschrift*"/>
           </div>
@@ -239,8 +239,8 @@ export default {
       }
 
       this.loading = true;
-      fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&userID=" + this.userOneGamingID.id, {
+      fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGamingID
         }
@@ -256,7 +256,8 @@ export default {
             this.userIdentify = result
           }).finally(() => {
             this.loading = false;
-            window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+            console.log(this.userIdentify.id)
+           // window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
           })
         }).catch(error => {
           console.error(error)
