@@ -183,7 +183,6 @@ export default {
         this.alreadyLike = true
         return
       }
-
       this.isInSession()
 
       if (this.userOneGamingID != null) {

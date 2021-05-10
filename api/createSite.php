@@ -1,9 +1,15 @@
 <?php
-header('Access-Control-Allow-Origin: *');
+require 'util/config.php';
+setCorsPolice();
+
 $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+
+$tokenResponse = json_decode(isValidToken(getBearerToken()), true);
+$alreadyExistCode = false;
 
 if (isset($_GET['code']) &&
     isset($_GET['name']) &&
+    isset($_GET['userID']) &&
     isset($_GET['text']) &&
     isset($_GET['color']) &&
     isset($_GET['subHeadLine']) &&
@@ -13,6 +19,7 @@ if (isset($_GET['code']) &&
     isset($_GET['email'])) {
 
     $code = $_GET['code'];
+    $userID = $_GET['userID'];
     $name = $_GET['name'];
     $text = $_GET['text'];
     $subHeadLine = $_GET['subHeadLine'];
@@ -29,31 +36,44 @@ if (isset($_GET['code']) &&
         return http_response_code(203);
     }
 
-    $sql = "INSERT INTO `websites` (`ip`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
- VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $name) . "', '" . mysqli_real_escape_string($db, $code) . "',
+    if ($tokenResponse["id"] === $userID) {
+
+        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
+ VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "', '" . mysqli_real_escape_string($db, $code) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
       '" . mysqli_real_escape_string($db, $image) . "', '" . mysqli_real_escape_string($db, $likes) . "' );";
 
-    $user_check_query = "SELECT * FROM websites";
-    $db_erg = mysqli_query($db, $user_check_query);
+        $user_check_query = "SELECT * FROM websites";
+        $db_erg = mysqli_query($db, $user_check_query);
 
-    if (mysqli_query($db, $sql)) {
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-            if ($row['name'] === $name && $row['text'] === $text) {
-                echo json_encode([
-                    'id' => $row['id']
-                ]);
-                return;
+            if ($row['userID'] === $userID) {
+                $alreadyExistCode = true;
             }
         }
-    } else {
-        echo json_encode([
-            'error' => mysqli_error($db)
-        ]);
-    }
 
+        if (!$alreadyExistCode) {
+            if (mysqli_query($db, $sql)) {
+                while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
+                    if ($row['name'] === $name && $row['text'] === $text) {
+                        echo json_encode([
+                            'id' => $row['id']
+                        ]);
+                        return;
+                    }
+                }
+            } else {
+                echo json_encode([
+                    'error' => mysqli_error($db)
+                ]);
+            }
+        } else return http_response_code(409);
+
+    } else {
+        return http_response_code(401);
+    }
 } else {
     return http_response_code(400);
 }

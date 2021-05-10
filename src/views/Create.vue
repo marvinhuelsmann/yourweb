@@ -111,6 +111,11 @@
             Erstellen
           </button>
         </div>
+        <div v-else-if="alreadyExist">
+          <p class=" text-center text-sm text-gray-600">
+            Du besitzt bereits eine mini Monster Seite!
+          </p>
+        </div>
         <div v-else>
           <p class=" text-center text-sm text-gray-600">
             Dein Beta Code war ungültig, probiere es später erneut!
@@ -153,6 +158,7 @@ export default {
       preview: false,
       loading: false,
       codeInvalid: false,
+      alreadyExist: false,
       success: false
     }
   },
@@ -234,12 +240,16 @@ export default {
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color).catch(error => {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&userID=" + this.userOneGamingID.id, {
+        headers: {
+          'Authorization': 'Bearer ' + this.tokenOneGamingID
+        }
+      }).catch(error => {
         if (error.status === 203) {
           this.codeInvalid = true;
-          console.log("code is invalid!");
-        } else if (error)
-          console.error(error)
+        } else if (error.status === 409) {
+          this.alreadyExist = true;
+        } else console.error(error)
       }).finally(() => {
         fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
           result.json().then(result => {
