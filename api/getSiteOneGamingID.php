@@ -11,7 +11,7 @@ if (isset($_GET['i'])) {
     $name = $_GET['i'];
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($row['userUD'] === $name) {
+        if ($row['userID'] === $name) {
             $count = true;
 
             echo json_encode([
