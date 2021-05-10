@@ -45,17 +45,19 @@
                 </nav>
               </div>
               <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-                <a :href="'https://yourweb.monster/' + user.id" class="flex-shrink-0 group block">
+                <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
+                      <a target="_blank" :href="'https://yourweb.monster/' + user.id">
                       <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
+                      </a>
                     </div>
                     <div class="ml-3">
                       <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
                         {{ userOneGaming.name }}
                       </p>
                       <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
-                        Deine Seite
+                        Ausloggen
                       </p>
                     </div>
                   </div>
@@ -93,7 +95,7 @@
               </nav>
             </div>
             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <a target="_blank" :href="'https://yourweb.monster/' + user.id" class="flex-shrink-0 w-full group block">
+              <a target="_blank" href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
                     <a target="_blank" :href="'https://yourweb.monster/' + user.id">
@@ -105,7 +107,7 @@
                       {{ userOneGaming.name }}
                     </p>
                     <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-                      Deine Seite
+                      Ausloggen
                     </p>
                   </div>
                 </div>
