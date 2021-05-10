@@ -1,6 +1,6 @@
 <?php
 
-$mysqli = new mysqli('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+$mysqli = new mysqli($_ENV['DB_HOSTNAME'],  $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
 
 function isValidToken($token)
 {

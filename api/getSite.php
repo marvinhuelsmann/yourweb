@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin: *');
 
 $count = false;
 
-$db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+$db = mysqli_connect($_ENV['DB_HOSTNAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
 $user_check_query = "SELECT * FROM websites";
 $db_erg = mysqli_query($db, $user_check_query);
 
@@ -28,13 +28,9 @@ if (isset($_GET['i'])) {
         }
     }
 
-    if (!$count) {
-        return http_response_code(404);
-    }
+    if (!$count) return http_response_code(404);
 
-} else {
-    return http_response_code(404);
-}
+} else return http_response_code(404);
 header('Content-Type: application/json');
 
 ?>

@@ -5,7 +5,7 @@ getUser(!isset($_GET['oldUser']) ? '' : $_GET['oldUser'], $_GET['fromID']);
 
 function getUser($userID, $fromID)
 {
-    $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+    $db =  mysqli_connect($_ENV['DB_HOSTNAME'],  $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
     $user_check_query = "SELECT * FROM websites ORDER BY rand()";
     $db_erg = mysqli_query($db, $user_check_query);
 

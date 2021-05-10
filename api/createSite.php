@@ -2,7 +2,7 @@
 require 'util/config.php';
 setCorsPolice();
 
-$db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+$db = mysqli_connect($_ENV['DB_HOSTNAME'],  $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
 
 $tokenResponse = json_decode(isValidToken(getBearerToken()), true);
 $alreadyExistCode = false;
@@ -81,8 +81,6 @@ if (isset($_GET['name']) &&
     ]);
     return http_response_code(400);
 }
-
-header('Content-Type: application/json');
 
 function getIp()
 {
