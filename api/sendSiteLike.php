@@ -1,9 +1,7 @@
 <?php
-header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
-header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token');
 
 require 'util/config.php';
+setCorsPolice();
 
 $count = false;
 
@@ -17,7 +15,7 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
     $id = $_GET['id'];
     $user = $_GET['user'];
 
-    if ($tokenResponse->id == $id) {
+    if ($tokenResponse->id === $id) {
 
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             if ($row['fromLike'] === $user && $row['userID'] === $id) {
