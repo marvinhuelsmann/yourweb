@@ -5,9 +5,8 @@ setCorsPolice();
 
 $count = false;
 
-$tokenResponse = json_decode(isValidToken(getBearerToken()));
-echo getBearerToken();
-echo $tokenResponse->id();
+$tokenResponse = json_decode(isValidToken(getBearerToken()), true);
+echo $tokenResponse["id"];
 
 $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
 $user_check_query = "SELECT * FROM yourweb_likes";
@@ -17,7 +16,7 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
     $id = $_GET['id'];
     $user = $_GET['user'];
 
-    if ($tokenResponse->id() === $id) {
+    if ($tokenResponse["id"] === $id) {
 
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             if ($row['fromLike'] === $user && $row['userID'] === $id) {
