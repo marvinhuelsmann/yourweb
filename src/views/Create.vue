@@ -234,7 +234,7 @@ export default {
             }).finally(() => {
               this.loading = false;
 
-              if (this.userIdentify.id == null || this.userIdentify.id !== "null") {
+              if (this.userIdentify.id === null) {
                 this.alreadyExist = true;
               } else {
                  window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
