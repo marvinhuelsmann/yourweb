@@ -96,7 +96,7 @@
         <div v-if="loading" class="justify-center flex">
           <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
         </div>
-        <div v-else-if="!codeValid">
+        <div v-if="!alreadyExistValid">
           <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -107,15 +107,10 @@
         </div>
         <div v-else>
           <p class=" text-center text-sm text-gray-600">
-            Dein Beta Code war ungültig, probiere es später erneut!
-          </p>
-        </div>
-        <div v-if="alreadyExistValid">
-          <p class=" text-center text-sm text-gray-600">
             Du besitzt bereits eine mini Monster Seite!
           </p>
         </div>
-        <div class="justify-center flex" v-if="preview && !codeValid && !loading">
+        <div class="justify-center flex" v-if="preview && !alreadyExistValid && !loading">
           <ArrowDownIcon class="animate-bounce h-10 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
         </div>
       </form>
@@ -150,7 +145,6 @@ export default {
       },
       preview: false,
       loading: false,
-      codeInvalid: false,
       alreadyExist: false,
       success: false
     }
@@ -162,9 +156,6 @@ export default {
     ClockIcon
   },
   computed: {
-    codeValid() {
-      return this.codeInvalid
-    },
     alreadyExistValid() {
       return this.alreadyExist
     },
@@ -212,26 +203,9 @@ export default {
       this.user.place = document.getElementById('place').value;
       this.user.image = document.getElementById('image').value;
     },
-    formInput(value) {
-      let isAlreadyChanged = false;
-
-      if (!isAlreadyChanged) {
-        if (value === "name") {
-          return this.userOneGamingID.name
-        }
-      }
-
-      if (!isAlreadyChanged) {
-        isAlreadyChanged = true;
-      }
-    },
     createWebsite() {
       this.isInSession()
       this.getPreviewData()
-      if (this.user.code == null || this.user.code === '') {
-        this.codeInvalid = true;
-        return;
-      }
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
