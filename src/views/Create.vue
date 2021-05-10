@@ -1,5 +1,6 @@
 <template>
-  <div v-if="userOneGamingID != null" class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
+  <div v-if="userOneGamingID != null"
+       class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
         <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
@@ -68,7 +69,7 @@
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea v-on:input="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
+            <textarea onchange="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Zwischenüberschrift*"/>
           </div>
@@ -167,6 +168,9 @@ export default {
     },
     userOneGamingID() {
       return store.state.user
+    },
+    tokenOneGamingID() {
+      return store.state.token
     }
   },
   mounted() {
@@ -175,6 +179,23 @@ export default {
     }
   },
   methods: {
+    isInSession() {
+      this.axios.get('https://id.onegaming.group/api/v1/user', {
+        headers: {
+          'Authorization': 'Bearer ' + this.tokenOneGamingID
+        }
+      }).then(response => {
+        if (response.status === 200) {
+          store.mutations.SET_USER(response.data)
+        }
+      }).catch(error => {
+        if (error.response.status === 401) {
+          store.mutations.REMOVE_TOKEN()
+          store.mutations.REMOVE_USER()
+          window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+        }
+      })
+    },
     setPreview(preview) {
       this.preview = preview;
       this.getPreviewData()
@@ -190,7 +211,21 @@ export default {
       this.user.place = document.getElementById('place').value;
       this.user.image = document.getElementById('image').value;
     },
+    formInput(value) {
+      let isAlreadyChanged = false;
+
+      if (!isAlreadyChanged) {
+        if (value === "name") {
+          return this.userOneGamingID.name
+        }
+      }
+
+      if (!isAlreadyChanged) {
+        isAlreadyChanged = true;
+      }
+    },
     createWebsite() {
+      this.isInSession()
       this.getPreviewData()
       if (this.user.code == null || this.user.code === '') {
         this.codeInvalid = true;
