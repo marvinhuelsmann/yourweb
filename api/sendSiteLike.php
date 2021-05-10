@@ -29,8 +29,9 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
                 $queryIntoWebsites = "UPDATE websites SET `likes` = `likes`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $id) . "'";
                 if (mysqli_query($db, $queryIntoWebsites)) {
                     return http_response_code(200);
-                }
-            }
+
+                } else return http_response_code(503);
+            } else return http_response_code(503);
         } else {
             return http_response_code(400);
         }
