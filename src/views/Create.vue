@@ -38,44 +38,44 @@
           </div>
           <div class="">
             <label for="name" class="sr-only">Name</label>
-            <input v-on:input="setPreview(true)" id="name" name="name" autocomplete="name" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Name*" :value="this.userOneGamingID.name"/>
+                   placeholder="Name*" />
           </div>
           <div class="pt-2">
             <label for="birthday" class="sr-only">Geburtstag</label>
-            <input v-on:input="setPreview(true)" id="birthday" name="birthday" autocomplete="birthday" required=""
+            <input @input="setPreview(true)" v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
                    type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Geburtstag" :value="this.userOneGamingID.birthday"/>
+                   placeholder="Geburtstag"/>
           </div>
           <div class="pt-2">
             <label for="place" class="sr-only">Wohnort</label>
-            <input v-on:input="setPreview(true)" id="place" name="place" autocomplete="place" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Wohnort" :value="this.userOneGamingID.location"/>
+                   placeholder="Wohnort" />
           </div>
           <div class="pt-2">
             <label for="image" class="sr-only">Bild</label>
-            <input v-on:input="setPreview(true)" id="image" name="image" autocomplete="image" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Bild URL" :value="this.userOneGamingID.avatar"/>
+                   placeholder="Bild URL" />
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea v-on:input="setPreview(true)" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
+            <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Zwischenüberschrift*"/>
           </div>
           <div class="pt-2">
             <label for="biography" class="sr-only">Biografie</label>
-            <textarea v-on:input="setPreview(true)" id="biography" name="biography" autocomplete="biography" required=""
+            <textarea @input="setPreview(true)" v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Biographie*"/>
           </div>
           <div class="pt-2">
             <label for="color" class="">Lieblingsfarbe: </label>
-            <input v-on:input="setPreview(true)" id="color" name="color" autocomplete="color" type="color" required=""
+            <input id="color" name="color" autocomplete="color" type="color" required=""
                    class="" placeholder="Farbe:"/>
           </div>
         </div>
@@ -134,14 +134,14 @@ export default {
         id: null
       },
       user: {
-        name: null,
+        name: store.state.user ? store.state.user.name : null,
         subHeadLine: null,
         color: null,
         text: null,
-        birthday: null,
-        place: null,
-        image: null,
-        email: null
+        birthday: store.state.user ? store.state.user.birthday : null,
+        place: store.state.user ? store.state.user.location : null,
+        image: store.state.user ? store.state.user.avatar : null,
+        email: store.state.user ? store.state.user.email : null
       },
       preview: false,
       loading: false,
@@ -191,21 +191,9 @@ export default {
     },
     setPreview(preview) {
       this.preview = preview;
-      this.getPreviewData()
-    },
-    getPreviewData() {
-      this.user.name = document.getElementById('name').value;
-      this.user.email = document.getElementById('email-address').value;
-      this.user.subHeadLine = document.getElementById('subHeader').value;
-      this.user.color = document.getElementById('color').value;
-      this.user.text = document.getElementById('biography').value;
-      this.user.birthday = document.getElementById('birthday').value;
-      this.user.place = document.getElementById('place').value;
-      this.user.image = document.getElementById('image').value;
     },
     createWebsite() {
       this.isInSession()
-      this.getPreviewData()
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
@@ -218,7 +206,7 @@ export default {
           this.alreadyExist = true;
         }
       }).catch(error => {
-       console.error(error)
+        console.error(error)
       }).finally(() => {
         if (!this.alreadyExist) {
           fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
@@ -237,7 +225,7 @@ export default {
               if (this.userIdentify.id === null) {
                 this.alreadyExist = true;
               } else {
-                 window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+                window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
               }
 
             })
