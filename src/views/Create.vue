@@ -247,23 +247,24 @@ export default {
       }).catch(error => {
         if (error.status === 203) {
           this.codeInvalid = true;
-        } else if (error.status === 409) {
+        } else if (error.status === 404) {
           this.alreadyExist = true;
         } else console.error(error)
       }).finally(() => {
-        fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
-          result.json().then(result => {
-            this.userIdentify = result
-          }).finally(() => {
-            this.loading = false;
-            console.log(this.userIdentify.id)
-           // window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+        if (!this.alreadyExist) {
+          fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
+            result.json().then(result => {
+              this.userIdentify = result
+            }).finally(() => {
+              this.loading = false;
+              console.log(this.userIdentify.id)
+              window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+            })
+          }).catch(error => {
+            console.error(error)
           })
-        }).catch(error => {
-          console.error(error)
-        })
+        }
       })
-
     }
   }
 }

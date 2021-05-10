@@ -7,8 +7,6 @@ $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb'
 $tokenResponse = json_decode(isValidToken(getBearerToken()), true);
 $alreadyExistCode = false;
 
-echo $tokenResponse;
-
 if (isset($_GET['code']) &&
     isset($_GET['name']) &&
     isset($_GET['userID']) &&
@@ -75,7 +73,7 @@ if (isset($_GET['code']) &&
             echo json_encode([
                 'error' => "a site with your onegaming id is already exist!"
             ]);
-            return http_response_code(409);
+            return http_response_code(404);
         }
     } else {
         echo json_encode([
