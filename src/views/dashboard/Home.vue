@@ -1,5 +1,5 @@
 <template>
-  <div v-if="user != null">
+  <div v-if="userOneGaming != null">
     <div class="bg-green-600">
       <div class="max-w-7xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
         <div class="flex items-center justify-between flex-wrap">
@@ -12,7 +12,7 @@
               Keine Neuigkeiten!
             </span>
               <span class="hidden md:inline">
-               Momentan gibt es keine Neuigkeinen!
+               Momentan gibt es keine Neuigkeiten!
             </span>
             </p>
           </div>
@@ -219,22 +219,23 @@ export default {
     }
   },
   mounted() {
-    this.isInSession()
+  this.isInSession()
 
-    fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
-      result.json().then(result => {
-        this.user = result
-      }).catch(error => {
-        console.error(error)
+    if (this.userOneGaming != null) {
+      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
+        result.json().then(result => {
+          this.user = result
+        }).catch(error => {
+          console.error(error)
+        })
       })
-    })
+    }
 
     if (this.userOneGaming === null) {
       window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
     }
   },
   methods: {
-
     authenticate() {
       if (this.userOneGaming === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
@@ -244,6 +245,7 @@ export default {
     },
     logout() {
       store.mutations.REMOVE_USER()
+      store.mutations.REMOVE_TOKEN()
       window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
     },
     isInSession() {
