@@ -2,11 +2,9 @@
 
 $mysqli = new mysqli('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
 
-function isValidToken()
+function isValidToken($token)
 {
     $curl = curl_init();
-
-    $token = getBearerToken();
 
     curl_setopt_array($curl, array(
         CURLOPT_URL => 'https://id.onegaming.group/api/v1/user',
@@ -44,17 +42,4 @@ function getAuthorizationHeader(){
         }
     }
     return $headers;
-}
-/**
- * get access token from header
- * */
-function getBearerToken() {
-    $headers = getAuthorizationHeader();
-    // HEADER: Get the access token from the header
-    if (!empty($headers)) {
-        if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
-            return $matches[1];
-        }
-    }
-    return null;
 }

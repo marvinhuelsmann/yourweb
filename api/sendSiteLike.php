@@ -7,7 +7,24 @@ require 'util/config.php';
 
 $count = false;
 
-if (isValidToken() == 200) {
+/**
+ * get access token from header
+ * */
+function getBearerToken() {
+    $headers = getAuthorizationHeader();
+    // HEADER: Get the access token from the header
+    if (!empty($headers)) {
+        if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+            return $matches[1];
+        }
+    }
+    return null;
+}
+
+
+echo (getBearerToken());
+echo (isValidToken(getBearerToken()));
+if (isValidToken(getBearerToken()) == 200) {
 
     $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
     $user_check_query = "SELECT * FROM yourweb_likes";
