@@ -96,7 +96,7 @@
         <div v-if="loading" class="justify-center flex">
           <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
         </div>
-        <div v-if="!alreadyExistValid">
+        <div v-else-if="!alreadyExistValid">
           <button type="submit" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
@@ -218,9 +218,7 @@ export default {
           this.alreadyExist = true;
         }
       }).catch(error => {
-        if (error.status === 203) {
-          this.codeInvalid = true;
-        } else console.error(error)
+       console.error(error)
       }).finally(() => {
         if (!this.alreadyExist) {
           fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {

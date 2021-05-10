@@ -7,8 +7,7 @@ $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb'
 $tokenResponse = json_decode(isValidToken(getBearerToken()), true);
 $alreadyExistCode = false;
 
-if (isset($_GET['code']) &&
-    isset($_GET['name']) &&
+if (isset($_GET['name']) &&
     isset($_GET['userID']) &&
     isset($_GET['text']) &&
     isset($_GET['color']) &&
@@ -18,7 +17,6 @@ if (isset($_GET['code']) &&
     isset($_GET['image']) &&
     isset($_GET['email'])) {
 
-    $code = $_GET['code'];
     $userID = $_GET['userID'];
     $name = $_GET['name'];
     $text = $_GET['text'];
