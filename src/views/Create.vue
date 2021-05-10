@@ -28,12 +28,6 @@
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Email*" :value="this.userOneGamingID.email"/>
           </div>
-          <div>
-            <label for="password" class="sr-only">Code</label>
-            <input id="password" name="password" type="password" autocomplete="current-password" required=""
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Beta Code*"/>
-          </div>
           <div class="py-1">
             <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
               mini Seite:
@@ -111,14 +105,14 @@
             Erstellen
           </button>
         </div>
-        <div v-else-if="alreadyExist">
-          <p class=" text-center text-sm text-gray-600">
-            Du besitzt bereits eine mini Monster Seite!
-          </p>
-        </div>
         <div v-else>
           <p class=" text-center text-sm text-gray-600">
             Dein Beta Code war ungültig, probiere es später erneut!
+          </p>
+        </div>
+        <div v-if="alreadyExistValid">
+          <p class=" text-center text-sm text-gray-600">
+            Du besitzt bereits eine mini Monster Seite!
           </p>
         </div>
         <div class="justify-center flex" v-if="preview && !codeValid && !loading">
@@ -145,7 +139,6 @@ export default {
         id: null
       },
       user: {
-        code: null,
         name: null,
         subHeadLine: null,
         color: null,
@@ -171,6 +164,9 @@ export default {
   computed: {
     codeValid() {
       return this.codeInvalid
+    },
+    alreadyExistValid() {
+      return this.alreadyExist
     },
     userOneGamingID() {
       return store.state.user
@@ -207,7 +203,6 @@ export default {
       this.getPreviewData()
     },
     getPreviewData() {
-      this.user.code = document.getElementById('password').value;
       this.user.name = document.getElementById('name').value;
       this.user.email = document.getElementById('email-address').value;
       this.user.subHeadLine = document.getElementById('subHeader').value;
@@ -239,26 +234,40 @@ export default {
       }
 
       this.loading = true;
-      fetch('https://yourweb.monster/api/v1/createSite?code=' + this.user.code + "&name=" + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGamingID
         }
+      }).then(response => {
+        if (response.status === 404) {
+          this.alreadyExist = true;
+        }
       }).catch(error => {
         if (error.status === 203) {
           this.codeInvalid = true;
-        } else if (error.status === 404) {
-          this.alreadyExist = true;
         } else console.error(error)
       }).finally(() => {
         if (!this.alreadyExist) {
           fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
+
+            if (result.status === 404) {
+              this.loading = false;
+              this.alreadyExist = true;
+              return;
+            }
+
             result.json().then(result => {
               this.userIdentify = result
             }).finally(() => {
               this.loading = false;
-              console.log(this.userIdentify.id)
-              window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+
+              if (this.userIdentify.id == null || this.userIdentify.id !== "null") {
+                this.alreadyExist = true;
+              } else {
+                 window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+              }
+
             })
           }).catch(error => {
             console.error(error)

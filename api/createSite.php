@@ -32,14 +32,10 @@ if (isset($_GET['code']) &&
 
     $likes = 0;
 
-    if ($code !== '500') {
-        return http_response_code(203);
-    }
-
     if ($tokenResponse["id"] === $userID) {
 
-        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `code`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
- VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "', '" . mysqli_real_escape_string($db, $code) . "',
+        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
+ VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
