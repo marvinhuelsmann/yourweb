@@ -6,6 +6,9 @@ setCorsPolice();
 $count = false;
 
 $tokenResponse = isValidToken(getBearerToken());
+echo $tokenResponse;
+echo getBearerToken();
+echo $tokenResponse->id;
 
 $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
 $user_check_query = "SELECT * FROM yourweb_likes";

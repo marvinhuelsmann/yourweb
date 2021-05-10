@@ -50,6 +50,11 @@
         Du hast dieser Website bereits dein Herz gegeben!
       </p>
     </div>
+    <div v-if="error">
+      <p class="text-sm text-center justify-center flex text-blue-700">
+        Es ist ein Fehler aufgetaucht!
+      </p>
+    </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
         Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
@@ -87,6 +92,7 @@ export default {
       isLoaded: false,
       alreadyLike: false,
       loveButtonRed: false,
+      error: false
     }
   },
   computed: {
@@ -139,6 +145,7 @@ export default {
       })
     },
     reload() {
+      this.error = false
       this.alreadyLike = false
       this.loveButtonRed = false
       this.isLoaded = false
@@ -189,8 +196,10 @@ export default {
           }).then(response => {
             if (response.status === 200) {
               this.user.likes++;
-            } else {
+            } else if (response.status === 400) {
               this.alreadyLike = true
+            } else {
+              this.error = true
             }
             this.loveButtonRed = true
           })
