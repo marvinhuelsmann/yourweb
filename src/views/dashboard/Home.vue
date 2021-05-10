@@ -60,7 +60,7 @@
                 <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                              class="font-medium text-gray-500 hover:text-gray-900">{{ item.name }}
                 </router-link>
-                <a :href='"https://yourweb.monster/" + user.name'
+                <a :href='"https://yourweb.monster/" + user.id'
                    class="font-medium text-green-600 hover:text-green-500"> {{ userOneGaming.name }}</a>
               </div>
             </nav>
