@@ -7,32 +7,17 @@ require 'util/config.php';
 
 $count = false;
 
-/**
- * get access token from header
- * */
-function getBearerToken() {
-    $headers = getAuthorizationHeader();
-    // HEADER: Get the access token from the header
-    if (!empty($headers)) {
-        if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
-            return $matches[1];
-        }
-    }
-    return null;
-}
+$tokenResponse = isValidToken(getBearerToken());
 
+$db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
+$user_check_query = "SELECT * FROM yourweb_likes";
+$db_erg = mysqli_query($db, $user_check_query);
 
-echo (getBearerToken());
-echo (isValidToken(getBearerToken()));
-if (isValidToken(getBearerToken()) == 200) {
+if (isset($_GET['id']) && isset($_GET['user'])) {
+    $id = $_GET['id'];
+    $user = $_GET['user'];
 
-    $db = mysqli_connect('db.dlrm-hosting.de', 'marvinhuelsmann', 'wyUoXpjFKl2vAEqb', 'marvinhuelsmann');
-    $user_check_query = "SELECT * FROM yourweb_likes";
-    $db_erg = mysqli_query($db, $user_check_query);
-
-    if (isset($_GET['id']) && isset($_GET['user'])) {
-        $id = $_GET['id'];
-        $user = $_GET['user'];
+    if ($tokenResponse->id == $id) {
 
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             if ($row['fromLike'] === $user && $row['userID'] === $id) {
@@ -53,13 +38,12 @@ if (isValidToken(getBearerToken()) == 200) {
         }
 
     } else {
-        return http_response_code(404);
-    };
+        return http_response_code(401);
+    }
 
 } else {
-    return http_response_code(401);
+    return http_response_code(404);
 }
-
 
 
 ?>

@@ -22,7 +22,7 @@ function isValidToken($token)
     $response = curl_exec($curl);
     curl_close($curl);
 
-    return $response;
+    return json_decode($response);
 }
 
 function getAuthorizationHeader(){
@@ -42,4 +42,18 @@ function getAuthorizationHeader(){
         }
     }
     return $headers;
+}
+
+/**
+ * get access token from header
+ * */
+function getBearerToken() {
+    $headers = getAuthorizationHeader();
+    // HEADER: Get the access token from the header
+    if (!empty($headers)) {
+        if (preg_match('/Bearer\s(\S+)/', $headers, $matches)) {
+            return $matches[1];
+        }
+    }
+    return null;
 }
