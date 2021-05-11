@@ -48,6 +48,16 @@ const routes = [
         component: () => import('../views/dashboard/Home.vue')
     },
     {
+        path: "/dashboard/site",
+        name: 'Dashboard Seiten',
+        component: () => import('../views/dashboard/Site.vue')
+    },
+    {
+        path: "/dashboard/settings",
+        name: 'Dashboard Einstellungen',
+        component: () => import('../views/dashboard/Settings.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
         component: Profile

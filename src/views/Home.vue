@@ -207,7 +207,7 @@ export default {
     },
     signIn() {
       if (this.user != null) {
-        return this.user.name
+        return  this.user.name + "'s Profil"
       } else {
         return "Anmelden"
       }

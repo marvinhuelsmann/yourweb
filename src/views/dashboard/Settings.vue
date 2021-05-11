@@ -49,7 +49,7 @@
                   <div class="flex items-center">
                     <div>
                       <a target="_blank" :href="'https://yourweb.monster/' + user.id">
-                      <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
+                        <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
                       </a>
                     </div>
                     <div class="ml-3">
@@ -79,7 +79,7 @@
             <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div class="flex items-center flex-shrink-0 px-4">
                 <a href="/">
-                <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
+                  <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
                 </a>
               </div>
               <nav class="mt-5 flex-1" aria-label="Sidebar">
@@ -95,7 +95,7 @@
               </nav>
             </div>
             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <a  href="#" @click="logout" class="flex-shrink-0 w-full group block">
+              <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
                     <a :href="'https://yourweb.monster/' + user.id">
@@ -121,7 +121,7 @@
           <div class="flex items-center justify-between bg-gray-50 border-b border-gray-200 px-4 py-1.5">
             <div>
               <a href="/">
-              <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
+                <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
               </a>
             </div>
             <div>
@@ -158,8 +158,8 @@
 <script>
 
 const navigation = [
-  {name: 'Dashboard', href: '#', icon: HomeIcon, current: true},
-  {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false},
+  {name: 'Dashboard', href: '/dashboard/home', icon: HomeIcon, current: false},
+  {name: 'Einstellungen', href: '#', icon: SearchCircleIcon, current: true},
   {name: 'Deine Seiten', href: '/dashboard/site', icon: MapIcon, current: false},
 ]
 
