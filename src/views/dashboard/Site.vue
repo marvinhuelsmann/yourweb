@@ -147,7 +147,7 @@
           <aside class="relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full rounded-lg">
-                <h1 class="font-bold text-4xl">Deine Seite:</h1>
+                <h1 class="font-bold text-4xl">Deine Seite</h1>
                 <form class="mt-8 space-y-6">
                   <input type="hidden" name="remember" value="true"/>
                   <div class="rounded-md shadow-sm -space-y-px">

@@ -229,8 +229,12 @@ export default {
 
       if (today.getUTCDate() >= 5) {
         if (today.getHours() >= 13 && today.getHours() < 18) {
-          return "Guten Mittag"
-        } else if (today.getHours() >= 4 && today.getHours() < 12) {
+          if (today.getHours() >= 15) {
+            return "Guten Nachmittag"
+          } else {
+            return "Guten Mittag"
+          }
+        } else if (today.getHours() >= 4 && today.getHours() <= 12) {
           return "Guten Morgen"
         } else if (today.getHours() >= 18 && today.getHours() < 22) {
           return "Guten Abend"

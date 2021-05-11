@@ -136,19 +136,15 @@
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
           <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
-            <!-- Start main area-->
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
+              <div class="h-full rounded-lg">
+                <h1 class="font-bold text-4xl">Deine Statistiken</h1>
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  Du benötigst eine Max Seite um dir Statistiken anzusehen zu können!
+                </p>
+              </div>
             </div>
-            <!-- End main area -->
           </main>
-          <aside class="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-            <!-- Start secondary column (hidden on smaller screens) -->
-            <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
-            </div>
-            <!-- End secondary column -->
-          </aside>
         </div>
       </div>
     </div>
