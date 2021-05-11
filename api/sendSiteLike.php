@@ -22,7 +22,7 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
             }
         }
         if (!$count) {
-            $queryIntoLikes = "INSERT INTO `yourweb_likes` (`userID`, `fromLike`) VALUES ('" . mysqli_real_escape_string($db, $id) . "', '" . mysqli_real_escape_string($db, $user) . "')";
+            $queryIntoLikes = "INSERT INTO `yourweb_likes` (`userID`, `fromLike`, `timestamp`) VALUES ('" . mysqli_real_escape_string($db, $id) . "', '" . mysqli_real_escape_string($db, $user) . "', NOW())";
             if (mysqli_query($db, $queryIntoLikes)) {
 
                 $queryIntoWebsites = "UPDATE websites SET `likes` = `likes`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $id) . "'";

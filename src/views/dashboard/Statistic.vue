@@ -186,6 +186,7 @@ export default {
         image: null,
         likes: null
       },
+      datacollection: null,
       sidebarOpen: false
     }
   },
@@ -211,6 +212,7 @@ export default {
     }
   },
   mounted() {
+    this.fillData()
     this.isInSession()
 
     if (this.userOneGaming != null) {
