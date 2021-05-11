@@ -49,7 +49,7 @@
                   <div class="flex items-center">
                     <div>
                       <a target="_blank" :href="'https://yourweb.monster/' + user.id">
-                      <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
+                        <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
                       </a>
                     </div>
                     <div class="ml-3">
@@ -79,7 +79,7 @@
             <div class="flex-1 flex flex-col pt-5 pb-4 overflow-y-auto">
               <div class="flex items-center flex-shrink-0 px-4">
                 <a href="/">
-                <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
+                  <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
                 </a>
               </div>
               <nav class="mt-5 flex-1" aria-label="Sidebar">
@@ -95,7 +95,7 @@
               </nav>
             </div>
             <div class="flex-shrink-0 flex border-t border-gray-200 p-4">
-              <a  href="#" @click="logout" class="flex-shrink-0 w-full group block">
+              <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
                     <a :href="'https://yourweb.monster/' + user.id">
@@ -121,7 +121,7 @@
           <div class="flex items-center justify-between bg-gray-50 border-b border-gray-200 px-4 py-1.5">
             <div>
               <a href="/">
-              <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
+                <img class="h-8 w-auto" src="../../assets/images/yourweb.png" alt="Workflow"/>
               </a>
             </div>
             <div>
@@ -135,20 +135,16 @@
           </div>
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
-          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
-            <!-- Start main area-->
-            <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
+          <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
+            <div class="h-full  border-dashed rounded-lg">
+              <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ userOneGaming.name }}</h1>
+              <div v-if="user.name != null">
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren
+                </p>
+              </div>
             </div>
-            <!-- End main area -->
-          </main>
-          <aside class="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-            <!-- Start secondary column (hidden on smaller screens) -->
-            <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
-            </div>
-            <!-- End secondary column -->
-          </aside>
+          </div>
         </div>
       </div>
     </div>
@@ -226,6 +222,23 @@ export default {
     }
   },
   methods: {
+    helloDayTime() {
+      let today = new Date();
+
+      if (today.getUTCDate() >= 5) {
+        if (today.getHours() >= 13 && today.getHours() < 18) {
+          return "Guten Mittag"
+        } else if (today.getHours() >= 4 && today.getHours() < 12) {
+          return "Guten Morgen"
+        } else if (today.getHours() >= 18 && today.getHours() < 22) {
+          return "Guten Abend"
+        } else if (today.getHours() >= 22 && today.getHours() < 4) {
+          return "Guten Nacht"
+        }
+      } else {
+        return "Schönes Wochenende"
+      }
+    },
     authenticate() {
       if (this.userOneGaming === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
