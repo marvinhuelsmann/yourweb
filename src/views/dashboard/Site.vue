@@ -338,7 +338,7 @@ export default {
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image, {
         headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGamingID
+          'Authorization': 'Bearer ' + this.tokenOneGaming
         }
       }).then(response => {
         if (response.status === 200) {
