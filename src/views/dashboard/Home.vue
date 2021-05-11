@@ -140,7 +140,7 @@
               <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ userOneGaming.name }}</h1>
               <div v-if="user.name != null">
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren
+                  Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren.
                 </p>
               </div>
             </div>
@@ -238,8 +238,10 @@ export default {
           return "Guten Morgen"
         } else if (today.getHours() >= 18 && today.getHours() < 22) {
           return "Guten Abend"
-        } else if (today.getHours() >= 22 && today.getHours() < 4) {
-          return "Guten Nacht"
+        } else if (today.getHours() >= 22 && today.getHours() > 4) {
+          return "Gute Nacht"
+        } else {
+          return "Guten Tag"
         }
       } else {
         return "Schönes Wochenende"

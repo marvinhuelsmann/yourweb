@@ -138,10 +138,19 @@
           <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full rounded-lg">
-                <h1 class="font-bold text-4xl">Deine Statistiken</h1>
+                <h1 class="font-bold text-4xl">Deine Statistiken </h1>
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Du benötigst eine Max Seite um dir Statistiken anzusehen zu können!
+                  Hier kannst du deine mini Website Statistiken ansehen.
                 </p>
+                <div class="mt-32 space-y-6">
+                  <div class="w-20 content-center mx-auto">
+                    <HeartIcon class="text-red-500"/>
+                  </div>
+                  <div class="text-center">
+                    <h1 class="font-bold text-3xl">Deine mini Seite hat folgende Herzen Anzahl</h1>
+                    <h2 class=" text-3xl">{{ likeAmount }}</h2>
+                  </div>
+                </div>
               </div>
             </div>
           </main>
@@ -168,6 +177,7 @@ import {
   MapIcon,
   MenuIcon,
   SearchCircleIcon,
+  HeartIcon,
   XIcon,
 } from '@heroicons/vue/outline'
 
@@ -195,6 +205,7 @@ export default {
     DialogOverlay,
     TransitionChild,
     TransitionRoot,
+    HeartIcon,
     MenuIcon,
     XIcon,
   },
@@ -207,12 +218,20 @@ export default {
     userOneGaming() {
       return store.state.user
     },
+    likeAmount() {
+      if (this.user.likes === "1") {
+        return "Jemand hat dir 1 Herz für deine Seite gegeben, der Anfang ist gut..."
+      } else if (this.user.likes === null || this.user.likes === "0") {
+        return "Du hast keine Herzen für deine Seite erhalten, style sie auf!"
+      } else {
+        return "Du besitzt momentan " + this.user.likes + " Herzen für deine Seite, weiter so!"
+      }
+    },
     tokenOneGaming() {
       return store.state.token
     }
   },
   mounted() {
-    this.fillData()
     this.isInSession()
 
     if (this.userOneGaming != null) {

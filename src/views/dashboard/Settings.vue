@@ -139,6 +139,9 @@
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full rounded-lg">
                 <h1 class="font-bold text-4xl">Deine Einstellungen</h1>
+                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                  Hier kannst du YourWeb Account Einstellungen vornehmen.
+                </p>
               </div>
             </div>
           </main>
