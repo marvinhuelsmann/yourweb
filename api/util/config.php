@@ -82,3 +82,19 @@ function setCorsPolice() {
         exit(0);
     }
 }
+
+/**
+ * get the current ip
+ * */
+function getIp()
+{
+    $ip = $_SERVER['REMOTE_ADDR'];
+    if (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+        $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    } elseif (isset($_SERVER["HTTP_CF_CONNECTING_IP"])) {
+        $ip = $_SERVER["HTTP_CF_CONNECTING_IP"];
+    } elseif (!empty($_SERVER['HTTP_CLIENT_IP'])) {
+        $ip = $_SERVER['HTTP_CLIENT_IP'];
+    }
+    return $ip;
+}

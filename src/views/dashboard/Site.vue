@@ -135,19 +135,83 @@
           </div>
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
-          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
-            <!-- Start main area-->
+          <main
+              class="invisible md:visible xl:visible flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
+              <div class="h-full border-2 border-gray-200 rounded-lg">
+                <Profile :name="user.name" :id="user.id" :birthday="user.birthday" :img-url="user.image"
+                         :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"/>
+              </div>
             </div>
-            <!-- End main area -->
           </main>
-          <aside class="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
-            <!-- Start secondary column (hidden on smaller screens) -->
+          <aside class="relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
+              <div class="h-full rounded-lg">
+                <h1 class="font-bold text-4xl">Deine Seite:</h1>
+                <form class="mt-8 space-y-6">
+                  <input type="hidden" name="remember" value="true"/>
+                  <div class="rounded-md shadow-sm -space-y-px">
+                    <div class="py-1">
+                      <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
+                        mini Seite
+                      </h2>
+                      <p class=" text-center text-sm text-gray-600">
+                        Diese Daten werden öffentlich auf deinem Profil stehen
+                      </p>
+                    </div>
+                    <div class="">
+                      <label for="name" class="sr-only">Name</label>
+                      <input v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
+                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                             placeholder="Name*"/>
+                    </div>
+                    <div class="pt-2">
+                      <label for="birthday" class="sr-only">Geburtstag</label>
+                      <input v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
+                             type="text"
+                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                             placeholder="Geburtstag"/>
+                    </div>
+                    <div class="pt-2">
+                      <label for="place" class="sr-only">Wohnort</label>
+                      <input v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
+                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                             placeholder="Wohnort"/>
+                    </div>
+                    <div class="pt-2">
+                      <label for="image" class="sr-only">Bild</label>
+                      <input v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
+                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                             placeholder="Bild URL"/>
+                    </div>
+                    <div class="pt-2">
+                      <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
+                      <textarea v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader"
+                                required=""
+                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Zwischenüberschrift*"/>
+                    </div>
+                    <div class="pt-2">
+                      <label for="biography" class="sr-only">Biografie</label>
+                      <textarea v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
+                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                placeholder="Biographie*"/>
+                    </div>
+                  </div>
+
+                  <button v-if="!loading" type="submit" @click="saveChanges()"
+                          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
+            </span>
+                    Speichern
+                  </button>
+                  <div v-if="loading" class="justify-center flex">
+                    <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                  </div>
+                </form>
+              </div>
             </div>
-            <!-- End secondary column -->
           </aside>
         </div>
       </div>
@@ -157,10 +221,13 @@
 
 <script>
 
+import Profile from "@/components/Profile";
+
 const navigation = [
   {name: 'Dashboard', href: '/dashboard/home', icon: HomeIcon, current: false},
-  {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false},
   {name: 'Deine Seiten', href: '#', icon: MapIcon, current: true},
+  {name: 'Statistiken', href: '/dashboard/statistic', icon: CalculatorIcon, current: false},
+  {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false},
 ]
 
 import {Dialog, DialogOverlay, TransitionChild, TransitionRoot} from '@headlessui/vue'
@@ -171,6 +238,9 @@ import {
   MenuIcon,
   SearchCircleIcon,
   XIcon,
+  LockClosedIcon,
+  ArrowDownIcon,
+  ClockIcon, CalculatorIcon
 } from '@heroicons/vue/outline'
 
 export default {
@@ -188,16 +258,21 @@ export default {
         image: null,
         likes: null
       },
-      sidebarOpen: false
+      sidebarOpen: false,
+      loading: false
     }
   },
   components: {
+    Profile,
     Dialog,
     DialogOverlay,
     TransitionChild,
     TransitionRoot,
     MenuIcon,
     XIcon,
+    LockClosedIcon,
+    ArrowDownIcon,
+    ClockIcon
   },
   setup() {
     return {
@@ -255,6 +330,25 @@ export default {
           window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
         }
       });
+    },
+    saveChanges() {
+      this.isInSession()
+
+      this.loading = true;
+      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+          + "&place=" + this.user.place + "&image=" + this.user.image, {
+        headers: {
+          'Authorization': 'Bearer ' + this.tokenOneGamingID
+        }
+      }).then(response => {
+        if (response.status === 200) {
+          this.mounted()
+        }
+      }).catch(error => {
+        console.error(error)
+      }).finally(() => {
+        this.loading = false;
+      })
     }
   }
 }

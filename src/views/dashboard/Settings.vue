@@ -159,13 +159,15 @@
 
 const navigation = [
   {name: 'Dashboard', href: '/dashboard/home', icon: HomeIcon, current: false},
-  {name: 'Einstellungen', href: '#', icon: SearchCircleIcon, current: true},
   {name: 'Deine Seiten', href: '/dashboard/site', icon: MapIcon, current: false},
+  {name: 'Statistiken', href: '/dashboard/statistic', icon: CalculatorIcon, current: false},
+  {name: 'Einstellungen', href: '#', icon: SearchCircleIcon, current: true},
 ]
 
 import {Dialog, DialogOverlay, TransitionChild, TransitionRoot} from '@headlessui/vue'
 import {store} from "@/store";
 import {
+  CalculatorIcon,
   HomeIcon,
   MapIcon,
   MenuIcon,

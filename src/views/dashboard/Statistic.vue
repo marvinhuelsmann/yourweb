@@ -135,16 +135,20 @@
           </div>
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
-          <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
-            <div class="h-full  border-dashed rounded-lg">
-              <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ userOneGaming.name }}</h1>
-              <div v-if="user.name != null">
-                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren
-                </p>
-              </div>
+          <main class="flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
+            <!-- Start main area-->
+            <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
+              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
             </div>
-          </div>
+            <!-- End main area -->
+          </main>
+          <aside class="hidden relative xl:order-first xl:flex xl:flex-col flex-shrink-0 w-96 border-r border-gray-200">
+            <!-- Start secondary column (hidden on smaller screens) -->
+            <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
+              <div class="h-full border-2 border-gray-200 border-dashed rounded-lg"/>
+            </div>
+            <!-- End secondary column -->
+          </aside>
         </div>
       </div>
     </div>
@@ -154,9 +158,9 @@
 <script>
 
 const navigation = [
-  {name: 'Dashboard', href: '#', icon: HomeIcon, current: true},
+  {name: 'Dashboard', href: '/dashboard/home', icon: HomeIcon, current: false},
   {name: 'Deine Seiten', href: '/dashboard/site', icon: MapIcon, current: false},
-  {name: 'Statistiken', href: '/dashboard/statistic', icon: CalculatorIcon, current: false},
+  {name: 'Statistiken', href: '#', icon: CalculatorIcon, current: true},
   {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false},
 ]
 
@@ -172,7 +176,7 @@ import {
 } from '@heroicons/vue/outline'
 
 export default {
-  name: "Home",
+  name: "Statistic",
   data() {
     return {
       user: {
@@ -224,23 +228,6 @@ export default {
     }
   },
   methods: {
-    helloDayTime() {
-      let today = new Date();
-
-      if (today.getUTCDate() >= 5) {
-        if (today.getHours() >= 13 && today.getHours() < 18) {
-          return "Guten Mittag"
-        } else if (today.getHours() >= 4 && today.getHours() < 12) {
-          return "Guten Morgen"
-        } else if (today.getHours() >= 18 && today.getHours() < 22) {
-          return "Guten Abend"
-        } else if (today.getHours() >= 22 && today.getHours() < 4) {
-          return "Guten Nacht"
-        }
-      } else {
-        return "Schönes Wochenende"
-      }
-    },
     authenticate() {
       if (this.userOneGaming === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`

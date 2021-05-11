@@ -58,6 +58,11 @@ const routes = [
         component: () => import('../views/dashboard/Settings.vue')
     },
     {
+        path: "/dashboard/statistic",
+        name: 'Dashboard Statistiken',
+        component: () => import('../views/dashboard/Statistic.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
         component: Profile

@@ -17,6 +17,9 @@
     },
     "api/getSiteOneGamingID.php": {
       "runtime": "vercel-php@0.4.0"
+    },
+    "api/saveChanges.php": {
+      "runtime": "vercel-php@0.4.0"
     }
   },
   "routes": [
@@ -25,7 +28,8 @@
     { "src": "/api/v1/getID",  "dest": "/api/getSiteID.php" },
     { "src": "/api/v1/getCommunity",  "dest": "/api/getSpecialSite.php" },
     { "src": "/api/v1/sendLike",  "dest": "/api/sendSiteLike.php" },
-    { "src": "/api/v1/getSiteOneGaming",  "dest": "/api/getSiteOneGamingID.php" }
+    { "src": "/api/v1/getSiteOneGaming",  "dest": "/api/getSiteOneGamingID.php" },
+    { "src": "/api/v1/saveChanges",  "dest": "/api/saveChanges.php" }
   ]
 }
 
