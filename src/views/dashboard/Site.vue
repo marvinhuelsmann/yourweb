@@ -161,39 +161,39 @@
                     </div>
                     <div class="">
                       <label for="name" class="sr-only">Name</label>
-                      <input v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
+                      <input @input="setNoSaveChanges(true)" v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
                              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                              placeholder="Name*"/>
                     </div>
                     <div class="pt-2">
                       <label for="birthday" class="sr-only">Geburtstag</label>
-                      <input v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
+                      <input @input="setNoSaveChanges(true)" v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
                              type="text"
                              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                              placeholder="Geburtstag"/>
                     </div>
                     <div class="pt-2">
                       <label for="place" class="sr-only">Wohnort</label>
-                      <input v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
+                      <input @input="setNoSaveChanges(true)" v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
                              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                              placeholder="Wohnort"/>
                     </div>
                     <div class="pt-2">
                       <label for="image" class="sr-only">Bild</label>
-                      <input v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
+                      <input @input="setNoSaveChanges(true)" v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
                              class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                              placeholder="Bild URL"/>
                     </div>
                     <div class="pt-2">
                       <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-                      <textarea v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader"
+                      <textarea @input="setNoSaveChanges(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader"
                                 required=""
                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Zwischenüberschrift*"/>
                     </div>
                     <div class="pt-2">
                       <label for="biography" class="sr-only">Biografie</label>
-                      <textarea v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
+                      <textarea @input="setNoSaveChanges(true)" v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                 placeholder="Biographie*"/>
                     </div>
@@ -208,6 +208,12 @@
                   </button>
                   <div v-if="loading" class="justify-center flex">
                     <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                  </div>
+                  <div v-if="finish && !unSaveChanges" class="justify-center flex">
+                    <CheckIcon class="text-green-900 h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                    <a target="_blank" :href="'https://yourweb.monster/' + user.id" class="text-center underline pt-1.5 text-sm text-gray-600">
+                      Zu deinen Profil
+                    </a>
                   </div>
                 </form>
               </div>
@@ -240,7 +246,7 @@ import {
   XIcon,
   LockClosedIcon,
   ArrowDownIcon,
-  ClockIcon, CalculatorIcon
+  ClockIcon, CalculatorIcon, CheckIcon
 } from '@heroicons/vue/outline'
 
 export default {
@@ -259,7 +265,9 @@ export default {
         likes: null
       },
       sidebarOpen: false,
-      loading: false
+      unSaveChanges: false,
+      loading: false,
+      finish: false
     }
   },
   components: {
@@ -272,7 +280,8 @@ export default {
     XIcon,
     LockClosedIcon,
     ArrowDownIcon,
-    ClockIcon
+    ClockIcon,
+    CheckIcon
   },
   setup() {
     return {
@@ -289,6 +298,7 @@ export default {
   },
   mounted() {
     this.isInSession()
+    this.finish = false
 
     if (this.userOneGaming != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
@@ -331,23 +341,25 @@ export default {
         }
       });
     },
+    setNoSaveChanges(save) {
+      this.unSaveChanges = save
+    },
     saveChanges() {
       this.isInSession()
 
-      this.loading = true;
+      this.finish = false
+      this.unSaveChanges = false
+      this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGaming
         }
-      }).then(response => {
-        if (response.status === 200) {
-          this.mounted()
-        }
       }).catch(error => {
         console.error(error)
       }).finally(() => {
         this.loading = false;
+        this.finish = true;
       })
     }
   }
