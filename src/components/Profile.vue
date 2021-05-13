@@ -9,7 +9,7 @@
       <div class="text-center">
         <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
              alt="">
-        <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }}</h2>
+        <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }}   <BadgeCheckIcon v-if="verify" class="pl-0.5 h-6 w-6 text-blue-500" aria-hidden="true"/></h2>
         <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday != null">
           <h2 class="text-indigo-500 font-semibold">
             {{ birthday }}
@@ -74,7 +74,7 @@ import {
   LightningBoltIcon,
   ScaleIcon,
   RewindIcon,
-  ShareIcon
+  ShareIcon, BadgeCheckIcon
 } from '@heroicons/vue/outline'
 
 export default {
@@ -89,11 +89,13 @@ export default {
     social: Map,
     imgUrl: String,
     showAdvertise: Boolean,
-    redirect: String
+    redirect: String,
+    verify: Boolean
   },
   components: {
     LocationMarkerIcon,
     CakeIcon,
+    BadgeCheckIcon,
     // eslint-disable-next-line vue/no-unused-components
     AnnotationIcon,
     // eslint-disable-next-line vue/no-unused-components

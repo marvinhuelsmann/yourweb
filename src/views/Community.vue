@@ -9,7 +9,7 @@
       </router-link>
     </div>
     <div v-if="isLoaded">
-      <Profile :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
+      <Profile :verify="user.verify" :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
                :place='user.place'
                :name='user.name' :img-url='user.image'></Profile>
       <div class="mt-3 mb-4 justify-center flex">
@@ -85,7 +85,8 @@ export default {
         image: null,
         likes: null,
         hasUserLiked: null,
-        views: null
+        views: null,
+        verify: null
       },
       isLoaded: false,
       alreadyLike: false,

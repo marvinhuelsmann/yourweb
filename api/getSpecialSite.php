@@ -40,6 +40,7 @@ function getUser($userID, $fromID)
                 'likes' => $row['likes'],
                 'hasUserLiked' => $likeFind,
                 'views' => $row['views'],
+                'verify' => $row['verify']
             ]);
         } else if ($alreadyFind) {
             return;
