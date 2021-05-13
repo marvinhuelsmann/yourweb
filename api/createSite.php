@@ -28,16 +28,16 @@ if (isset($_GET['name']) &&
     $email = $_GET['email'];
     $ip = getIp();
 
-    $likes = 0;
+    $amountZero = 0;
 
     if ($tokenResponse["id"] === $userID) {
 
-        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`)
+        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `likes`, `views`)
  VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
-      '" . mysqli_real_escape_string($db, $image) . "', '" . mysqli_real_escape_string($db, $likes) . "' );";
+      '" . mysqli_real_escape_string($db, $image) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $amountZero) . "' );";
 
         $user_check_query = "SELECT * FROM websites";
         $db_erg = mysqli_query($db, $user_check_query);

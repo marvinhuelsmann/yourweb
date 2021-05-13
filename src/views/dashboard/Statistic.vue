@@ -150,6 +150,13 @@
                     <h1 class="font-bold text-3xl">Deine mini Seite hat folgende Herzen Anzahl</h1>
                     <h2 class=" text-3xl">{{ likeAmount }}</h2>
                   </div>
+                  <div class="w-20 content-center mx-auto">
+                    <CursorClickIcon class="text-green-500"/>
+                  </div>
+                  <div class="text-center">
+                    <h1 class="font-bold text-3xl">Deine mini Seite hat folgende Aufrufe</h1>
+                    <h2 class=" text-3xl">{{ viewsAmount }}</h2>
+                  </div>
                 </div>
               </div>
             </div>
@@ -178,7 +185,7 @@ import {
   MenuIcon,
   SearchCircleIcon,
   HeartIcon,
-  XIcon,
+  XIcon, CursorClickIcon,
 } from '@heroicons/vue/outline'
 
 export default {
@@ -194,7 +201,8 @@ export default {
         birthday: null,
         place: null,
         image: null,
-        likes: null
+        likes: null,
+        views: null
       },
       datacollection: null,
       sidebarOpen: false
@@ -206,6 +214,7 @@ export default {
     TransitionChild,
     TransitionRoot,
     HeartIcon,
+    CursorClickIcon,
     MenuIcon,
     XIcon,
   },
@@ -224,7 +233,16 @@ export default {
       } else if (this.user.likes === null || this.user.likes === "0") {
         return "Du hast keine Herzen für deine Seite erhalten, style sie auf!"
       } else {
-        return "Du besitzt momentan " + this.user.likes + " Herzen für deine Seite, weiter so!"
+        return "Du besitzt momentan " + this.user.likes + " Herzen erhalten für deine Seite, weiter so!"
+      }
+    },
+    viewsAmount() {
+      if (this.user.views === "1") {
+        return "Du hast 1 Website Aufruf in der Community Sektion erhalten."
+      } else if (this.user.views === null || this.user.views === "0") {
+        return "Du hast bis jetzt noch keine Website Aufrufe in der Community Sektion erhalten!"
+      } else {
+        return "Deine Website hatte bis jetzt " + this.user.views + " Aufrufe in der Community Sektion!"
       }
     },
     tokenOneGaming() {

@@ -142,10 +142,19 @@
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   Hier kannst du YourWeb Account Einstellungen vornehmen.
                 </p>
+                <div class="mt-32 space-y-6">
+                  <div class="w-20 content-center mx-auto">
+
+                  </div>
+                  <div class="text-center">
+                    <h1 class="font-bold text-3xl">In Entwicklung...</h1>
+
+                  </div>
+                </div>
               </div>
             </div>
           </main>
-        </div>
+        </div>r
       </div>
     </div>
   </div>
