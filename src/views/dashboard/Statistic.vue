@@ -234,7 +234,7 @@ export default {
       } else if (this.user.likes === null || this.user.likes === "0") {
         return "Du hast keine Herzen für deine Seite erhalten, style sie auf!"
       } else {
-        return "Du besitzt momentan " + this.user.likes + " Herzen erhalten für deine Seite, weiter so!"
+        return "Du hast momentan " + this.user.likes + " Herzen für deine Seite erhalten, weiter so!"
       }
     },
     viewsAmount() {
