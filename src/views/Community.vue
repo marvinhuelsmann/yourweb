@@ -57,10 +57,7 @@
     </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
-        Hier siehst du Zufällige Mini Seite die vor kurzem erstellt worden sind!
-      </p>
-      <p class="text-sm text-center justify-center flex text-gray-500">
-        2021 YourWeb Pre Build - SNAPSHOT 0.7
+        Diese Website hat {{ user.views }} Community {{ user.views === 1 ? "Aufruf" : "Aufrufe"}}.
       </p>
     </div>
   </div>
