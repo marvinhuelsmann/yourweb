@@ -10,7 +10,7 @@
         <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
              alt="">
         <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }} </h2>
-        <div v-if="verify" class="text-center flex justify-center">
+        <div v-if="verify === 'TRUE'" class="text-center flex justify-center">
         <BadgeCheckIcon class="h-8 text-blue-500" aria-hidden="true"/>
         </div>
         <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday != null">
@@ -93,7 +93,7 @@ export default {
     imgUrl: String,
     showAdvertise: Boolean,
     redirect: String,
-    verify: Boolean
+    verify: String
   },
   components: {
     LocationMarkerIcon,

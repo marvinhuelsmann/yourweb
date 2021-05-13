@@ -22,7 +22,8 @@ if (isset($_GET['i'])) {
                 'text' => $row['text'],
                 'birthday' => $row['birthday'],
                 'place' => $row['place'],
-                'image' => $row['image']
+                'image' => $row['image'],
+                'verify' => $row['verify']
             ]);
             return http_response_code(200);
         }
