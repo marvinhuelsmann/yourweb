@@ -202,7 +202,8 @@ export default {
         place: null,
         image: null,
         likes: null,
-        views: null
+        views: null,
+        verify: null
       },
       datacollection: null,
       sidebarOpen: false

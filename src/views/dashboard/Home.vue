@@ -184,7 +184,8 @@ export default {
         birthday: null,
         place: null,
         image: null,
-        likes: null
+        likes: null,
+        verify: null
       },
       sidebarOpen: false
     }

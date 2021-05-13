@@ -139,7 +139,7 @@
               class="invisible md:visible xl:visible flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full border-2 border-gray-200 rounded-lg">
-                <Profile :name="user.name" :id="user.id" :birthday="user.birthday" :img-url="user.image"
+                <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :name="user.name" :id="user.id" :birthday="user.birthday" :img-url="user.image"
                          :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"/>
               </div>
             </div>
@@ -262,7 +262,8 @@ export default {
         birthday: null,
         place: null,
         image: null,
-        likes: null
+        likes: null,
+        verify: null
       },
       sidebarOpen: false,
       unSaveChanges: false,
