@@ -87,7 +87,8 @@ export default {
         place: null,
         image: null,
         likes: null,
-        hasUserLiked: null
+        hasUserLiked: null,
+        views: null
       },
       isLoaded: false,
       alreadyLike: false,
