@@ -62,7 +62,7 @@ if (isset($_GET['name']) &&
             }
             if ($correctQuery) {
                 while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-                    if ($row['name'] === $name && $row['text'] === $text) {
+                    if ($row['userID'] === $userID) {
                         echo json_encode([
                             'id' => $row['id']
                         ]);
