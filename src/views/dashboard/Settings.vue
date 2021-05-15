@@ -248,7 +248,7 @@ export default {
 
       fetch('https://yourweb.monster/api/v1/delete?user=' + this.userOneGaming.id, {
         headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGamingID
+          'Authorization': 'Bearer ' + this.tokenOneGaming
         }
       }).then(response => {
         if (response.status === 200) {

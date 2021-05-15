@@ -21,7 +21,7 @@ if (isset($_GET['user'])) {
             }
         }
         if ($count) {
-            $deleteSite = "DELETE FROM `finishMatch` WHERE `userID`= '".mysqli_real_escape_string($db, $user)."'";
+            $deleteSite = "DELETE FROM `websites` WHERE `userID`= '".mysqli_real_escape_string($db, $user)."'";
             if (mysqli_query($db, $deleteSite)) {
                 return http_response_code(200);
             } else return http_response_code(503);
