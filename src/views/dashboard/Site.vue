@@ -323,6 +323,7 @@ export default {
           this.user = result
           this.userLoaded = true
         }).catch(error => {
+          this.userLoaded = true
           console.error(error)
         })
       })

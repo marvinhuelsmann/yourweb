@@ -143,21 +143,34 @@
                   Hier kannst du YourWeb Account Einstellungen vornehmen.
                 </p>
                 <div class="mt-32 space-y-6">
-                  <div class="content-center mx-auto">
-
-                    <div class="text-center">
-                      <h1 class="font-bold text-3xl">Deine YourWeb Seite löschen</h1>
-                      <h2 class=" text-3xl">Alle deine gesammelten Statistiken und Website Daten gehen permantent
-                        verloren!</h2>
-                      <div class="mt-3 mb-4 justify-center flex">
-                        <button
-                            class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-red-300 bg-red-200 hover:bg-red-300 text-red-700"
-                            v-on:click="deleteWebsite">
-                          Endgültig löschen
-                        </button>
+                  <div class="content-center mx-auto" v-if="loaded">
+                    <div v-if="user.name != null">
+                      <div class="text-center">
+                        <h1 class="font-bold text-3xl">Deine YourWeb Seite löschen</h1>
+                        <h2 class=" text-3xl">Alle deine gesammelten Statistiken und Website Daten gehen permantent
+                          verloren!</h2>
+                        <div class="mt-3 mb-4 justify-center flex">
+                          <button v-if="!deleteLoading"
+                                  class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-red-300 bg-red-200 hover:bg-red-300 text-red-700"
+                                  v-on:click="deleteWebsite">
+                            Endgültig löschen
+                          </button>
+                          <div v-else>
+                            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                              Lädt...
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-
+                    <div v-else>
+                      <div class="mt-32 text-center">
+                        <h1 class="font-bold text-3xl">Du besitzt keine YourWeb Seite</h1>
+                        <h2 class=" text-3xl"><a href="https://yourweb.monster/create" class="text-blue-500">Du kannst
+                          dir
+                          hier deine eigene Seite erstellen</a></h2>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -205,7 +218,9 @@ export default {
         likes: null,
         verify: null
       },
-      sidebarOpen: false
+      sidebarOpen: false,
+      loaded: false,
+      deleteLoading: false
     }
   },
   components: {
@@ -231,6 +246,7 @@ export default {
   },
   mounted() {
     this.isInSession()
+    this.loaded = false
 
     if (this.userOneGaming != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
@@ -239,21 +255,25 @@ export default {
         }).catch(error => {
           console.error(error)
         })
+      }).finally(response => {
+        console.log(response)
+        this.loaded = true
       })
     }
   },
   methods: {
     deleteWebsite() {
-      this.authenticate();
+      this.isInSession()
+      this.deleteLoading = true
 
       fetch('https://yourweb.monster/api/v1/delete?user=' + this.userOneGaming.id, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGaming
         }
-      }).then(response => {
-        if (response.status === 200) {
-          window.location.href = "https://yourweb.monster"
-        }
+      }).finally(response => {
+        console.log(response)
+        this.deleteLoading = false
+        document.location.reload()
       }).catch(error => {
         console.log(error)
       })
@@ -261,15 +281,15 @@ export default {
     authenticate() {
       if (this.userOneGaming === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-      } else {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb.monster/dashboard/home'
       }
-    },
+    }
+    ,
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
       window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
-    },
+    }
+    ,
     isInSession() {
       this.axios.get('https://id.onegaming.group/api/v1/user', {
         headers: {

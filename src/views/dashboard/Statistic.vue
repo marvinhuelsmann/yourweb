@@ -142,7 +142,7 @@
                 <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                   Hier kannst du deine mini Website Statistiken ansehen.
                 </p>
-                <div v-if="!loading">
+                <div v-if="loaded">
                   <div v-if="user.name != null" class="mt-32 space-y-6">
                     <div class="w-20 content-center mx-auto">
                       <HeartIcon class="text-red-500"/>
@@ -163,7 +163,7 @@
                     <div class="mt-32 text-center">
                       <h1 class="font-bold text-3xl">Du besitzt keine YourWeb Seite</h1>
                       <h2 class=" text-3xl"><a href="https://yourweb.monster/create" class="text-blue-500">Du kannst dir
-                        hier deine Seite erstellen</a></h2>
+                        hier deine eigene Seite erstellen</a></h2>
                     </div>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export default {
         views: null,
         verify: null
       },
-      loading: false,
+      loaded: false,
       sidebarOpen: false
     }
   },
@@ -261,15 +261,18 @@ export default {
   },
   mounted() {
     this.isInSession()
-    this.loading = true;
+    this.loaded = false;
 
     if (this.userOneGaming != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
         result.json().then(result => {
+          this.loaded = true
           this.user = result
-          this.loading = false;
         }).catch(error => {
           console.error(error)
+        }).finally(response =>{
+          console.log(response)
+          this.loaded = true
         })
       })
     }
