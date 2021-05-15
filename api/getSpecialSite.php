@@ -19,14 +19,13 @@ function getUser($userID, $fromID)
 
             while ($inRow = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
                 if ($inRow['userID'] === $row['id'] && $inRow['fromLike'] === $fromID) {
-
-                    $queryIntoWebsites = "UPDATE websites SET `views` = `views`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $row['id']) . "'";
-                    mysqli_query($db, $queryIntoWebsites);
-
                     $likeFind = true;
                 }
             }
             $alreadyFind = true;
+
+            $queryIntoWebsites = "UPDATE websites SET `views` = `views`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $row['id']) . "'";
+            mysqli_query($db, $queryIntoWebsites);
 
             echo json_encode([
                 'id' => $row['id'],
