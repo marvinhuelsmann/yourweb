@@ -2,6 +2,19 @@
 
 $mysqli = new mysqli($_ENV['DB_HOSTNAME'],  $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
 
+
+function checkIfIdIsValid($json, $id) {
+    $isValid = false;
+    foreach($json as $key => $val) {
+        if ($key === 'id') {
+           if ($val === $id) {
+               $isValid = true;
+           }
+        }
+    }
+    return $isValid;
+}
+
 function isValidToken($token)
 {
     $curl = curl_init();

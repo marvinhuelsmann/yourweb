@@ -14,7 +14,7 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
     $id = $_GET['id'];
     $user = $_GET['user'];
 
-    if ($tokenResponse->id === $user) {
+    if (checkIfIdIsValid($tokenResponse, $userID)) {
 
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             if ($row['fromLike'] === $user && $row['userID'] === $id) {

@@ -32,7 +32,7 @@ if (isset($_GET['name']) &&
 
     $amountZero = 0;
 
-    if ($tokenResponse->id === $userID) {
+    if (checkIfIdIsValid($tokenResponse, $userID)) {
 
         $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`)
  VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',

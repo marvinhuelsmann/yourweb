@@ -26,7 +26,7 @@ if (isset($_GET['name']) &&
     $link = $_GET['link'];
     $ip = getIp();
 
-    if ($tokenResponse->id === $userID) {
+    if (checkIfIdIsValid($tokenResponse, $userID)) {
 
         $sql = "UPDATE `websites` SET `ip` = '" . mysqli_real_escape_string($db, $ip) . "', `name` = '" . mysqli_real_escape_string($db, $name) . "', `text` = '" . mysqli_real_escape_string($db, $text) . "',
         `subHeadLine` = '" . mysqli_real_escape_string($db, $subHeadLine) . "', `birthday` = '" . mysqli_real_escape_string($db, $birthday) . "', `place` = '" . mysqli_real_escape_string($db, $place) . "',
