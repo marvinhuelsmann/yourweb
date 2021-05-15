@@ -215,6 +215,7 @@ export default {
         birthday: null,
         place: null,
         image: null,
+        link: null,
         likes: null,
         verify: null
       },

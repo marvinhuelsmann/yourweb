@@ -37,6 +37,7 @@ function getUser($userID, $fromID)
                 'birthday' => $row['birthday'],
                 'place' => $row['place'],
                 'image' => $row['image'],
+                'link' => $row['link'],
                 'likes' => $row['likes'],
                 'hasUserLiked' => $likeFind,
                 'views' => $row['views'],

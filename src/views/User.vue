@@ -1,7 +1,7 @@
 <template>
   <div v-if="isLoaded">
     <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday' :place='user.place'
-             :name='user.name' :img-url='user.image' show-advertise :redirect=redirect></Profile>
+             :name='user.name' :img-url='user.image' :link="user.link" show-advertise :redirect=redirect></Profile>
   </div>
   <div v-else-if="isNotCorrectLoading">
     <h1>Error 404 user not found!</h1>
@@ -36,6 +36,7 @@ export default {
         birthday: null,
         place: null,
         image: null,
+        link: null,
         verify: null
       },
       isLoaded: false,

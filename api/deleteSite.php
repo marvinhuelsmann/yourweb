@@ -13,7 +13,7 @@ $db_erg = mysqli_query($db, $user_check_query);
 if (isset($_GET['user'])) {
     $user = $_GET['user'];
 
-    if ($tokenResponse["id"] === $user) {
+    if ($tokenResponse->id === $user) {
 
         while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
             if ($row['userID'] === $user) {

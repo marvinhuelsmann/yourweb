@@ -62,6 +62,12 @@
                    placeholder="Bild URL" />
           </div>
           <div class="pt-2">
+            <label for="link" class="sr-only">Link</label>
+            <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Website zum verlinken" />
+          </div>
+          <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
             <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
@@ -118,7 +124,7 @@
   </div>
   <div id="preview" class="pb-3" v-if="preview">
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
-             :place='user.place' :birthday='user.birthday' :img-url='user.image' show-advertise></Profile>
+             :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image' show-advertise></Profile>
   </div>
 </template>
 
@@ -141,7 +147,8 @@ export default {
         birthday: store.state.user ? store.state.user.birthday : null,
         place: store.state.user ? store.state.user.location : null,
         image: store.state.user ? store.state.user.avatar : null,
-        email: store.state.user ? store.state.user.email : null
+        email: store.state.user ? store.state.user.email : null,
+        link: null
       },
       preview: false,
       loading: false,
@@ -197,42 +204,29 @@ export default {
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color, {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGamingID
         }
       }).then(response => {
-        if (response.status === 404) {
-          this.alreadyExist = true;
+        if (response.status !== 404) {
+          response.json().then(result => {
+            this.userIdentify = result
+          }).catch(error => {
+            console.error(error)
+          }).finally(() => {
+            this.loading = false;
+
+            if (typeof this.userIdentify.id === 'undefined') {
+              this.alreadyExist = true;
+            } else {
+             window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+            }
+
+          })
         }
       }).catch(error => {
         console.error(error)
-      }).finally(() => {
-        if (!this.alreadyExist) {
-          fetch('https://yourweb.monster/api/v1/getID?name=' + this.user.name + "&text=" + this.user.text).then(result => {
-
-            if (result.status === 404) {
-              this.loading = false;
-              this.alreadyExist = true;
-              return;
-            }
-
-            result.json().then(result => {
-              this.userIdentify = result
-            }).finally(() => {
-              this.loading = false;
-
-              if (this.userIdentify.id === null) {
-                this.alreadyExist = true;
-              } else {
-                window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
-              }
-
-            })
-          }).catch(error => {
-            console.error(error)
-          })
-        }
       })
     }
   }

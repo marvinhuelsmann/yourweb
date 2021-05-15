@@ -140,7 +140,7 @@
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full border-2 border-gray-200 rounded-lg">
                 <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :name="user.name" :id="user.id"
-                         :birthday="user.birthday" :img-url="user.image"
+                         :birthday="user.birthday" :img-url="user.image" :link="user.link"
                          :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"/>
               </div>
             </div>
@@ -189,6 +189,12 @@
                                autocomplete="image" required="" type="text"
                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                placeholder="Bild URL"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="link" class="sr-only">Link</label>
+                        <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required="" type="text"
+                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                               placeholder="Website zum verlinken" />
                       </div>
                       <div class="pt-2">
                         <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
@@ -276,6 +282,7 @@ export default {
         birthday: null,
         place: null,
         image: null,
+        link: null,
         likes: null,
         verify: null
       },

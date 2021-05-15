@@ -34,6 +34,11 @@
         <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
           {{ text }}
         </p>
+        <div class="mt-4" v-if="link !== '' && link !== null">
+          <a target="_blank" class="text-blue-500" :href="link">
+            Zu meiner Privaten Seite
+          </a>
+        </div>
       </div>
     </div>
   </div>
@@ -88,6 +93,7 @@ export default {
   props: {
     id: String,
     name: String,
+    link: String,
     subHeadLine: String,
     place: String,
     birthday: String,

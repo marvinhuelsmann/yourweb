@@ -13,6 +13,7 @@ if (isset($_GET['name']) &&
     isset($_GET['subHeadLine']) &&
     isset($_GET['birthday']) &&
     isset($_GET['place']) &&
+    isset($_GET['link']) &&
     isset($_GET['image'])) {
 
     $userID = $_GET['userID'];
@@ -22,13 +23,14 @@ if (isset($_GET['name']) &&
     $birthday = $_GET['birthday'];
     $place = $_GET['place'];
     $image = $_GET['image'];
+    $link = $_GET['link'];
     $ip = getIp();
 
-    if ($tokenResponse["id"] === $userID) {
+    if ($tokenResponse->id === $userID) {
 
         $sql = "UPDATE `websites` SET `ip` = '" . mysqli_real_escape_string($db, $ip) . "', `name` = '" . mysqli_real_escape_string($db, $name) . "', `text` = '" . mysqli_real_escape_string($db, $text) . "',
         `subHeadLine` = '" . mysqli_real_escape_string($db, $subHeadLine) . "', `birthday` = '" . mysqli_real_escape_string($db, $birthday) . "', `place` = '" . mysqli_real_escape_string($db, $place) . "',
-        `image` = '" . mysqli_real_escape_string($db, $image) . "'  WHERE `userID` = '" . mysqli_real_escape_string($db, $userID) . "'";
+        `image` = '" . mysqli_real_escape_string($db, $image) . "', `link` = '" . mysqli_real_escape_string($db, $link) . "'  WHERE `userID` = '" . mysqli_real_escape_string($db, $userID) . "'";
 
         $user_check_query = "SELECT * FROM websites";
         $db_erg = mysqli_query($db, $user_check_query);

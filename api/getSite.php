@@ -23,6 +23,7 @@ if (isset($_GET['i'])) {
                 'birthday' => $row['birthday'],
                 'place' => $row['place'],
                 'image' => $row['image'],
+                'link' => $row['link'],
                 'verify' => $row['verify']
             ]);
             return http_response_code(200);

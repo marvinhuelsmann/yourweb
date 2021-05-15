@@ -10,7 +10,7 @@
     </div>
     <div v-if="isLoaded">
       <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
-               :place='user.place'
+               :place='user.place' :link="user.link"
                :name='user.name' :img-url='user.image'></Profile>
       <div class="mt-3 mb-4 justify-center flex">
         <button
@@ -83,6 +83,7 @@ export default {
         birthday: null,
         place: null,
         image: null,
+        link: null,
         likes: null,
         hasUserLiked: null,
         views: null,

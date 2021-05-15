@@ -25,7 +25,8 @@ if (isset($_GET['i'])) {
                 'image' => $row['image'],
                 'likes' => $row['likes'],
                 'views' => $row['views'],
-                'verify' => $row['verify']
+                'verify' => $row['verify'],
+                'link' => $row['link']
             ]);
             return http_response_code(200);
         }

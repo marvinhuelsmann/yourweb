@@ -210,6 +210,7 @@ export default {
         birthday: null,
         place: null,
         image: null,
+        link: null,
         likes: null,
         views: null,
         verify: null
