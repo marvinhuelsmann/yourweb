@@ -147,7 +147,7 @@
                     <div v-if="user.name != null">
                       <div class="text-center">
                         <h1 class="font-bold text-3xl">Deine YourWeb Seite löschen</h1>
-                        <h2 class=" text-3xl">Alle deine gesammelten Statistiken und Website Daten gehen permantent
+                        <h2 class=" text-3xl">Alle deine gesammelten Statistiken und Website Daten gehen permanent
                           verloren!</h2>
                         <div class="mt-3 mb-4 justify-center flex">
                           <button v-if="!deleteLoading"
