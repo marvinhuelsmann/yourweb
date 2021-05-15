@@ -50,8 +50,17 @@ if (isset($_GET['name']) &&
             }
         }
 
+        $correctQuery = false;
+
         if (!$alreadyExistCode) {
             if (mysqli_query($db, $sql)) {
+                $correctQuery = true;
+            } else {
+                echo json_encode([
+                    'error' => mysqli_error($db)
+                ]);
+            }
+            if ($correctQuery) {
                 while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
                     if ($row['name'] === $name && $row['text'] === $text) {
                         echo json_encode([
@@ -60,10 +69,6 @@ if (isset($_GET['name']) &&
                         return;
                     }
                 }
-            } else {
-                echo json_encode([
-                    'error' => mysqli_error($db)
-                ]);
             }
         } else {
             echo json_encode([

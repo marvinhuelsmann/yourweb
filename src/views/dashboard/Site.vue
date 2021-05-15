@@ -377,7 +377,7 @@ export default {
       this.unSaveChanges = false
       this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image, {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGaming
         }

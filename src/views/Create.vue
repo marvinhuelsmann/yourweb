@@ -38,44 +38,51 @@
           </div>
           <div class="">
             <label for="name" class="sr-only">Name</label>
-            <input @input="setPreview(true)" v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.name" id="name" name="name" autocomplete="name" required=""
+                   type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Name*" />
+                   placeholder="Name*"/>
           </div>
           <div class="pt-2">
             <label for="birthday" class="sr-only">Geburtstag</label>
-            <input @input="setPreview(true)" v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
+            <input @input="setPreview(true)" v-model="user.birthday" id="birthday" name="birthday"
+                   autocomplete="birthday" required=""
                    type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                    placeholder="Geburtstag"/>
           </div>
           <div class="pt-2">
             <label for="place" class="sr-only">Wohnort</label>
-            <input @input="setPreview(true)" v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.place" id="place" name="place" autocomplete="place"
+                   required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Wohnort" />
+                   placeholder="Wohnort"/>
           </div>
           <div class="pt-2">
             <label for="image" class="sr-only">Bild</label>
-            <input @input="setPreview(true)" v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.image" id="image" name="image" autocomplete="image"
+                   required="" type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Bild URL" />
+                   placeholder="Bild URL"/>
           </div>
           <div class="pt-2">
             <label for="link" class="sr-only">Link</label>
-            <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required="" type="text"
+            <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required=""
+                   type="text"
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Website zum verlinken" />
+                   placeholder="Website zum verlinken"/>
           </div>
           <div class="pt-2">
             <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader" required=""
+            <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader"
+                      autocomplete="subHeader" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Zwischenüberschrift*"/>
           </div>
           <div class="pt-2">
             <label for="biography" class="sr-only">Biografie</label>
-            <textarea @input="setPreview(true)" v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
+            <textarea @input="setPreview(true)" v-model="user.text" id="biography" name="biography"
+                      autocomplete="biography" required=""
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Biographie*"/>
           </div>
@@ -124,7 +131,8 @@
   </div>
   <div id="preview" class="pb-3" v-if="preview">
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
-             :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image' show-advertise></Profile>
+             :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image'
+             show-advertise></Profile>
   </div>
 </template>
 
@@ -211,6 +219,7 @@ export default {
       }).then(response => {
         if (response.status !== 404) {
           response.json().then(result => {
+            console.log(result)
             this.userIdentify = result
           }).catch(error => {
             console.error(error)
@@ -220,7 +229,7 @@ export default {
             if (typeof this.userIdentify.id === 'undefined') {
               this.alreadyExist = true;
             } else {
-           //  window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+              window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
             }
 
           })
