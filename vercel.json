@@ -23,6 +23,9 @@
     },
     "api/stripe/checkOut.php": {
       "runtime": "vercel-php@0.4.0"
+    },
+    "api/deleteSite.php": {
+      "runtime": "vercel-php@0.4.0"
     }
   },
   "routes": [
