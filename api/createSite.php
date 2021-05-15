@@ -2,7 +2,7 @@
 require 'util/config.php';
 setCorsPolice();
 
-$db = mysqli_connect($_ENV['DB_HOSTNAME'],  $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
+$db = mysqli_connect($_ENV['DB_HOSTNAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
 
 $tokenResponse = json_decode(isValidToken(getBearerToken()), true);
 $alreadyExistCode = false;
@@ -34,7 +34,7 @@ if (isset($_GET['name']) &&
 
     if (checkIfIdIsValid($tokenResponse, $userID)) {
 
-        $sql = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`)
+        $queryIntoSites = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`)
  VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
@@ -50,25 +50,13 @@ if (isset($_GET['name']) &&
             }
         }
 
-        $correctQuery = false;
 
         if (!$alreadyExistCode) {
-            if (mysqli_query($db, $sql)) {
-                $correctQuery = true;
-            } else {
+            if (mysqli_query($db, $queryIntoSites)) {
                 echo json_encode([
-                    'error' => mysqli_error($db)
+                    'success' => "your website is created!"
                 ]);
-            }
-            if ($correctQuery) {
-                while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-                    if ($row['userID'] === $userID) {
-                        echo json_encode([
-                            'id' => $row['id']
-                        ]);
-                        return;
-                    }
-                }
+                return http_response_code(200);
             }
         } else {
             echo json_encode([

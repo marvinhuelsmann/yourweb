@@ -229,7 +229,7 @@ export default {
             if (typeof this.userIdentify.id === 'undefined') {
               this.alreadyExist = true;
             } else {
-              window.location.href = "https://yourweb.monster/" + this.userIdentify.id;
+              window.location.href = "https://yourweb.monster/dashboard/site";
             }
 
           })

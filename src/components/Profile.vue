@@ -34,7 +34,7 @@
         <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
           {{ text }}
         </p>
-        <div class="mt-4" v-if="link !== '' && link !== null">
+        <div class="mt-4" v-if="link !== '' && link !== null && link !== 'null'">
           <a target="_blank" class="text-blue-500" :href="link">
             Zu meiner Privaten Seite
           </a>
