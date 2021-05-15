@@ -143,18 +143,27 @@
                   Hier kannst du YourWeb Account Einstellungen vornehmen.
                 </p>
                 <div class="mt-32 space-y-6">
-                  <div class="w-20 content-center mx-auto">
+                  <div class="content-center mx-auto">
 
-                  </div>
-                  <div class="text-center">
-                    <h1 class="font-bold text-3xl">In Entwicklung...</h1>
+                    <div class="text-center">
+                      <h1 class="font-bold text-3xl">Deine YourWeb Seite löschen</h1>
+                      <h2 class=" text-3xl">Alle deine gesammelten Statistiken und Website Daten gehen permantent
+                        verloren!</h2>
+                      <div class="mt-3 mb-4 justify-center flex">
+                        <button
+                            class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-red-300 bg-red-200 hover:bg-red-300 text-red-700"
+                            v-on:click="deleteWebsite">
+                          Endgültig löschen
+                        </button>
+                      </div>
+                    </div>
 
                   </div>
                 </div>
               </div>
             </div>
           </main>
-        </div>r
+        </div>
       </div>
     </div>
   </div>
@@ -234,6 +243,21 @@ export default {
     }
   },
   methods: {
+    deleteWebsite() {
+      this.authenticate();
+
+      fetch('https://yourweb.monster/api/v1/delete?user=' + this.userOneGaming.id, {
+        headers: {
+          'Authorization': 'Bearer ' + this.tokenOneGamingID
+        }
+      }).then(response => {
+        if (response.status === 200) {
+          window.location.href = "https://yourweb.monster"
+        }
+      }).catch(error => {
+        console.log(error)
+      })
+    },
     authenticate() {
       if (this.userOneGaming === null) {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`

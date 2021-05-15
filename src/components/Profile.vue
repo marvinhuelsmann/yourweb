@@ -23,7 +23,10 @@
           <LocationMarkerIcon v-if="place !== ''" class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
         </div>
         <div v-if="verify === 'TRUE'" class="mt-1 text-center flex justify-center">
-          <BadgeCheckIcon class="h-8 text-blue-500" aria-hidden="true"/>
+          <h2 class="text-blue-500 font-semibold">
+            Verifizierter Account
+          </h2>
+          <BadgeCheckIcon class="h-6 text-blue-500" aria-hidden="true"/>
         </div>
         <p class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           {{ subHeadLine }}

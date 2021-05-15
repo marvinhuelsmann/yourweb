@@ -135,11 +135,12 @@
           </div>
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
-          <main
+          <main v-if="userLoaded"
               class="invisible md:visible xl:visible flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full border-2 border-gray-200 rounded-lg">
-                <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :name="user.name" :id="user.id" :birthday="user.birthday" :img-url="user.image"
+                <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :name="user.name" :id="user.id"
+                         :birthday="user.birthday" :img-url="user.image"
                          :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"/>
               </div>
             </div>
@@ -148,74 +149,87 @@
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full rounded-lg">
                 <h1 class="font-bold text-4xl">Deine Seite</h1>
-                <form class="mt-8 space-y-6">
-                  <input type="hidden" name="remember" value="true"/>
-                  <div class="rounded-md shadow-sm -space-y-px">
-                    <div class="py-1">
-                      <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
-                        mini Seite
-                      </h2>
-                      <p class=" text-center text-sm text-gray-600">
-                        Diese Daten werden öffentlich auf deinem Profil stehen
-                      </p>
+                <div v-if="userLoaded">
+                  <form v-if="user.name != null" class="mt-8 space-y-6">
+                    <input type="hidden" name="remember" value="true"/>
+                    <div class="rounded-md shadow-sm -space-y-px">
+                      <div class="py-1">
+                        <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
+                          mini Seite
+                        </h2>
+                        <p class=" text-center text-sm text-gray-600">
+                          Diese Daten werden öffentlich auf deinem Profil stehen
+                        </p>
+                      </div>
+                      <div class="">
+                        <label for="name" class="sr-only">Name</label>
+                        <input @input="setNoSaveChanges(true)" v-model="user.name" id="name" name="name"
+                               autocomplete="name" required="" type="text"
+                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                               placeholder="Name*"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="birthday" class="sr-only">Geburtstag</label>
+                        <input @input="setNoSaveChanges(true)" v-model="user.birthday" id="birthday" name="birthday"
+                               autocomplete="birthday" required=""
+                               type="text"
+                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                               placeholder="Geburtstag"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="place" class="sr-only">Wohnort</label>
+                        <input @input="setNoSaveChanges(true)" v-model="user.place" id="place" name="place"
+                               autocomplete="place" required="" type="text"
+                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                               placeholder="Wohnort"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="image" class="sr-only">Bild</label>
+                        <input @input="setNoSaveChanges(true)" v-model="user.image" id="image" name="image"
+                               autocomplete="image" required="" type="text"
+                               class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                               placeholder="Bild URL"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
+                        <textarea @input="setNoSaveChanges(true)" v-model="user.subHeadLine" id="subHeader"
+                                  name="subHeader" autocomplete="subHeader"
+                                  required=""
+                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                  placeholder="Zwischenüberschrift*"/>
+                      </div>
+                      <div class="pt-2">
+                        <label for="biography" class="sr-only">Biografie</label>
+                        <textarea @input="setNoSaveChanges(true)" v-model="user.text" id="biography" name="biography"
+                                  autocomplete="biography" required=""
+                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                  placeholder="Biographie*"/>
+                      </div>
                     </div>
-                    <div class="">
-                      <label for="name" class="sr-only">Name</label>
-                      <input @input="setNoSaveChanges(true)" v-model="user.name" id="name" name="name" autocomplete="name" required="" type="text"
-                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                             placeholder="Name*"/>
-                    </div>
-                    <div class="pt-2">
-                      <label for="birthday" class="sr-only">Geburtstag</label>
-                      <input @input="setNoSaveChanges(true)" v-model="user.birthday" id="birthday" name="birthday" autocomplete="birthday" required=""
-                             type="text"
-                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                             placeholder="Geburtstag"/>
-                    </div>
-                    <div class="pt-2">
-                      <label for="place" class="sr-only">Wohnort</label>
-                      <input @input="setNoSaveChanges(true)" v-model="user.place" id="place" name="place" autocomplete="place" required="" type="text"
-                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                             placeholder="Wohnort"/>
-                    </div>
-                    <div class="pt-2">
-                      <label for="image" class="sr-only">Bild</label>
-                      <input @input="setNoSaveChanges(true)" v-model="user.image" id="image" name="image" autocomplete="image" required="" type="text"
-                             class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                             placeholder="Bild URL"/>
-                    </div>
-                    <div class="pt-2">
-                      <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-                      <textarea @input="setNoSaveChanges(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader" autocomplete="subHeader"
-                                required=""
-                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Zwischenüberschrift*"/>
-                    </div>
-                    <div class="pt-2">
-                      <label for="biography" class="sr-only">Biografie</label>
-                      <textarea @input="setNoSaveChanges(true)" v-model="user.text" id="biography" name="biography" autocomplete="biography" required=""
-                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                                placeholder="Biographie*"/>
-                    </div>
-                  </div>
 
-                  <button v-if="!loading" type="submit" @click="saveChanges()"
-                          class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    <button v-if="!loading" type="submit" @click="saveChanges()"
+                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
             </span>
-                    Speichern
-                  </button>
-                  <div v-if="loading" class="justify-center flex">
-                    <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                      Speichern
+                    </button>
+                    <div v-if="loading" class="justify-center flex">
+                      <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                    </div>
+                    <div v-if="finish && !unSaveChanges" class="justify-center flex">
+                      <CheckIcon class="text-green-900 h-8 mr-3 ..." viewBox="0 0 24 24"/>
+                      <a target="_blank" :href="'https://yourweb.monster/' + user.id"
+                         class="text-center underline pt-1.5 text-sm text-gray-600">
+                        Zu deinen Profil
+                      </a>
+                    </div>
+                  </form>
+                  <div v-else>
+                    <h1><a class="text-blue-500" href="https://yourweb.monster/create">Du besitzt keine YourWeb Seite du
+                      kannst dir hier eine erstellen</a></h1>
                   </div>
-                  <div v-if="finish && !unSaveChanges" class="justify-center flex">
-                    <CheckIcon class="text-green-900 h-8 mr-3 ..." viewBox="0 0 24 24"/>
-                    <a target="_blank" :href="'https://yourweb.monster/' + user.id" class="text-center underline pt-1.5 text-sm text-gray-600">
-                      Zu deinen Profil
-                    </a>
-                  </div>
-                </form>
+                </div>
               </div>
             </div>
           </aside>
@@ -265,6 +279,7 @@ export default {
         likes: null,
         verify: null
       },
+      userLoaded: false,
       sidebarOpen: false,
       unSaveChanges: false,
       loading: false,
@@ -300,11 +315,13 @@ export default {
   mounted() {
     this.isInSession()
     this.finish = false
+    this.userLoaded = false;
 
     if (this.userOneGaming != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
         result.json().then(result => {
           this.user = result
+          this.userLoaded = true
         }).catch(error => {
           console.error(error)
         })

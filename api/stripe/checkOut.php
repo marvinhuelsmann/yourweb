@@ -1,6 +1,6 @@
 <?php
 
-require('../stripe-php-7.78.0/init.php');
+require_once ('../stripe-php-7.78.0/init.php');
 
 use Stripe\Checkout\Session;
 use Stripe\Exception\ApiErrorException;

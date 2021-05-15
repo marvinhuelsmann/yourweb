@@ -33,7 +33,8 @@
     { "src": "/api/v1/sendLike",  "dest": "/api/sendSiteLike.php" },
     { "src": "/api/v1/getSiteOneGaming",  "dest": "/api/getSiteOneGamingID.php" },
     { "src": "/api/v1/saveChanges",  "dest": "/api/saveChanges.php" },
-    { "src": "/api/v1/checkOut",  "dest": "/api/stripe/checkOut.php" }
+    { "src": "/api/v1/checkOut",  "dest": "/api/stripe/checkOut.php" },
+    { "src": "/api/v1/delete",  "dest": "/api/deleteSite.php" }
   ]
 }
 
