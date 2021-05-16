@@ -5,6 +5,7 @@ import Create from '../views/Create.vue'
 import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
 import Search from '../views/Search.vue'
+import YouWillLeave from '../views/YouWillLeave.vue'
 
 const routes = [
     {
@@ -41,6 +42,11 @@ const routes = [
         path: "/search",
         name: 'Suchen',
         component: Search
+    },
+    {
+        path: "/leave",
+        name: 'YourWeb verlassen',
+        component: YouWillLeave
     },
     {
         path: "/dashboard/home",
