@@ -33,7 +33,7 @@
     <div class="content-center">
       <h2 class="text-center text-green-500 text-sm uppercase">
         {{
-          type === 'link' ? "Wenn du auf Bestätigen Button drückst wirst du zu einer nicht YourWeb Seite weitergeleitet" : "Du kannst den angegebenen Namen kopieren"
+          type === 'link' ? "Wenn du auf den Bestätigen Button drückst wirst du zu einer nicht YourWeb Seite weitergeleitet" : "Du kannst den angegebenen Namen kopieren"
         }}</h2>
     </div>
   </div>
