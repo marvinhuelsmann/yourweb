@@ -14,7 +14,13 @@ if (isset($_GET['name']) &&
     isset($_GET['birthday']) &&
     isset($_GET['place']) &&
     isset($_GET['link']) &&
-    isset($_GET['image'])) {
+    isset($_GET['image']) &&
+
+    isset($_GET['twitter']) &&
+    isset($_GET['minecraft']) &&
+    isset($_GET['youtube']) &&
+    isset($_GET['discord']) &&
+    isset($_GET['twitch'])) {
 
     $userID = $_GET['userID'];
     $name = $_GET['name'];

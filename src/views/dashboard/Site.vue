@@ -222,7 +222,7 @@
                             Twitter Name
                           </p>
                           <label for="link" class="sr-only">Twitter</label>
-                          <input @input="setPreview(true)" v-model="user.twitter" id="Twitter" name="twitter"
+                          <input @input="setNoSaveChanges(true)" v-model="user.twitter" id="Twitter" name="twitter"
                                  autocomplete="twitter" required="" type="text"
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Twitter Name"/>
@@ -232,7 +232,7 @@
                             Minecraft Name
                           </p>
                           <label for="link" class="sr-only">Minecraft</label>
-                          <input @input="setPreview(true)" v-model="user.minecraft" id="Minecraft" name="minecraft"
+                          <input @input="setNoSaveChanges(true)" v-model="user.minecraft" id="Minecraft" name="minecraft"
                                  autocomplete="minecraft" required="" type="text"
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Minecraft Name"/>
@@ -242,7 +242,7 @@
                             Youtube Name
                           </p>
                           <label for="link" class="sr-only">Youtube</label>
-                          <input @input="setPreview(true)" v-model="user.youtube" id="Youtube" name="youtube"
+                          <input @input="setNoSaveChanges(true)" v-model="user.youtube" id="Youtube" name="youtube"
                                  autocomplete="youtube" required="" type="text"
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Youtube Name"/>
@@ -252,7 +252,7 @@
                             Twitch Name
                           </p>
                           <label for="link" class="sr-only">Twitch</label>
-                          <input @input="setPreview(true)" v-model="user.twitch" id="Twitch" name="twitch"
+                          <input @input="setNoSaveChanges(true)" v-model="user.twitch" id="Twitch" name="twitch"
                                  autocomplete="twitch" required="" type="text"
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Twitch Name"/>
@@ -262,7 +262,7 @@
                             Discord Name
                           </p>
                           <label for="link" class="sr-only">Discord</label>
-                          <input @input="setPreview(true)" v-model="user.discord" id="Discord" name="discord"
+                          <input @input="setNoSaveChanges(true)" v-model="user.discord" id="Discord" name="discord"
                                  autocomplete="discord" required="" type="text"
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Discord Name"/>
@@ -287,9 +287,6 @@
                     </button>
                     <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
                             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
-            </span>
                       Nächste Seite
                     </button>
                     <div v-if="loading" class="justify-center flex">
@@ -459,7 +456,8 @@ export default {
       this.unSaveChanges = false
       this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link, {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
+          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" + this.user.discord.replace('#', '@'), {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGaming
         }

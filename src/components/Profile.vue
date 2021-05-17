@@ -35,19 +35,19 @@
           {{ text }}
         </p>
         <div class="mt-4">
-          <a v-if="youtube != null && youtube !== ''" class="text-red-500 pr-1 pl-1" :href="'/social?redirect=' + youtube">
+          <a v-if="youtube != null && youtube !== ''" class="text-red-500 pr-1 pl-1" :href="'/social?redirect=https://www.youtube.com/results?search_query=' + youtube + '&type=link&name=Youtube&from=https://yourweb.monster/' + id">
             YouTube
           </a>
-          <a v-if="twitch != null && twitch !== ''" class="text-purple-500 pr-1 pl-1" :href="'/social?redirect=' + twitter">
+          <a v-if="twitch != null && twitch !== ''" class="text-purple-500 pr-1 pl-1" :href="'/social?redirect=https://twitch.tv/' + twitch + '&type=link&name=Twitter&from=https://yourweb.monster/' + id">
             Twitch
           </a>
-          <a v-if="minecraft != null && minecraft !== ''" class="text-green-500 pr-1 pl-1" :href="'/social?redirect=' + minecraft">
+          <a v-if="minecraft != null && minecraft !== ''" class="text-green-500 pr-1 pl-1" :href="'/social?redirect=' + minecraft + '&type=display&name=Minecraft&from=https://yourweb.monster/' + id">
             Minecraft
           </a>
-          <a v-if="twitter != null && twitter !== ''" class="text-blue-500 pr-1 pl-1" :href="'/social?redirect=' + twitter">
+          <a v-if="twitter != null && twitter !== ''" class="text-blue-500 pr-1 pl-1" :href="'/social?redirect=https://twitter.com/' + twitter + '&type=link&name=Twitter&from=https://yourweb.monster/' + id">
             Twitter
           </a>
-          <a v-if="discord != null && discord !== ''" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord">
+          <a v-if="discord != null && discord !== ''" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord.replace('#', '@') + '&type=display&name=Discord&from=https://yourweb.monster/' + id">
             Discord
           </a>
         </div>
