@@ -34,7 +34,24 @@
         <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
           {{ text }}
         </p>
-        <div class="mt-4" v-if="link !== '' && link !== null && link !== 'null'">
+        <div class="mt-4">
+          <a v-if="youtube != null && youtube !== ''" class="text-red-500 pr-1 pl-1" :href="'/social?redirect=' + youtube">
+            YouTube
+          </a>
+          <a v-if="twitch != null && twitch !== ''" class="text-purple-500 pr-1 pl-1" :href="'/social?redirect=' + twitter">
+            Twitch
+          </a>
+          <a v-if="minecraft != null && minecraft !== ''" class="text-green-500 pr-1 pl-1" :href="'/social?redirect=' + minecraft">
+            Minecraft
+          </a>
+          <a v-if="twitter != null && twitter !== ''" class="text-blue-500 pr-1 pl-1" :href="'/social?redirect=' + twitter">
+            Twitter
+          </a>
+          <a v-if="discord != null && discord !== ''" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord">
+            Discord
+          </a>
+        </div>
+        <div class="mt-3" v-if="link !== '' && link !== null && link !== 'null'">
           <a class="text-blue-500" :href="'/leave?redirect=' + link">
             Zu meiner Privaten Seite
           </a>
@@ -102,7 +119,14 @@ export default {
     imgUrl: String,
     showAdvertise: Boolean,
     redirect: String,
-    verify: String
+    verify: String,
+
+    twitter: String,
+    youtube: String,
+    twitch: String,
+    discord: String,
+    minecraft: String,
+
   },
   components: {
     LocationMarkerIcon,

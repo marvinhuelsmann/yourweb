@@ -26,7 +26,13 @@ if (isset($_GET['i'])) {
                 'likes' => $row['likes'],
                 'views' => $row['views'],
                 'verify' => $row['verify'],
-                'link' => $row['link']
+                'link' => $row['link'],
+
+                'twitter' => $row['twitter'],
+                'minecraft' => $row['minecraft'],
+                'youtube' => $row['youtube'],
+                'twitch' => $row['twitch'],
+                'discord' => $row['discord']
             ]);
             return http_response_code(200);
         }

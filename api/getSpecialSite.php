@@ -40,7 +40,13 @@ function getUser($userID, $fromID)
                 'likes' => $row['likes'],
                 'hasUserLiked' => $likeFind,
                 'views' => $row['views'],
-                'verify' => $row['verify']
+                'verify' => $row['verify'],
+
+                'twitter' => $row['twitter'],
+                'minecraft' => $row['minecraft'],
+                'youtube' => $row['youtube'],
+                'twitch' => $row['twitch'],
+                'discord' => $row['discord']
             ]);
         } else if ($alreadyFind) {
             return;

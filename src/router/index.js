@@ -6,6 +6,7 @@ import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
 import Search from '../views/Search.vue'
 import YouWillLeave from '../views/YouWillLeave.vue'
+import Social from '../views/SocialMedia'
 
 const routes = [
     {
@@ -47,6 +48,11 @@ const routes = [
         path: "/leave",
         name: 'YourWeb verlassen',
         component: YouWillLeave
+    },
+    {
+        path: "/social",
+        name: 'Zum SocialMedia',
+        component: Social
     },
     {
         path: "/dashboard/home",

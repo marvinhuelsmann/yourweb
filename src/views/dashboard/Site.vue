@@ -136,12 +136,14 @@
         </div>
         <div class="flex-1 relative z-0 flex overflow-hidden">
           <main v-if="userLoaded"
-              class="invisible md:visible xl:visible flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
+                class="invisible md:visible xl:visible flex-1 relative z-0 overflow-y-auto focus:outline-none xl:order-last">
             <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
               <div class="h-full border-2 border-gray-200 rounded-lg">
                 <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :name="user.name" :id="user.id"
                          :birthday="user.birthday" :img-url="user.image" :link="user.link"
-                         :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"/>
+                         :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"
+                         :twitter="user.twitter" :minecraft="user.minecraft" :twitch="user.twitch"
+                         :discord="user.discord" :youtube="user.youtube"/>
               </div>
             </div>
           </main>
@@ -150,17 +152,18 @@
               <div class="h-full rounded-lg">
                 <h1 class="font-bold text-4xl">Deine Seite</h1>
                 <div v-if="userLoaded">
-                  <form v-if="user.name != null" class="mt-8 space-y-6">
+                  <form v-if="user.name != null" class="space-y-6">
                     <input type="hidden" name="remember" value="true"/>
                     <div class="rounded-md shadow-sm -space-y-px">
                       <div class="py-1">
-                        <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
+                        <h2 class=" mt-3 text-center text-3xl font-medium text-gray-900">
                           mini Seite
                         </h2>
                         <p class=" text-center text-sm text-gray-600">
                           Diese Daten werden öffentlich auf deinem Profil stehen
                         </p>
                       </div>
+                      <div v-if="!isSocialMediaView">
                       <div class="">
                         <label for="name" class="sr-only">Name</label>
                         <input @input="setNoSaveChanges(true)" v-model="user.name" id="name" name="name"
@@ -192,9 +195,10 @@
                       </div>
                       <div class="pt-2">
                         <label for="link" class="sr-only">Link</label>
-                        <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required="" type="text"
+                        <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link"
+                               required="" type="text"
                                class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                               placeholder="Website zum verlinken" />
+                               placeholder="Website zum verlinken"/>
                       </div>
                       <div class="pt-2">
                         <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
@@ -211,14 +215,82 @@
                                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                   placeholder="Biographie*"/>
                       </div>
+                      </div>
+                      <div v-if="isSocialMediaView">
+                        <div class="pt-4 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Twitter Name
+                          </p>
+                          <label for="link" class="sr-only">Twitter</label>
+                          <input @input="setPreview(true)" v-model="user.twitter" id="Twitter" name="twitter"
+                                 autocomplete="twitter" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Twitter Name"/>
+                        </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Minecraft Name
+                          </p>
+                          <label for="link" class="sr-only">Minecraft</label>
+                          <input @input="setPreview(true)" v-model="user.minecraft" id="Minecraft" name="minecraft"
+                                 autocomplete="minecraft" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Minecraft Name"/>
+                        </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Youtube Name
+                          </p>
+                          <label for="link" class="sr-only">Youtube</label>
+                          <input @input="setPreview(true)" v-model="user.youtube" id="Youtube" name="youtube"
+                                 autocomplete="youtube" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Youtube Name"/>
+                        </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Twitch Name
+                          </p>
+                          <label for="link" class="sr-only">Twitch</label>
+                          <input @input="setPreview(true)" v-model="user.twitch" id="Twitch" name="twitch"
+                                 autocomplete="twitch" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Twitch Name"/>
+                        </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Discord Name
+                          </p>
+                          <label for="link" class="sr-only">Discord</label>
+                          <input @input="setPreview(true)" v-model="user.discord" id="Discord" name="discord"
+                                 autocomplete="discord" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Discord Name"/>
+                        </div>
+                        <div class="mt-1 flex items-center justify-between">
+                          <div class="flex text-sm items-center justify-between">
+                            <a href="#" @click="nextView()"
+                               class="font-medium text-indigo-600 hover:text-indigo-500">
+                              Zurück
+                            </a>
+                          </div>
+                        </div>
+                      </div>
                     </div>
 
-                    <button v-if="!loading" type="submit" @click="saveChanges()"
+                    <button v-if="!loading && isSocialMediaView" type="submit" @click="saveChanges()"
                             class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
             </span>
                       Speichern
+                    </button>
+                    <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
+                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
+            </span>
+                      Nächste Seite
                     </button>
                     <div v-if="loading" class="justify-center flex">
                       <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
@@ -284,8 +356,15 @@ export default {
         image: null,
         link: null,
         likes: null,
-        verify: null
+        verify: null,
+
+        twitter: null,
+        minecraft: null,
+        youtube: null,
+        discord: null,
+        twitch: null
       },
+      isSocialMediaView: false,
       userLoaded: false,
       sidebarOpen: false,
       unSaveChanges: false,
@@ -369,6 +448,9 @@ export default {
     },
     setNoSaveChanges(save) {
       this.unSaveChanges = save
+    },
+    nextView() {
+      this.isSocialMediaView = !this.isSocialMediaView;
     },
     saveChanges() {
       this.isInSession()

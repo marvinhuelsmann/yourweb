@@ -16,7 +16,13 @@ if (isset($_GET['name']) &&
     isset($_GET['place']) &&
     isset($_GET['image']) &&
     isset($_GET['link']) &&
-    isset($_GET['email'])) {
+    isset($_GET['email']) &&
+
+    isset($_GET['twitter']) &&
+    isset($_GET['minecraft']) &&
+    isset($_GET['youtube']) &&
+    isset($_GET['discord']) &&
+    isset($_GET['twitch'])) {
 
     $userID = $_GET['userID'];
     $name = $_GET['name'];
@@ -28,18 +34,26 @@ if (isset($_GET['name']) &&
     $image = $_GET['image'];
     $link = $_GET['link'];
     $email = $_GET['email'];
+
+    $twitter = $_GET['twitter'];
+    $minecraft = $_GET['minecraft'];
+    $youtube = $_GET['youtube'];
+    $twitch = $_GET['twitch'];
+    $discord = $_GET['discord'];
+
     $ip = getIp();
 
     $amountZero = 0;
 
     if (checkIfIdIsValid($tokenResponse, $userID)) {
 
-        $queryIntoSites = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`)
+        $queryIntoSites = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`, `twitter`, `minecraft`, `youtube`, `twitch`, `discord`)
  VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
-      '" . mysqli_real_escape_string($db, $image) . "',  '" . mysqli_real_escape_string($db, $link) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $amountZero) . "');";
+      '" . mysqli_real_escape_string($db, $image) . "',  '" . mysqli_real_escape_string($db, $link) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $amountZero) . "',
+       '" . mysqli_real_escape_string($db, $twitter) . "', '" . mysqli_real_escape_string($db, $minecraft) . "', '" . mysqli_real_escape_string($db, $youtube) . "', '" . mysqli_real_escape_string($db, $twitch) . "', '" . mysqli_real_escape_string($db, $discord) . "');";
 
         $user_check_query = "SELECT * FROM websites";
         $db_erg = mysqli_query($db, $user_check_query);
@@ -49,7 +63,6 @@ if (isset($_GET['name']) &&
                 $alreadyExistCode = true;
             }
         }
-
 
         if (!$alreadyExistCode) {
             if (mysqli_query($db, $queryIntoSites)) {

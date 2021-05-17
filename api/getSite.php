@@ -24,7 +24,13 @@ if (isset($_GET['i'])) {
                 'place' => $row['place'],
                 'image' => $row['image'],
                 'link' => $row['link'],
-                'verify' => $row['verify']
+                'verify' => $row['verify'],
+
+                'twitter' => $row['twitter'],
+                'minecraft' => $row['minecraft'],
+                'youtube' => $row['youtube'],
+                'twitch' => $row['twitch'],
+                'discord' => $row['discord']
             ]);
             return http_response_code(200);
         }

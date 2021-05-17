@@ -86,10 +86,53 @@
                       class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                       placeholder="Biographie*"/>
           </div>
-          <div class="pt-2">
-            <label for="color" class="">Lieblingsfarbe: </label>
-            <input id="color" name="color" autocomplete="color" type="color" required=""
-                   class="" placeholder="Farbe:"/>
+          <p class="pt-3 text-center text-sm text-gray-600">
+            Socialmedia
+          </p>
+          <div class="pt-4 pb-1">
+            <p class=" text-sm text-gray-600">
+              Twitter Name
+            </p>
+            <label for="link" class="sr-only">Twitter</label>
+            <input @input="setPreview(true)" v-model="user.socialmedia.twitter" id="Twitter" name="twitter" autocomplete="twitter" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Twitter Name" />
+          </div>
+          <div class="pt-2 pb-1">
+            <p class=" text-sm text-gray-600">
+              Minecraft Name
+            </p>
+            <label for="link" class="sr-only">Minecraft</label>
+            <input @input="setPreview(true)" v-model="user.socialmedia.minecraft" id="Minecraft" name="minecraft" autocomplete="minecraft" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Minecraft Name"/>
+          </div>
+          <div class="pt-2 pb-1">
+            <p class=" text-sm text-gray-600">
+              Youtube Name
+            </p>
+            <label for="link" class="sr-only">Youtube</label>
+            <input @input="setPreview(true)" v-model="user.socialmedia.youtube" id="Youtube" name="youtube" autocomplete="youtube" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Youtube Name"/>
+          </div>
+          <div class="pt-2 pb-1">
+            <p class=" text-sm text-gray-600">
+              Twitch Name
+            </p>
+            <label for="link" class="sr-only">Twitch</label>
+            <input @input="setPreview(true)" v-model="user.socialmedia.twitch" id="Twitch" name="twitch" autocomplete="twitch" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Twitch Name"/>
+          </div>
+          <div class="pt-2 pb-1">
+            <p class=" text-sm text-gray-600">
+              Discord Name
+            </p>
+            <label for="link" class="sr-only">Discord</label>
+            <input @input="setPreview(true)" v-model="user.socialmedia.discord" id="Discord" name="discord" autocomplete="discord" required="" type="text"
+                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                   placeholder="Discord Name"/>
           </div>
         </div>
         <div class="flex items-center justify-between">
@@ -132,6 +175,7 @@
   <div id="preview" class="pb-3" v-if="preview">
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
              :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image'
+             :twitter="user.socialmedia.twitter" :minecraft="user.socialmedia.minecraft" :twitch="user.socialmedia.twitch" :discord="user.socialmedia.discord" :youtube="user.socialmedia.youtube"
              show-advertise></Profile>
   </div>
 </template>
@@ -156,7 +200,14 @@ export default {
         place: store.state.user ? store.state.user.location : null,
         image: store.state.user ? store.state.user.avatar : null,
         email: store.state.user ? store.state.user.email : null,
-        link: null
+        link: null,
+        socialmedia: {
+          twitter: null,
+          minecraft: store.state.user.links.minecraft ? store.state.user.links.minecraft.cached_user.username : null,
+          youtube: store.state.user.links.youtube ? store.state.user.links.youtube.cached_user.username : null,
+          discord: store.state.user.links.discord ? store.state.user.links.discord.cached_user.username : null,
+          twitch: store.state.user.links.twitch ? store.state.user.links.twitch.cached_user.username : null
+        }
       },
       preview: false,
       loading: false,
@@ -182,6 +233,7 @@ export default {
     }
   },
   mounted() {
+    console.log(this.userOneGamingID)
     if (this.userOneGamingID === null) {
       window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
     }
@@ -212,7 +264,8 @@ export default {
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
-          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link, {
+          + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
+          + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.user.socialmedia.discord, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGamingID
         }
