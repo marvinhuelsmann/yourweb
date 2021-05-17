@@ -36,108 +36,114 @@
               Diese Daten werden öffentlich auf deinem Profil stehen
             </p>
           </div>
-          <div class="">
-            <label for="name" class="sr-only">Name</label>
-            <input @input="setPreview(true)" v-model="user.name" id="name" name="name" autocomplete="name" required=""
-                   type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Name*"/>
+          <div v-if="!isSocialMediaView">
+            <div class="">
+              <label for="name" class="sr-only">Name</label>
+              <input @input="setPreview(true)" v-model="user.name" id="name" name="name" autocomplete="name" required=""
+                     type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Name*"/>
+            </div>
+            <div class="pt-2">
+              <label for="birthday" class="sr-only">Geburtstag</label>
+              <input @input="setPreview(true)" v-model="user.birthday" id="birthday" name="birthday"
+                     autocomplete="birthday" required=""
+                     type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Geburtstag"/>
+            </div>
+            <div class="pt-2">
+              <label for="place" class="sr-only">Wohnort</label>
+              <input @input="setPreview(true)" v-model="user.place" id="place" name="place" autocomplete="place"
+                     required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Wohnort"/>
+            </div>
+            <div class="pt-2">
+              <label for="image" class="sr-only">Bild</label>
+              <input @input="setPreview(true)" v-model="user.image" id="image" name="image" autocomplete="image"
+                     required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Bild URL"/>
+            </div>
+            <div class="pt-2">
+              <label for="link" class="sr-only">Link</label>
+              <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required=""
+                     type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Website zum verlinken"/>
+            </div>
+            <div class="pt-2">
+              <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
+              <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader"
+                        autocomplete="subHeader" required=""
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Zwischenüberschrift*"/>
+            </div>
+            <div class="pt-2">
+              <label for="biography" class="sr-only">Biografie</label>
+              <textarea @input="setPreview(true)" v-model="user.text" id="biography" name="biography"
+                        autocomplete="biography" required=""
+                        class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                        placeholder="Biographie*"/>
+            </div>
           </div>
-          <div class="pt-2">
-            <label for="birthday" class="sr-only">Geburtstag</label>
-            <input @input="setPreview(true)" v-model="user.birthday" id="birthday" name="birthday"
-                   autocomplete="birthday" required=""
-                   type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Geburtstag"/>
-          </div>
-          <div class="pt-2">
-            <label for="place" class="sr-only">Wohnort</label>
-            <input @input="setPreview(true)" v-model="user.place" id="place" name="place" autocomplete="place"
-                   required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Wohnort"/>
-          </div>
-          <div class="pt-2">
-            <label for="image" class="sr-only">Bild</label>
-            <input @input="setPreview(true)" v-model="user.image" id="image" name="image" autocomplete="image"
-                   required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Bild URL"/>
-          </div>
-          <div class="pt-2">
-            <label for="link" class="sr-only">Link</label>
-            <input @input="setPreview(true)" v-model="user.link" id="link" name="link" autocomplete="link" required=""
-                   type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Website zum verlinken"/>
-          </div>
-          <div class="pt-2">
-            <label for="subHeader" class="sr-only">Zwischenüberschrift</label>
-            <textarea @input="setPreview(true)" v-model="user.subHeadLine" id="subHeader" name="subHeader"
-                      autocomplete="subHeader" required=""
-                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Zwischenüberschrift*"/>
-          </div>
-          <div class="pt-2">
-            <label for="biography" class="sr-only">Biografie</label>
-            <textarea @input="setPreview(true)" v-model="user.text" id="biography" name="biography"
-                      autocomplete="biography" required=""
-                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                      placeholder="Biographie*"/>
-          </div>
-          <p class="pt-3 text-center text-sm text-gray-600">
-            Socialmedia
-          </p>
-          <div class="pt-4 pb-1">
-            <p class=" text-sm text-gray-600">
-              Twitter Name
-            </p>
-            <label for="link" class="sr-only">Twitter</label>
-            <input @input="setPreview(true)" v-model="user.socialmedia.twitter" id="Twitter" name="twitter" autocomplete="twitter" required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Twitter Name" />
-          </div>
-          <div class="pt-2 pb-1">
-            <p class=" text-sm text-gray-600">
-              Minecraft Name
-            </p>
-            <label for="link" class="sr-only">Minecraft</label>
-            <input @input="setPreview(true)" v-model="user.socialmedia.minecraft" id="Minecraft" name="minecraft" autocomplete="minecraft" required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Minecraft Name"/>
-          </div>
-          <div class="pt-2 pb-1">
-            <p class=" text-sm text-gray-600">
-              Youtube Name
-            </p>
-            <label for="link" class="sr-only">Youtube</label>
-            <input @input="setPreview(true)" v-model="user.socialmedia.youtube" id="Youtube" name="youtube" autocomplete="youtube" required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Youtube Name"/>
-          </div>
-          <div class="pt-2 pb-1">
-            <p class=" text-sm text-gray-600">
-              Twitch Name
-            </p>
-            <label for="link" class="sr-only">Twitch</label>
-            <input @input="setPreview(true)" v-model="user.socialmedia.twitch" id="Twitch" name="twitch" autocomplete="twitch" required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Twitch Name"/>
-          </div>
-          <div class="pt-2 pb-1">
-            <p class=" text-sm text-gray-600">
-              Discord Name
-            </p>
-            <label for="link" class="sr-only">Discord</label>
-            <input @input="setPreview(true)" v-model="user.socialmedia.discord" id="Discord" name="discord" autocomplete="discord" required="" type="text"
-                   class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Discord Name"/>
+          <div v-if="isSocialMediaView">
+            <div class="pt-4 pb-1">
+              <p class=" text-sm text-gray-600">
+                Twitter Name
+              </p>
+              <label for="link" class="sr-only">Twitter</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.twitter" id="Twitter" name="twitter"
+                     autocomplete="twitter" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Twitter Name"/>
+            </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                Minecraft Name
+              </p>
+              <label for="link" class="sr-only">Minecraft</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.minecraft" id="Minecraft" name="minecraft"
+                     autocomplete="minecraft" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Minecraft Name"/>
+            </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                Youtube Name
+              </p>
+              <label for="link" class="sr-only">Youtube</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.youtube" id="Youtube" name="youtube"
+                     autocomplete="youtube" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Youtube Name"/>
+            </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                Twitch Name
+              </p>
+              <label for="link" class="sr-only">Twitch</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.twitch" id="Twitch" name="twitch"
+                     autocomplete="twitch" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Twitch Name"/>
+            </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                Discord Name
+              </p>
+              <label for="link" class="sr-only">Discord</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.discord" id="Discord" name="discord"
+                     autocomplete="discord" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Discord Name"/>
+            </div>
           </div>
         </div>
         <div class="flex items-center justify-between">
           <div class="flex text-sm items-center justify-between">
-            <a href="https://yourweb.monster" @click="setPreview()"
+            <a href="#" @click="isSocialMediaView ? nextView() : window.location.href = 'https://yourweb.monster'"
                class="font-medium text-indigo-600 hover:text-indigo-500">
               Zurück
             </a>
@@ -153,12 +159,16 @@
           <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
         </div>
         <div v-else-if="!alreadyExistValid">
-          <button type="submit" @click="createWebsite()"
+          <button v-if="isSocialMediaView" @click="createWebsite()"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             <span class="absolute left-0 inset-y-0 flex items-center pl-3">
               <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
             </span>
             Erstellen
+          </button>
+          <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
+                  class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            Nächste Seite
           </button>
         </div>
         <div v-else>
@@ -175,7 +185,8 @@
   <div id="preview" class="pb-3" v-if="preview">
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
              :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image'
-             :twitter="user.socialmedia.twitter" :minecraft="user.socialmedia.minecraft" :twitch="user.socialmedia.twitch" :discord="user.socialmedia.discord" :youtube="user.socialmedia.youtube"
+             :twitter="user.socialmedia.twitter" :minecraft="user.socialmedia.minecraft"
+             :twitch="user.socialmedia.twitch" :discord="user.socialmedia.discord" :youtube="user.socialmedia.youtube"
              show-advertise></Profile>
   </div>
 </template>
@@ -209,6 +220,7 @@ export default {
           twitch: store.state.user.links.twitch ? store.state.user.links.twitch.cached_user.username : null
         }
       },
+      isSocialMediaView: false,
       preview: false,
       loading: false,
       alreadyExist: false,
@@ -255,6 +267,9 @@ export default {
           window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
         }
       })
+    },
+    nextView() {
+      this.isSocialMediaView = !this.isSocialMediaView;
     },
     setPreview(preview) {
       this.preview = preview;
