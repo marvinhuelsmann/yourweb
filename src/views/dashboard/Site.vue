@@ -143,7 +143,7 @@
                          :birthday="user.birthday" :img-url="user.image" :link="user.link"
                          :sub-head-line="user.subHeadLine" :text="user.text" :place="user.place"
                          :twitter="user.twitter" :minecraft="user.minecraft" :twitch="user.twitch"
-                         :discord="user.discord" :youtube="user.youtube"/>
+                         :discord="user.discord" :youtube="user.youtube" :instagram="user.instagram" :snapchat="user.snapchat"/>
               </div>
             </div>
           </main>
@@ -267,6 +267,26 @@
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="Discord Name"/>
                         </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            Instagram Name
+                          </p>
+                          <label for="link" class="sr-only">Instagram</label>
+                          <input @input="setNoSaveChanges(true)" v-model="user.instagram" id="Instagram" name="instagram"
+                                 autocomplete="instagram" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="Instagram Name"/>
+                        </div>
+                        <div class="pt-2 pb-1">
+                          <p class=" text-sm text-gray-600">
+                            SnapChat Name
+                          </p>
+                          <label for="link" class="sr-only">SnapChat</label>
+                          <input @input="setNoSaveChanges(true)" v-model="user.snapchat" id="SnapChat" name="snapchat"
+                                 autocomplete="snapchat" required="" type="text"
+                                 class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                                 placeholder="SnapChat Name"/>
+                        </div>
                         <div class="mt-1 flex items-center justify-between">
                           <div class="flex text-sm items-center justify-between">
                             <a href="#" @click="nextView()"
@@ -359,7 +379,9 @@ export default {
         minecraft: null,
         youtube: null,
         discord: null,
-        twitch: null
+        twitch: null,
+        instagram: null,
+        snapchat: null
       },
       isSocialMediaView: false,
       userLoaded: false,
@@ -457,7 +479,7 @@ export default {
       this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
-          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" + this.user.discord.replace('#', '@'), {
+          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" + this.user.discord.replace('#', '@') + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGaming
         }

@@ -50,6 +50,12 @@
           <a v-if="discord != null && discord !== ''" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord.replace('#', '@') + '&type=display&name=Discord&from=https://yourweb.monster/' + id">
             Discord
           </a>
+          <a v-if="instagram != null && instagram !== ''" class="text-purple-600 pr-1 pl-1" :href="'/social?redirect=https://instagram.com/' + instagram + '&type=link&name=Instagram&from=https://yourweb.monster/' + id">
+            Instagram
+          </a>
+          <a v-if="snapchat != null && snapchat !== ''" class="text-yellow-400 pr-1 pl-1" :href="'/social?redirect=https://snapchat.com/add/' + snapchat + '&type=link&name=SnapChat&from=https://yourweb.monster/' + id">
+            SnapChat
+          </a>
         </div>
         <div class="mt-3" v-if="link !== '' && link !== null && link !== 'null'">
           <a class="text-blue-500" :href="'/leave?redirect=' + link">
@@ -126,6 +132,8 @@ export default {
     twitch: String,
     discord: String,
     minecraft: String,
+    instagram: String,
+    snapchat: String
 
   },
   components: {

@@ -30,7 +30,9 @@ if (isset($_GET['i'])) {
                 'minecraft' => $row['minecraft'],
                 'youtube' => $row['youtube'],
                 'twitch' => $row['twitch'],
-                'discord' => $row['discord']
+                'discord' => $row['discord'],
+                'instagram' => $row['instagram'],
+                'snapchat' => $row['snapchat']
             ]);
             return http_response_code(200);
         }

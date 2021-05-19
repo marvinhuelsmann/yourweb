@@ -11,7 +11,7 @@
     <div v-if="isLoaded">
       <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
                :place='user.place' :link="user.link"
-               :name='user.name' :img-url='user.image' :twitter="user.twitter" :minecraft="user.minecraft" :twitch="user.twitch" :discord="user.discord" :youtube="user.youtube"></Profile>
+               :name='user.name' :img-url='user.image' :twitter="user.twitter" :minecraft="user.minecraft" :twitch="user.twitch" :discord="user.discord" :youtube="user.youtube" :instagram="user.instagram" :snapchat="user.snapchat"></Profile>
       <div class="mt-3 mb-4 justify-center flex">
         <button
             class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"

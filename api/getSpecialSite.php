@@ -46,7 +46,9 @@ function getUser($userID, $fromID)
                 'minecraft' => $row['minecraft'],
                 'youtube' => $row['youtube'],
                 'twitch' => $row['twitch'],
-                'discord' => $row['discord']
+                'discord' => $row['discord'],
+                'instagram' => $row['instagram'],
+                'snapchat' => $row['snapchat']
             ]);
         } else if ($alreadyFind) {
             return;

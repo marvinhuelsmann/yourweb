@@ -20,6 +20,8 @@ if (isset($_GET['name']) &&
     isset($_GET['minecraft']) &&
     isset($_GET['youtube']) &&
     isset($_GET['discord']) &&
+    isset($_GET['instagram']) &&
+    isset($_GET['snapchat']) &&
     isset($_GET['twitch'])) {
 
     $userID = $_GET['userID'];
@@ -36,6 +38,8 @@ if (isset($_GET['name']) &&
     $youtube = $_GET['youtube'];
     $twitch = $_GET['twitch'];
     $discord = $_GET['discord'];
+    $instagram = $_GET['instagram'];
+    $snapchat = $_GET['snapchat'];
 
     $ip = getIp();
 
@@ -43,7 +47,8 @@ if (isset($_GET['name']) &&
 
         $sql = "UPDATE `websites` SET `ip` = '" . mysqli_real_escape_string($db, $ip) . "', `name` = '" . mysqli_real_escape_string($db, $name) . "', `text` = '" . mysqli_real_escape_string($db, $text) . "',
         `subHeadLine` = '" . mysqli_real_escape_string($db, $subHeadLine) . "', `birthday` = '" . mysqli_real_escape_string($db, $birthday) . "', `place` = '" . mysqli_real_escape_string($db, $place) . "',
-        `image` = '" . mysqli_real_escape_string($db, $image) . "', `link` = '" . mysqli_real_escape_string($db, $link) . "', `twitter` = '" . mysqli_real_escape_string($db, $twitter) . "', `minecraft` = '" . mysqli_real_escape_string($db, $minecraft) . "', `youtube` = '" . mysqli_real_escape_string($db, $youtube) . "', `twitch` = '" . mysqli_real_escape_string($db, $twitch) . "', `discord` = '" . mysqli_real_escape_string($db, $discord) . "'  WHERE `userID` = '" . mysqli_real_escape_string($db, $userID) . "'";
+        `image` = '" . mysqli_real_escape_string($db, $image) . "', `link` = '" . mysqli_real_escape_string($db, $link) . "', `twitter` = '" . mysqli_real_escape_string($db, $twitter) . "', `minecraft` = '" . mysqli_real_escape_string($db, $minecraft) . "', `youtube` = '" . mysqli_real_escape_string($db, $youtube) . "', `twitch` = '" . mysqli_real_escape_string($db, $twitch) . "', `discord` = '" . mysqli_real_escape_string($db, $discord) . "',
+        `instagram` = '" . mysqli_real_escape_string($db, $instagram) . "', `snapchat` = '" . mysqli_real_escape_string($db, $snapchat) . "'  WHERE `userID` = '" . mysqli_real_escape_string($db, $userID) . "'";
 
         $user_check_query = "SELECT * FROM websites";
         $db_erg = mysqli_query($db, $user_check_query);

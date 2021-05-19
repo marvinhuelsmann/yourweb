@@ -141,6 +141,26 @@
                      class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                      placeholder="Discord Name"/>
             </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                Instagram Name
+              </p>
+              <label for="link" class="sr-only">Instagram</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.instagram" id="Instagram" name="instagram"
+                     autocomplete="instagram" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="Instagram Name"/>
+            </div>
+            <div class="pt-2 pb-1">
+              <p class=" text-sm text-gray-600">
+                SnapChat Name
+              </p>
+              <label for="link" class="sr-only">SnapChat</label>
+              <input @input="setPreview(true)" v-model="user.socialmedia.snapchat" id="SnapChat" name="snapchat"
+                     autocomplete="snapchat" required="" type="text"
+                     class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
+                     placeholder="SnapChat Name"/>
+            </div>
           </div>
         </div>
         <div class="flex items-center justify-between">
@@ -188,7 +208,7 @@
     <Profile is-preview :name='user.name' :text='user.text' :sub-head-line='user.subHeadLine'
              :place='user.place' :birthday='user.birthday' :link="user.link" :img-url='user.image'
              :twitter="user.socialmedia.twitter" :minecraft="user.socialmedia.minecraft"
-             :twitch="user.socialmedia.twitch" :discord="user.socialmedia.discord" :youtube="user.socialmedia.youtube"
+             :twitch="user.socialmedia.twitch" :discord="user.socialmedia.discord" :youtube="user.socialmedia.youtube" :instagram="user.socialmedia.instagram" :snapchat="user.socialmedia.snapchat"
              show-advertise></Profile>
   </div>
 </template>
@@ -219,7 +239,9 @@ export default {
           minecraft: store.state.user.links.minecraft ? store.state.user.links.minecraft.cached_user.username : null,
           youtube: store.state.user.links.youtube ? store.state.user.links.youtube.cached_user.username : null,
           discord: store.state.user.links.discord ? store.state.user.links.discord.cached_user.username : null,
-          twitch: store.state.user.links.twitch ? store.state.user.links.twitch.cached_user.username : null
+          twitch: store.state.user.links.twitch ? store.state.user.links.twitch.cached_user.username : null,
+          instagram: null,
+          snapchat: null
         }
       },
       isSocialMediaView: false,
@@ -282,7 +304,7 @@ export default {
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
-          + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.user.socialmedia.discord.replace('#', '@'), {
+          + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.user.socialmedia.discord.replace('#', '@') + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenOneGamingID
         }
