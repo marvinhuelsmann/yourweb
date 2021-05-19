@@ -8,10 +8,10 @@
           </span>
           <p class="ml-3 font-medium text-white truncate">
             <span class="md:hidden">
-              Entwicklungsstart am 1.5.2021
+              Soziale Netzwerke verknüpfen!
             </span>
             <span class="hidden md:inline">
-              Große Neuigkeiten! Wir sind am entwickeln!
+              Erstelle deine persönliche mini Seite und verknüpfe deine Sozialen Netzwerke!
             </span>
           </p>
         </div>
