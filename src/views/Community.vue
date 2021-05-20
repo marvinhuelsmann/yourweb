@@ -9,9 +9,12 @@
       </router-link>
     </div>
     <div v-if="isLoaded">
-      <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text' :sub-head-line='user.subHeadLine' :birthday='user.birthday'
+      <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text'
+               :sub-head-line='user.subHeadLine' :birthday='user.birthday'
                :place='user.place' :link="user.link"
-               :name='user.name' :img-url='user.image' :twitter="user.twitter" :minecraft="user.minecraft" :twitch="user.twitch" :discord="user.discord" :youtube="user.youtube" :instagram="user.instagram" :snapchat="user.snapchat"></Profile>
+               :name='user.name' :img-url='user.image' :twitter="user.twitter" :minecraft="user.minecraft"
+               :twitch="user.twitch" :discord="user.discord" :youtube="user.youtube" :instagram="user.instagram"
+               :snapchat="user.snapchat"></Profile>
       <div class="mt-3 mb-4 justify-center flex">
         <button
             class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"
@@ -57,7 +60,7 @@
     </div>
     <div v-if="isLoaded" class="inset-x-0 bottom-0 h-16 ...">
       <p class="text-sm text-center justify-center flex text-gray-500">
-        Diese Website hat {{ user.views }} Community {{ user.views === 1 ? "Aufruf" : "Aufrufe"}}.
+        Diese Website hat {{ user.views }} Community {{ user.views === 1 ? "Aufruf" : "Aufrufe" }}.
       </p>
     </div>
   </div>
@@ -190,6 +193,8 @@ export default {
         return
       }
       this.isInSession()
+      this.user.likes++;
+      this.loveButtonRed = true
 
       if (this.userOneGamingID != null) {
         fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID, {
@@ -197,17 +202,18 @@ export default {
             'Authorization': 'Bearer ' + this.tokenOneGamingID
           }
         }).catch(error => {
-            console.error(error)
-          }).then(response => {
-            if (response.status === 200) {
-              this.user.likes++;
-            } else if (response.status === 400) {
-              this.alreadyLike = true
-            } else {
-              this.error = true
-            }
-            this.loveButtonRed = true
-          })
+          console.error(error)
+        }).then(response => {
+          if (response.status === 400) {
+            this.alreadyLike = true
+            this.loveButtonRed = false
+            this.user.likes--;
+          } else if (response.status !== 200) {
+            this.error = true
+            this.loveButtonRed = false
+            this.user.likes--;
+          }
+        })
       } else {
         window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
       }
