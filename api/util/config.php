@@ -38,7 +38,7 @@ function isValidToken($token)
     return $response;
 }
 
-function getAuthorizationHeader(){
+function getAuthorizationHeader() {
     $headers = null;
     if (isset($_SERVER['Authorization'])) {
         $headers = trim($_SERVER["Authorization"]);
