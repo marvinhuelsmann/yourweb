@@ -155,7 +155,7 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
       });
     },
     reload() {
@@ -220,7 +220,7 @@ export default {
           }
         })
       } else {
-        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
+        window.location = `https://yourweb.monster/not-login`
       }
     }
   }
