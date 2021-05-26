@@ -476,7 +476,7 @@ export default {
       this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
-          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" + this.user.discord.replace('#', '@') + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
+          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" +  this.user.discord !== '' && this.user.discord != null ? this.user.discord.replace('#', '@') : this.user.discord + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {
           'Authorization': 'Bearer ' + this.googleToken
         }
