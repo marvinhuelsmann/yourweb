@@ -267,6 +267,9 @@ export default {
     },
     tokenGoogle() {
       return store.state.token
+    },
+    discordModified() {
+      return this.user.socialmedia.discord !== '' && this.user.socialmedia.discord != null ? this.user.socialmedia.discord.replace('#', '@') : this.user.socialmedia.discord
     }
   },
   mounted() {
@@ -301,12 +304,11 @@ export default {
       this.preview = preview;
     },
     createWebsite() {
-      this.isInSession(this.tokenGoogle)
 
       this.loading = true;
       fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
-          + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.user.socialmedia.discord !== '' && this.user.socialmedia.discord != null ? this.user.socialmedia.discord.replace('#', '@') : this.user.socialmedia.discord + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
+          + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.discordModified + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
         headers: {
           'Authorization': 'Bearer ' + this.tokenGoogle
         }
@@ -323,7 +325,8 @@ export default {
             if (typeof this.userIdentify.id === 'undefined') {
               this.alreadyExist = true;
             } else {
-              window.location.href = "https://yourweb.monster/dashboard/site";
+              console.log("shot")
+             //  window.location.href = "https://yourweb.monster/dashboard/site";
             }
 
           })
