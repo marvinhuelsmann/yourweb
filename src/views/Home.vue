@@ -201,32 +201,55 @@ export default {
       navigation,
     }
   },
-  computed: {
-    user() {
-      return store.state.user
-    },
-    signIn() {
-      if (this.user != null) {
-        return  this.user.name + "'s Profil"
-      } else {
-        return "Anmelden"
-      }
-    }
-  },
-  mounted() {
-    if (this.user === null) {
-      if(localStorage.getItem('users')) {
-        this.$forceUpdate();
-        document.location.reload(true)
-      }
+  data() {
+    return {
+      user: store.state.user != null ? store.state.user : '',
+      userFullName: store.state.user != null ? store.state.user['Ue'] : ''
     }
   },
   methods: {
     authenticate() {
-      if (this.user === null) {
-        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-      } else {
+      if (this.user !== '') {
+        this.goToDashBoard()
+      } else this.handleClickSignIn()
+    },
+    goToDashBoard() {
+      if (this.user !== '') {
         window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb.monster/dashboard/home'
+      }
+    },
+    async handleClickSignIn() {
+      try {
+        const googleUser = await this.$gAuth.signIn();
+        if (!googleUser) {
+          return null;
+        }
+        this.user = googleUser.getBasicProfile();
+        this.userFullName = googleUser.getBasicProfile().getName();
+
+        store.mutations.SET_USER(googleUser.getBasicProfile())
+        store.mutations.SET_TOKEN(this.$gAuth.instance.currentUser.get().getAuthResponse().id_token)
+      } catch (error) {
+        console.error(error);
+        return null;
+      }
+    },
+  },
+  computed: {
+    googleUser() {
+      return store.state.user
+    },
+    signIn() {
+      if (this.user !== '') {
+        return this.user['Ue'] + "'s Profil";
+      } else return "Mit Google anmelden"
+    }
+  },
+  mounted() {
+    if (this.googleUser === null) {
+      if (localStorage.getItem('users')) {
+        this.$forceUpdate();
+        document.location.reload(true)
       }
     }
   }

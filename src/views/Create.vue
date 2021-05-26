@@ -1,5 +1,5 @@
 <template>
-  <div v-if="userOneGamingID != null"
+  <div v-if="googleUser != null"
        class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
@@ -28,7 +28,7 @@
             <label for="email-address" class="sr-only">Email address</label>
             <input id="email-address" name="email" type="email" autocomplete="email" required=""
                    class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                   placeholder="Email*" :value="this.userOneGamingID.email"/>
+                   placeholder="Email*" v-model="user.email"/>
           </div>
           <div class="py-1">
             <h2 class=" mt-6 text-center text-3xl font-medium text-gray-900">
@@ -217,6 +217,7 @@
 import {LockClosedIcon, ArrowDownIcon, ClockIcon} from '@heroicons/vue/solid'
 import Profile from "@/components/Profile";
 import {store} from "@/store";
+import {OAuth2Client} from "google-auth-library";
 
 export default {
   data() {
@@ -225,21 +226,21 @@ export default {
         id: null
       },
       user: {
-        name: store.state.user ? store.state.user.name : null,
+        name: store.state.user ? store.state.user["Ue"] : null,
         subHeadLine: null,
         color: null,
         text: null,
-        birthday: store.state.user ? store.state.user.birthday : null,
-        place: store.state.user ? store.state.user.location : null,
-        image: store.state.user ? store.state.user.avatar : null,
-        email: store.state.user ? store.state.user.email : null,
+        birthday: null,
+        place: null,
+        image: store.state.user ? store.state.user["uK"] : null,
+        email: store.state.user ? store.state.user['ou'] : null,
         link: null,
         socialmedia: {
           twitter: null,
-          minecraft: store.state.user.links.minecraft ? store.state.user.links.minecraft.cached_user.username : null,
-          youtube: store.state.user.links.youtube ? store.state.user.links.youtube.cached_user.username : null,
-          discord: store.state.user.links.discord ? store.state.user.links.discord.cached_user.username : null,
-          twitch: store.state.user.links.twitch ? store.state.user.links.twitch.cached_user.username : null,
+          minecraft: null,
+          youtube: null,
+          discord: null,
+          twitch: null,
           instagram: null,
           snapchat: null
         }
@@ -261,36 +262,37 @@ export default {
     alreadyExistValid() {
       return this.alreadyExist
     },
-    userOneGamingID() {
+    googleUser() {
       return store.state.user
     },
-    tokenOneGamingID() {
+    tokenGoogle() {
       return store.state.token
     }
   },
   mounted() {
-    console.log(this.userOneGamingID)
-    if (this.userOneGamingID === null) {
-      window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-    }
+    this.isInSession(this.tokenGoogle)
   },
   methods: {
-    isInSession() {
-      this.axios.get('https://id.onegaming.group/api/v1/user', {
-        headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGamingID
-        }
-      }).then(response => {
-        if (response.status === 200) {
-          store.mutations.SET_USER(response.data)
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          store.mutations.REMOVE_TOKEN()
-          store.mutations.REMOVE_USER()
-          window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-        }
-      })
+    isInSession(token) {
+      const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
+
+      async function verify() {
+        const ticket = await client.verifyIdToken({
+          idToken: token,
+          audience: "1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+          // Or, if multiple clients access the backend:
+          //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        });
+        const payload = ticket.getPayload();
+        // eslint-disable-next-line no-unused-vars
+        const userid = payload['sub'];
+        // If request specified a G Suite domain:
+        // const domain = payload['hd'];
+      }
+
+      verify().catch(() => {
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      });
     },
     nextView() {
       this.isSocialMediaView = !this.isSocialMediaView;
@@ -299,14 +301,14 @@ export default {
       this.preview = preview;
     },
     createWebsite() {
-      this.isInSession()
+      this.isInSession(this.tokenGoogle)
 
       this.loading = true;
-      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.userOneGamingID.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
           + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.user.socialmedia.discord.replace('#', '@') + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
         headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGamingID
+          'Authorization': 'Bearer ' + this.tokenGoogle
         }
       }).then(response => {
         if (response.status !== 404) {

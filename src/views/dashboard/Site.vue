@@ -1,5 +1,5 @@
 <template>
-  <div v-if="userOneGaming != null">
+  <div v-if="googleUser != null">
     <div class="h-screen flex overflow-hidden bg-white">
       <TransitionRoot as="template" :show="sidebarOpen">
         <Dialog as="div" static class="fixed inset-0 flex z-40 lg:hidden" @close="sidebarOpen = false"
@@ -49,12 +49,12 @@
                   <div class="flex items-center">
                     <div>
                       <a target="_blank" :href="'https://yourweb.monster/' + user.id">
-                        <img class="inline-block h-10 w-10 rounded-full" :src="userOneGaming.avatar" alt=""/>
+                        <img class="inline-block h-10 w-10 rounded-full" :src="googleUser['uK']" alt=""/>
                       </a>
                     </div>
                     <div class="ml-3">
                       <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {{ userOneGaming.name }}
+                        {{ googleUser["Ue"] }}
                       </p>
                       <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                         Ausloggen
@@ -99,12 +99,12 @@
                 <div class="flex items-center">
                   <div>
                     <a :href="'https://yourweb.monster/' + user.id">
-                      <img class="inline-block h-9 w-9 rounded-full" :src="userOneGaming.avatar" alt=""/>
+                      <img class="inline-block h-9 w-9 rounded-full" :src="googleUser['uK']" alt=""/>
                     </a>
                   </div>
                   <div class="ml-3">
                     <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {{ userOneGaming.name }}
+                      {{ googleUser["Ue"] }}
                     </p>
                     <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                       Ausloggen
@@ -357,6 +357,7 @@ import {
   ArrowDownIcon,
   ClockIcon, CalculatorIcon, CheckIcon
 } from '@heroicons/vue/outline'
+import {OAuth2Client} from "google-auth-library";
 
 export default {
   name: "Home",
@@ -410,20 +411,20 @@ export default {
     }
   },
   computed: {
-    userOneGaming() {
+    googleUser() {
       return store.state.user
     },
-    tokenOneGaming() {
+    googleToken() {
       return store.state.token
     }
   },
   mounted() {
-    this.isInSession()
+    this.isInSession(this.googleToken)
     this.finish = false
     this.userLoaded = false;
 
-    if (this.userOneGaming != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.userOneGaming.id).then(result => {
+    if (this.googleUser != null) {
+      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser['MT']).then(result => {
         result.json().then(result => {
           this.user = result
           this.userLoaded = true
@@ -435,34 +436,30 @@ export default {
     }
   },
   methods: {
-    authenticate() {
-      if (this.userOneGaming === null) {
-        window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-      } else {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb.monster/dashboard/home'
-      }
-    },
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
       window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
     },
-    isInSession() {
-      this.axios.get('https://id.onegaming.group/api/v1/user', {
-        headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGaming
-        }
-      }).then(response => {
-        if (response.status === 200) {
-          store.mutations.SET_USER(response.data)
-          store.mutations.SET_TOKEN(this.tokenOneGaming)
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          store.mutations.REMOVE_TOKEN()
-          store.mutations.REMOVE_USER()
-          window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-        }
+    isInSession(token) {
+      const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
+
+      async function verify() {
+        const ticket = await client.verifyIdToken({
+          idToken: token,
+          audience: "1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+          // Or, if multiple clients access the backend:
+          //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        });
+        const payload = ticket.getPayload();
+        // eslint-disable-next-line no-unused-vars
+        const userid = payload['sub'];
+        // If request specified a G Suite domain:
+        // const domain = payload['hd'];
+      }
+
+      verify().catch(() => {
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
       });
     },
     setNoSaveChanges(save) {
@@ -477,11 +474,11 @@ export default {
       this.finish = false
       this.unSaveChanges = false
       this.loading = true
-      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.userOneGaming.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
           + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" + this.user.discord.replace('#', '@') + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGaming
+          'Authorization': 'Bearer ' + this.googleToken
         }
       }).catch(error => {
         console.error(error)

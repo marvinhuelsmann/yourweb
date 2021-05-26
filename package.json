@@ -13,13 +13,16 @@
     "axios": "^0.21.1",
     "chart.js": "^3.2.1",
     "core-js": "^3.6.5",
+    "google-auth-library": "^7.1.0",
     "postcss": "^7",
     "stripe": "^8.148.0",
     "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.0.2",
     "vue": "^3.0.11",
     "vue-axios": "^3.2.4",
     "vue-chartjs": "^3.5.1",
-    "vue-google-login": "^2.0.5"
+    "vue-google-login": "^2.0.5",
+    "vue-google-signin-button-directive": "^1.0.3",
+    "vue3-google-oauth2": "^1.0.4"
   },
   "devDependencies": {
     "@headlessui/vue": "^1.2.0",

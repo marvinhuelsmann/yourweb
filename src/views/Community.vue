@@ -70,6 +70,7 @@
 import Profile from "@/components/Profile";
 import {HeartIcon, XIcon, ShieldExclamationIcon, ClipboardCopyIcon} from "@heroicons/vue/outline/esm";
 import {store} from "@/store";
+import {OAuth2Client} from "google-auth-library";
 
 export default {
   name: "Community",
@@ -112,10 +113,10 @@ export default {
         return "0";
       }
     },
-    userOneGamingID() {
+    googleUser() {
       return store.state.user
     },
-    tokenOneGamingID() {
+    tokenGoogleID() {
       return store.state.token
     },
     hasLiked() {
@@ -124,9 +125,9 @@ export default {
     isLoveButtonRed() {
       return this.loveButtonRed
     },
-    oneGamingUserID() {
-      if (this.userOneGamingID != null) {
-        return this.userOneGamingID.id
+    googleUserID() {
+      if (this.googleUser != null) {
+        return this.googleUser["MT"]
       } else {
         return "123456789"
       }
@@ -136,22 +137,26 @@ export default {
     this.reload()
   },
   methods: {
-    isInSession() {
-      this.axios.get('https://id.onegaming.group/api/v1/user', {
-        headers: {
-          'Authorization': 'Bearer ' + this.tokenOneGamingID
-        }
-      }).then(response => {
-        if (response.status === 200) {
-          store.mutations.SET_USER(response.data)
-        }
-      }).catch(error => {
-        if (error.response.status === 401) {
-          store.mutations.REMOVE_TOKEN()
-          store.mutations.REMOVE_USER()
-          window.location = `https://id.onegaming.group/api/v1/oauth2/authorize?scope=openid+profile+email&response_type=token&approval_prompt=auto&redirect_uri=${encodeURIComponent(process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/auth/callback' : 'https://yourweb.monster/auth/callback')}&client_id=6087146f33be422f07a57e4f`
-        }
-      })
+    isInSession(token) {
+      const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
+
+      async function verify() {
+        const ticket = await client.verifyIdToken({
+          idToken: token,
+          audience: "1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
+          // Or, if multiple clients access the backend:
+          //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
+        });
+        const payload = ticket.getPayload();
+        // eslint-disable-next-line no-unused-vars
+        const userid = payload['sub'];
+        // If request specified a G Suite domain:
+        // const domain = payload['hd'];
+      }
+
+      verify().catch(() => {
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      });
     },
     reload() {
       this.error = false
@@ -160,7 +165,7 @@ export default {
       this.isLoaded = false
 
       if (this.user.id === null || this.user.id === "null") {
-        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.oneGamingUserID).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.googleUserID).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -173,7 +178,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.oneGamingUserID).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.googleUserID).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -192,14 +197,14 @@ export default {
         this.alreadyLike = true
         return
       }
-      this.isInSession()
+      this.isInSession(this.tokenGoogleID)
       this.user.likes++;
       this.loveButtonRed = true
 
-      if (this.userOneGamingID != null) {
-        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.oneGamingUserID, {
+      if (this.googleUser != null) {
+        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.googleUserID, {
           headers: {
-            'Authorization': 'Bearer ' + this.tokenOneGamingID
+            'Authorization': 'Bearer ' + this.tokenGoogleID
           }
         }).catch(error => {
           console.error(error)
