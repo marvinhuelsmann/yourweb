@@ -416,6 +416,9 @@ export default {
     },
     googleToken() {
       return store.state.token
+    },
+    discordModified() {
+      return this.user.discord !== '' && this.user.discord != null ? this.user.discord.replace('#', '@') : this.user.discord
     }
   },
   mounted() {
@@ -469,14 +472,13 @@ export default {
       this.isSocialMediaView = !this.isSocialMediaView;
     },
     saveChanges() {
-      this.isInSession()
 
       this.finish = false
       this.unSaveChanges = false
       this.loading = true
       fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
-          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" +  this.user.discord !== '' && this.user.discord != null ? this.user.discord.replace('#', '@') : this.user.discord + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
+          + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" +  this.discordModified + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {
           'Authorization': 'Bearer ' + this.googleToken
         }
