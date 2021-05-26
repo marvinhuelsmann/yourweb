@@ -209,6 +209,7 @@ export default {
   },
   methods: {
     authenticate() {
+      if (this.user === 'undefined') this.handleClickSignIn()
       if (this.user !== '') {
         this.goToDashBoard()
       } else this.handleClickSignIn()
