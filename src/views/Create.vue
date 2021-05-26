@@ -291,7 +291,7 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
       });
     },
     nextView() {

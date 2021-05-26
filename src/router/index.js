@@ -1,6 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Home from '../views/Home.vue'
 import Create from '../views/Create.vue'
+import NotRegister from '../views/NotRegister.vue'
 import Profile from '../views/User.vue'
 import Community from '../views/Community.vue'
 import Search from '../views/Search.vue'
@@ -17,6 +18,11 @@ const routes = [
         path: '/create',
         name: 'Create',
         component: Create,
+    },
+    {
+        path: '/not-login',
+        name: 'Not LoggedIn',
+        component: NotRegister,
     },
     {
         path: '/community',

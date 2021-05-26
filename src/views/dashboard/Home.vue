@@ -253,7 +253,7 @@ export default {
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster'
     },
     isInSession(token) {
       const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
@@ -271,7 +271,7 @@ export default {
         // const domain = payload['hd'];
       }
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
       });
     }
   }
