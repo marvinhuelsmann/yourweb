@@ -223,7 +223,7 @@ export default {
   data() {
     return {
       userIdentify: {
-        id: null
+        success: null
       },
       user: {
         name: store.state.user ? store.state.user["Ue"] : null,
@@ -322,11 +322,10 @@ export default {
           }).finally(() => {
             this.loading = false;
 
-            if (typeof this.userIdentify.id === 'undefined') {
+            if (this.userIdentify.id === null) {
               this.alreadyExist = true;
             } else {
-              console.log("shot")
-             //  window.location.href = "https://yourweb.monster/dashboard/site";
+              window.location.href = "https://yourweb.monster/dashboard/site";
             }
 
           })
