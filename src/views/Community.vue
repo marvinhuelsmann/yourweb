@@ -138,9 +138,9 @@ export default {
       if (localStorage.getItem('users')) {
         this.$forceUpdate();
         document.location.reload(true)
+
+        this.isInSession(store.state.token)
       }
-    } else {
-      this.isInSession(store.state.token)
     }
 
     this.reload()
