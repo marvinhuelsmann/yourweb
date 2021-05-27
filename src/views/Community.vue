@@ -134,6 +134,15 @@ export default {
     }
   },
   mounted() {
+    if (this.googleUser === null) {
+      if (localStorage.getItem('users')) {
+        this.$forceUpdate();
+        document.location.reload(true)
+      }
+    } else {
+      this.isInSession(store.state.token)
+    }
+
     this.reload()
   },
   methods: {
