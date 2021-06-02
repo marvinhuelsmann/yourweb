@@ -230,7 +230,7 @@ export default {
     helloDayTime() {
       let today = new Date();
 
-      if (today.getUTCDate() >= 5) {
+      if (today.getDay() >= 5) {
         if (today.getHours() >= 13 && today.getHours() < 18) {
           if (today.getHours() >= 15) {
             return "Guten Nachmittag"
