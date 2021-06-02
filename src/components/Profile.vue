@@ -10,13 +10,13 @@
         <img class="object-center md:object-top xl:w-1/6 sm:w-1/4 ..." :src='imgUrl' style="display: inline-block"
              alt="">
         <h2 class="text-base text-indigo-600 pt-1 font-bold tracking-wide uppercase">{{ name }} </h2>
-        <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday != null">
+        <div class="justify-center text-center flex pt-2 sm:-mr-2" v-if="birthday != null  && place !== 'null'">
           <h2 class="text-indigo-500 font-semibold">
             {{ birthday }}
           </h2>
           <CakeIcon v-if="birthday !== ''" class="pl-0.5 h-6 w-6 text-indigo-500" aria-hidden="true"/>
         </div>
-        <div class="justify-center text-center flex sm:-mr-2" v-if="place !== null">
+        <div class="justify-center text-center flex sm:-mr-2" v-if="place !== null && place !== 'null'">
           <h2 class="text-indigo-500 font-semibold">
             {{ place }}
           </h2>
@@ -28,10 +28,10 @@
           </h2>
           <BadgeCheckIcon class="h-6 text-blue-500" aria-hidden="true"/>
         </div>
-        <p class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+        <p v-if="subHeadLine !== ''"  class="mt-2 pt-1 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           {{ subHeadLine }}
         </p>
-        <p class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
+        <p v-if="text !== ''" class="mt-4 max-w-2xl text-xl text-gray-500 mx-auto">
           {{ text }}
         </p>
         <div class="mt-4">
