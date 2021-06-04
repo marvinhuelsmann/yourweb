@@ -462,7 +462,7 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?redirect=dashboard/site' : 'https://yourweb.monster/not-login?redirect=dashboard/site'
       });
     },
     setNoSaveChanges(save) {

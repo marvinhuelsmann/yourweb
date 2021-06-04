@@ -3,7 +3,7 @@
        class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <a href="https://yourweb.monster">
+        <a :href="'https://yourweb.monster/'">
         <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
              alt="Workflow"/>
         </a>
@@ -165,7 +165,7 @@
         </div>
         <div class="flex items-center justify-between">
           <div class="flex text-sm items-center justify-between">
-            <a href="#" @click="isSocialMediaView ? nextView() : window.location.href = 'https://yourweb.monster'"
+            <a href="#" @click=" nextView(!isSocialMediaView)"
                class="font-medium text-indigo-600 hover:text-indigo-500">
               Zurück
             </a>
@@ -188,7 +188,7 @@
             </span>
             Erstellen
           </button>
-          <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
+          <button v-if="!isSocialMediaView" type="submit" @click="nextView(false)"
                   class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
             Nächste Seite
           </button>
@@ -294,10 +294,13 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?redirect=create' : 'https://yourweb.monster/not-login?redirect=create'
       });
     },
-    nextView() {
+    nextView(goHome) {
+      if (goHome) {
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      }
       this.isSocialMediaView = !this.isSocialMediaView;
     },
     setPreview(preview) {

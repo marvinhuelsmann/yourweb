@@ -304,7 +304,7 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?dashboard/settings' : 'https://yourweb.monster/not-login?dashboard/settings'
       });
     }
   }

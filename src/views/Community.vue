@@ -138,8 +138,6 @@ export default {
       if (localStorage.getItem('users')) {
         this.$forceUpdate();
         document.location.reload(true)
-
-        this.isInSession(store.state.token)
       }
     }
 
@@ -164,7 +162,7 @@ export default {
       }
 
       verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login' : 'https://yourweb.monster/not-login'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?redirect=community' : 'https://yourweb.monster/not-login?redirect=community'
       });
     },
     reload() {
@@ -229,7 +227,7 @@ export default {
           }
         })
       } else {
-        window.location = `https://yourweb.monster/not-login`
+        window.location = `https://yourweb.monster/not-login?redirect=community`
       }
     }
   }
