@@ -30,9 +30,6 @@ export default {
     this.handleClickSignIn()
   },
   methods: {
-    goHome() {
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
-    },
     async handleClickSignIn() {
       try {
         const googleUser = await this.$gAuth.signIn();
@@ -41,7 +38,7 @@ export default {
         }
         store.mutations.SET_USER(googleUser.getBasicProfile())
         store.mutations.SET_TOKEN(this.$gAuth.instance.currentUser.get().getAuthResponse().id_token)
-        window.location.href = 'http://localhost:8080/' + this.redirect.replace('redirect=', '')
+        window.location.href = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/' + this.redirect.replace('redirect=', '')
       } catch (error) {
         console.error(error);
         return null;
