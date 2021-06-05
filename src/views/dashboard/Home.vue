@@ -143,6 +143,15 @@
                   Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren.
                 </p>
               </div>
+              <div v-else>
+                <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
+                      integrity="sha256-p9TTWD+813MlLaxMXMbTA7wN/ArzGyW/L7c5+KkjOkM=" crossorigin="anonymous">
+                <div class="w-full h-full fixed block top-0 left-10 opacity-75 z-50">
+          <span class="text-purple-500 opacity-75 top-1/2 my-0 mx-auto block relative w-0 h-0" style="top: 30%">
+            <i class="fas fa-circle-notch fa-spin fa-5x"></i>
+          </span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -257,6 +266,7 @@ export default {
     },
     isInSession(token) {
       const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
+
       async function verify() {
         const ticket = await client.verifyIdToken({
           idToken: token,
@@ -270,6 +280,7 @@ export default {
         // If request specified a G Suite domain:
         // const domain = payload['hd'];
       }
+
       verify().catch(() => {
         window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?dashboard/home' : 'https://yourweb.monster/not-login?dashboard/home'
       });

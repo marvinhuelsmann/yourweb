@@ -15,7 +15,7 @@
       </div>
       <div class="flex justify-center">
       <button
-            class="px-9 mt-3 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"
+            class="mt-2 sign-in-google"
             v-on:click="handleClickSignIn">
           Mit Google anmelden
         </button>
@@ -80,3 +80,20 @@ export default {
   }
 }
 </script>
+
+<style>
+.sign-in-google {
+  align-items: center;
+  padding: 8px 16px;
+
+  width: 343px;
+  height: 50px;
+  left: 16px;
+  top: 82px;
+
+  color: white;
+
+  background: #2064d7;
+  border-radius: 7px;
+}
+</style>

@@ -60,7 +60,11 @@
               <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                            class="font-medium text-gray-500 hover:text-gray-900">{{ item.name }}
               </router-link>
-              <a href="#" @click="authenticate" class="font-medium text-indigo-600 hover:text-indigo-500"> {{ signIn }}</a>
+              <a href="#" @click="authenticate" class="sign-in-google font-medium text-white">
+                {{
+                  signIn
+                }}
+              </a>
             </div>
           </nav>
         </div>
@@ -88,7 +92,7 @@
                   }}</a>
               </div>
               <a href="#" @click="authenticate"
-                 class="block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
+                 class="sign-in-google block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                 {{ signIn }}
               </a>
             </div>
@@ -256,6 +260,7 @@ export default {
       verify().catch(() => {
         store.mutations.REMOVE_TOKEN()
         store.mutations.REMOVE_USER()
+        this.document.reload(true)
       });
     }
   },
@@ -281,3 +286,20 @@ export default {
   }
 }
 </script>
+
+<style>
+.sign-in-google {
+  align-items: center;
+  padding: 8px 16px;
+
+  width: 343px;
+  height: 50px;
+  left: 16px;
+  top: 82px;
+
+  color: white;
+
+  background: #2064d7;
+  border-radius: 7px;
+}
+</style>
