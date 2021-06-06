@@ -238,9 +238,10 @@ export default {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser["MT"]).then(result => {
         result.json().then(result => {
           this.user = result
-          this.isLoaded = true
         }).catch(error => {
           console.error(error)
+        }).finally(()  => {
+          this.isLoaded = true
         })
       })
     }
