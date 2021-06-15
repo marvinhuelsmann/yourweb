@@ -75,6 +75,11 @@ const routes = [
         component: () => import('../views/dashboard/Statistic.vue')
     },
     {
+        path: "/jobs",
+        name: 'Jobs',
+        component: () => import('../views/Jobs.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
         component: Profile

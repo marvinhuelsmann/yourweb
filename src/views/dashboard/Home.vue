@@ -170,7 +170,6 @@ const navigation = [
 ]
 
 import {Dialog, DialogOverlay, TransitionChild, TransitionRoot} from '@headlessui/vue'
-import {OAuth2Client} from 'google-auth-library'
 import {store} from "@/store";
 import {
   CalculatorIcon,
@@ -223,7 +222,7 @@ export default {
     }
   },
   mounted() {
-    this.isInSession(this.googleToken)
+    store.mutations.isInSession("dashboard/home")
 
     if (this.googleUser != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser["MT"]).then(result => {
@@ -263,27 +262,6 @@ export default {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
       window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster'
-    },
-    isInSession(token) {
-      const client = new OAuth2Client("1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com");
-
-      async function verify() {
-        const ticket = await client.verifyIdToken({
-          idToken: token,
-          audience: "1095032961626-se382fodqvi2op0kbhmkp4i9nlutneoo.apps.googleusercontent.com",  // Specify the CLIENT_ID of the app that accesses the backend
-          // Or, if multiple clients access the backend:
-          //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
-        });
-        const payload = ticket.getPayload();
-        // eslint-disable-next-line no-unused-vars
-        const userid = payload['sub'];
-        // If request specified a G Suite domain:
-        // const domain = payload['hd'];
-      }
-
-      verify().catch(() => {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?dashboard/home' : 'https://yourweb.monster/not-login?dashboard/home'
-      });
     }
   }
 }

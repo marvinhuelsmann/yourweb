@@ -34,7 +34,7 @@
   </div>
   <Popover class="relative bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto">
-      <div class="relative z-10 pb-8 bg-white sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+      <div class="relative z-10 bg-white md:pb-20 lg:max-w-2xl lg:w-full">
         <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
              fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polygon points="50,0 100,0 50,100 0,100"/>
@@ -43,7 +43,7 @@
           <nav class="relative flex items-center justify-between sm:h-10 lg:justify-start" aria-label="Global">
             <div class="flex items-center flex-grow flex-shrink-0 lg:flex-grow-0">
               <div class="flex items-center justify-between w-full md:w-auto">
-                <a href="#">
+                <a href="/">
                   <span class="sr-only">Workflow</span>
                   <img class="h-8 w-auto sm:h-10" src="../assets/images/yourweb.png" alt=""/>
                 </a>
@@ -75,7 +75,9 @@
             <div class="rounded-lg shadow-md bg-white ring-1 ring-black ring-opacity-5 overflow-hidden">
               <div class="px-5 pt-4 flex items-center justify-between">
                 <div>
+                  <a href="https://yourweb.monster">
                   <img class="h-8 w-auto" src="../assets/images/yourweb.png" alt=""/>
+                  </a>
                 </div>
                 <div class="-mr-2">
                   <PopoverButton
@@ -98,50 +100,44 @@
             </div>
           </PopoverPanel>
         </transition>
-
-        <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
-          <div class="sm:text-center lg:text-left">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
-              <span class="block xl:inline">Monster Website</span>
-              {{ ' ' }}
-              <span class="block text-green-600 xl:inline">für jeden Menschen kinderleicht</span>
-            </h1>
-            <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Mit der mini oder Max Seite sind deine Kreativität keine Grenzen gesetzt! Ob mit viel Text oder weniger...
-              Sie wird dir gefallen.
-            </p>
-
-
-            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-              <div class="rounded-md shadow">
-                <a href="/create"
-                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-green-600 hover:bg-green-700 md:py-4 md:text-lg md:px-10">
-                  mini Seite erstellen
-                </a>
-              </div>
-              <div class="mt-3 sm:mt-0 sm:ml-3">
-                <a href="#"
-                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-green-200 md:py-4 md:text-lg md:px-10">
-                  Max Seite erstellen
-                </a>
-              </div>
-            </div>
-          </div>
-        </main>
       </div>
     </div>
-    <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full"
-           src="../assets/images/banner.png"
-           alt=""/>
-    </div>
   </Popover>
+    <main class="mx-auto max-w-7xl px-4  px-8">
+      <div class="pb-2 grid grid-cols-3 gap-2 place-items-start h-48 ...">
+        <img src="../assets/images/memoji-black.png" alt="memoji banner"/>
+        <div/>
+        <img src="../assets/images/memoji-happy.png" alt="memoji banner"/>
+      </div>
+      <div class="lg:mt-10 sm:mt-2 text-center text-center">
+        <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
+          <span class="block inline">Monster Jobs</span>
+          {{ ' ' }}
+          <br/>
+          <span class="block text-green-700 xl:inline">helfe und oder organisiere</span>
+        </h1>
+        <p class="mt-3 text-center text-gray-500 text-lg sm:max-w-xl mx-auto md:mt-5 md:text-xl">
+          Helfe als Monster Moderator die Community Sektion oder spezfische mini Seiten von bösartigen Seiten fernzuhalten.
+        </p>
+
+
+        <div class="mt-5 sm:mt-8 flex justify-center justify-start">
+          <div class="mt-3 sm:mt-0 sm:ml-3">
+            <button disabled
+               aria-disabled="true"
+               class="w-full disabled:opacity-50 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-red-200 hover:text-red-600 md:py-4 md:text-lg md:px-10">
+              Keine Jobs verfügbar
+            </button>
+          </div>
+        </div>
+      </div>
+    </main>
   <div class="pt-10">
     <div class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">
           <span class="block">Bereit neues zu erleben?</span>
-          <span class="block text-indigo-600">Erstelle dir heute deine kostenlose mini Seite.</span>
+          <span class="block text-blue-600">Erstelle dir heute deine kostenlose mini Seite.</span>
         </h2>
         <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
           <div class="inline-flex rounded-md shadow">
@@ -162,7 +158,7 @@
   </div>
   <div class="xl:pt-10">
     <div class="focus-within:bg-white">
-      <div class=" py-12 px-4 sm:px-6 lg:py-16 lg:flex lg:items-center lg:justify-between">
+      <div class="py-12 px-4 sm:px-6 lg:py-16 lg:flex lg:items-center lg:justify-between">
         <h2 class="text-3xl content-center font-extrabold  text-gray-900 sm:text-4xl">
           <span class="block">Monster Websites</span>
         </h2>
