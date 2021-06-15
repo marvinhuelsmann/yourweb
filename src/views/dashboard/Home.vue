@@ -138,10 +138,17 @@
           <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
             <div class="h-full  border-dashed rounded-lg">
               <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ googleUser["Ue"] }}</h1>
-              <div v-if="user.name != null">
-                <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                  Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren.
-                </p>
+              <div v-if="isLoaded">
+                <div v-if="user.name != null">
+                  <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                    Du kannst deine mini Website mit der ID {{ user.id }} auf diesem Dashboard bearbeiten und editieren.
+                  </p>
+                </div>
+                <div v-else>
+                  <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                   Du besitzt momentan keine YourWeb Seite!
+                  </p>
+                </div>
               </div>
               <div v-else>
                 <link rel="stylesheet" href="https://pagecdn.io/lib/font-awesome/5.10.0-11/css/all.min.css"
@@ -197,7 +204,8 @@ export default {
         likes: null,
         verify: null
       },
-      sidebarOpen: false
+      sidebarOpen: false,
+      isLoaded: false
     }
   },
   components: {
@@ -223,6 +231,7 @@ export default {
   },
   mounted() {
     store.mutations.isInSession("dashboard/home")
+    this.isLoaded = false
 
     if (this.googleUser != null) {
       fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser["MT"]).then(result => {
@@ -230,6 +239,8 @@ export default {
           this.user = result
         }).catch(error => {
           console.error(error)
+        }).finally(()  => {
+          this.isLoaded = true
         })
       })
     }
