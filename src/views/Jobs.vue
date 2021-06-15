@@ -56,11 +56,11 @@
                 </div>
               </div>
             </div>
-            <div class="hidden md:block md:ml-10 md:pr-4 md:space-x-8">
+            <div class="hidden justify-center text-center w-full md:block md:ml-10 md:pr-4 md:space-x-8">
               <router-link v-for="item in navigation" :key="item.name" :to="item.href"
                            class="font-medium text-gray-500 hover:text-gray-900">{{ item.name }}
               </router-link>
-              <a href="#" @click="authenticate" class="sign-in-google font-medium text-white">
+              <a href="#" @click="authenticate" class="sign-in-google w-full font-medium text-white">
                 {{
                   signIn
                 }}
@@ -94,7 +94,7 @@
                   }}</a>
               </div>
               <a href="#" @click="authenticate"
-                 class="sign-in-google block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
+                 class="sign-in-google w-full block w-full px-5 py-3 text-center font-medium text-indigo-600 bg-gray-50 hover:bg-gray-100">
                 {{ signIn }}
               </a>
             </div>
@@ -102,7 +102,6 @@
         </transition>
       </div>
     </div>
-  </Popover>
     <main class="mx-auto max-w-7xl px-4  px-8">
       <div class="pb-2 grid grid-cols-3 gap-2 place-items-start h-48 ...">
         <img src="../assets/images/memoji-black.png" alt="memoji banner"/>
@@ -117,7 +116,7 @@
           <span class="block text-green-700 xl:inline">helfe und oder organisiere</span>
         </h1>
         <p class="mt-3 text-center text-gray-500 text-lg sm:max-w-xl mx-auto md:mt-5 md:text-xl">
-          Helfe als Monster Moderator die Community Sektion oder spezfische mini Seiten von bösartigen Seiten fernzuhalten.
+          Helfe als Monster Moderator die Community Sektion oder spezifische mini Seiten von bösartigen Seiten fernzuhalten.
         </p>
 
 
@@ -132,6 +131,7 @@
         </div>
       </div>
     </main>
+  </Popover>
   <div class="pt-10">
     <div class="bg-gray-50">
       <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
@@ -267,7 +267,6 @@ export default {
   align-items: center;
   padding: 8px 16px;
 
-  width: 343px;
   height: 50px;
   left: 16px;
   top: 82px;
