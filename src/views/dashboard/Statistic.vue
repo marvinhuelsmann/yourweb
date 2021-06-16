@@ -143,7 +143,7 @@
                   Hier kannst du deine mini Website Statistiken ansehen.
                 </p>
                 <div v-if="loaded">
-                  <div v-if="user.name != null" class="mt-32 space-y-6">
+                  <div v-if="user.name != null" class="lg:mt-32 sm:mt-20 space-y-6">
                     <div class="w-20 content-center mx-auto">
                       <HeartIcon class="text-red-500"/>
                     </div>

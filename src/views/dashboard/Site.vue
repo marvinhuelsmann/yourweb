@@ -163,8 +163,28 @@
                           Diese Daten werden öffentlich auf deinem Profil stehen
                         </p>
                       </div>
-                      <div v-if="!isSocialMediaView">
+                      <button v-if="!loading && isSocialMediaView" type="submit" @click="saveChanges()"
+                              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
+              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
+            </span>
+                        Speichern
+                      </button>
+                      <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
+                              class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Nächste Seite
+                      </button>
+                      <div v-if="isSocialMediaView" class="mt-1 flex items-center justify-center">
+                        <div class="flex text-sm items-center justify-center">
+                          <a href="#" @click="nextView()"
+                             class="mt-1 font-medium text-center text-indigo-600 hover:text-indigo-500">
+                           Zurück zu den Seiten Daten
+                          </a>
+                        </div>
+                      </div>
+                      <div class="pt-4" v-if="!isSocialMediaView">
                       <div class="">
+                        <!-- -->
                         <label for="name" class="sr-only">Name</label>
                         <input @input="setNoSaveChanges(true)" v-model="user.name" id="name" name="name"
                                autocomplete="name" required="" type="text"
@@ -287,28 +307,8 @@
                                  class="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
                                  placeholder="SnapChat Name"/>
                         </div>
-                        <div class="mt-1 flex items-center justify-between">
-                          <div class="flex text-sm items-center justify-between">
-                            <a href="#" @click="nextView()"
-                               class="font-medium text-indigo-600 hover:text-indigo-500">
-                              Zurück
-                            </a>
-                          </div>
-                        </div>
                       </div>
                     </div>
-
-                    <button v-if="!loading && isSocialMediaView" type="submit" @click="saveChanges()"
-                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-            <span class="absolute left-0 inset-y-0 flex items-center pl-3">
-              <LockClosedIcon class="h-5 w-5 text-indigo-500 group-hover:text-indigo-400" aria-hidden="true"/>
-            </span>
-                      Speichern
-                    </button>
-                    <button v-if="!isSocialMediaView" type="submit" @click="nextView()"
-                            class="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                      Nächste Seite
-                    </button>
                     <div v-if="loading" class="justify-center flex">
                       <ClockIcon class="animate-spin h-8 mr-3 ..." viewBox="0 0 24 24"/>
                     </div>
