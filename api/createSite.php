@@ -78,13 +78,13 @@ if (isset($_GET['name']) &&
             }
         } else {
             echo json_encode([
-                'error' => "a site with your onegaming id is already exist!"
+                'error' => "a site with your google id is already exist!"
             ]);
             return http_response_code(404);
         }
     } else {
         echo json_encode([
-            'error' => "your user id is not the same as your onegaming id"
+            'error' => "your user id is not the same as your response from the google token"
         ]);
         return http_response_code(401);
     }

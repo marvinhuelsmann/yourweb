@@ -63,13 +63,13 @@ if (isset($_GET['name']) &&
             mysqli_query($db, $sql);
         } else {
             echo json_encode([
-                'error' => "a site with your onegaming id is not exisiting!"
+                'error' => "a site with your google id is not exisiting!"
             ]);
             return http_response_code(404);
         }
     } else {
         echo json_encode([
-            'error' => "your user id is not the same as your onegaming id"
+            'error' => "your user id is not the same as your response from the google token"
         ]);
         return http_response_code(401);
     }

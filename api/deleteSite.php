@@ -33,7 +33,7 @@ if (isset($_GET['user'])) {
         }
     } else {
         echo json_encode([
-            'error' => "your token have not the same id as your id"
+            'error' => "your user id is not the same as your response from the google token"
         ]);
         return http_response_code(401);
     }
