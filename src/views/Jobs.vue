@@ -76,7 +76,7 @@
               <div class="px-5 pt-4 flex items-center justify-between">
                 <div>
                   <a href="https://yourweb.monster">
-                  <img class="h-8 w-auto" src="../assets/images/yourweb.png" alt=""/>
+                    <img class="h-8 w-auto" src="../assets/images/yourweb.png" alt=""/>
                   </a>
                 </div>
                 <div class="-mr-2">
@@ -102,11 +102,13 @@
         </transition>
       </div>
     </div>
-    <main class="mx-auto max-w-7xl px-4  px-8">
-      <div class="pb-2 grid grid-cols-3 gap-2 place-items-start h-48 ...">
-        <img src="../assets/images/memoji-black.png" alt="memoji banner"/>
+    <main class="mx-auto max-w-7xl px-4 px-8">
+      <div class="pb-2 flex justify-center responsive-at-root ...">
+        <div class="invisible sm:block sm:visible hidden">
+          <img src="../assets/images/memoji-black.png" alt="memoji banner"/>
+        </div>
         <div/>
-        <img src="../assets/images/memoji-happy.png" alt="memoji banner"/>
+          <img class="justify-center" src="../assets/images/memoji-happy.png" alt="memoji banner"/>
       </div>
       <div class="lg:mt-10 sm:mt-2 text-center text-center">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl md:text-6xl">
@@ -116,15 +118,16 @@
           <span class="block text-green-700 xl:inline">helfe und oder organisiere</span>
         </h1>
         <p class="mt-3 text-center text-gray-500 text-lg sm:max-w-xl mx-auto md:mt-5 md:text-xl">
-          Helfe als Monster Moderator die Community Sektion oder spezifische mini Seiten von bösartigen Seiten fernzuhalten.
+          Helfe als Monster Moderator die Community Sektion oder spezifische mini Seiten von bösartigen Seiten
+          fernzuhalten.
         </p>
 
 
         <div class="mt-5 sm:mt-8 flex justify-center justify-start">
           <div class="mt-3 sm:mt-0 sm:ml-3">
             <button disabled
-               aria-disabled="true"
-               class="w-full disabled:opacity-50 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-red-200 hover:text-red-600 md:py-4 md:text-lg md:px-10">
+                    aria-disabled="true"
+                    class="w-full disabled:opacity-50 flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-green-700 bg-green-100 hover:bg-red-200 hover:text-red-600 md:py-4 md:text-lg md:px-10">
               Keine Jobs verfügbar
             </button>
           </div>
