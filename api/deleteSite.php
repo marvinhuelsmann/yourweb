@@ -25,9 +25,23 @@ if (isset($_GET['user'])) {
             if (mysqli_query($db, $deleteSite)) {
                 return http_response_code(200);
             } else return http_response_code(503);
-        } else return http_response_code(400);
-    } else return http_response_code(401);
-} else return http_response_code(404);
-
+        } else {
+            echo json_encode([
+                'error' => "you dont have any yourweb site"
+            ]);
+            return http_response_code(400);
+        }
+    } else {
+        echo json_encode([
+            'error' => "your token have not the same id as your id"
+        ]);
+        return http_response_code(401);
+    }
+} else {
+    echo json_encode([
+        'error' => "parameter are missing"
+    ]);
+    return http_response_code(404);
+}
 
 ?>

@@ -40,7 +40,12 @@ if (isset($_GET['i'])) {
 
     if (!$count) return http_response_code(404);
 
-} else return http_response_code(404);
+} else {
+    echo json_encode([
+        'error' => "parameter are missing"
+    ]);
+    return http_response_code(404);
+}
 header('Content-Type: application/json');
 
 ?>

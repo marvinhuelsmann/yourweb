@@ -27,13 +27,30 @@ if (isset($_GET['id']) && isset($_GET['user'])) {
 
                 $queryIntoWebsites = "UPDATE websites SET `likes` = `likes`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $id) . "'";
                 if (mysqli_query($db, $queryIntoWebsites)) {
+                    echo json_encode([
+                        'success' => "you like the user"
+                    ]);
                     return http_response_code(200);
                 } else return http_response_code(503);
-
             } else return http_response_code(503);
-        } else return http_response_code(400);
-    } else return http_response_code(401);
-} else return http_response_code(404);
+        } else {
+            echo json_encode([
+                'error' => "you have already liked this person"
+            ]);
+            return http_response_code(400);
+        }
+    } else {
+        echo json_encode([
+            'error' => "your token have not the same id as your id"
+        ]);
+        return http_response_code(401);
+    }
+} else {
+    echo json_encode([
+        'error' => "parameter are missing"
+    ]);
+    return http_response_code(404);
+}
 
 
 ?>
