@@ -12,7 +12,7 @@
     "api/sendSiteLike.php": {
       "runtime": "vercel-php@0.4.0"
     },
-    "api/getSiteOneGamingID.php": {
+    "api/getSiteViaUserID.php": {
       "runtime": "vercel-php@0.4.0"
     },
     "api/saveChanges.php": {
@@ -27,7 +27,7 @@
     { "src": "/api/v1/getSite",  "dest": "/api/getSite.php" },
     { "src": "/api/v1/getCommunity",  "dest": "/api/getSpecialSite.php" },
     { "src": "/api/v1/sendLike",  "dest": "/api/sendSiteLike.php" },
-    { "src": "/api/v1/getSiteOneGaming",  "dest": "/api/getSiteOneGamingID.php" },
+    { "src": "/api/v1/getSiteViaUserID",  "dest": "/api/getSiteViaUserID.php" },
     { "src": "/api/v1/saveChanges",  "dest": "/api/saveChanges.php" },
     { "src": "/api/v1/delete",  "dest": "/api/deleteSite.php" }
   ]

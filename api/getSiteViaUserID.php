@@ -16,6 +16,7 @@ if (isset($_GET['i'])) {
 
             echo json_encode([
                 'id' => $row['id'],
+                'moderator' => $row['moderator'],
                 'name' => $row['name'],
                 'subHeadLine' => $row['subHeadLine'],
                 'color' => $row['color'],

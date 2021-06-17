@@ -80,6 +80,11 @@ const routes = [
         component: () => import('../views/Jobs.vue')
     },
     {
+        path: "/report",
+        name: 'Report',
+        component: () => import('../views/Report.vue')
+    },
+    {
         path: "/:pathMatch(.*)*",
         name: '404',
         component: Profile

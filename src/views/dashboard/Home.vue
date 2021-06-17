@@ -193,6 +193,7 @@ export default {
     return {
       user: {
         id: null,
+        moderator: null,
         name: null,
         subHeadLine: null,
         color: null,
@@ -240,7 +241,7 @@ export default {
     this.isLoaded = false
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + store.state.googleUser.id).then(result => {
+      fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
         }).catch(error => {

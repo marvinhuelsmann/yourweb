@@ -191,7 +191,7 @@ const navigation = [
   {name: 'Dashboard', href: '/dashboard/home', icon: HomeIcon, current: false},
   {name: 'Deine Seiten', href: '/dashboard/site', icon: MapIcon, current: false},
   {name: 'Statistiken', href: '#', icon: CalculatorIcon, current: true},
-  {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false},
+  {name: 'Einstellungen', href: '/dashboard/settings', icon: SearchCircleIcon, current: false}
 ]
 
 import {Dialog, DialogOverlay, TransitionChild, TransitionRoot} from '@headlessui/vue'
@@ -213,6 +213,7 @@ export default {
       user: {
         id: null,
         name: null,
+        moderator: null,
         subHeadLine: null,
         color: null,
         text: null,
@@ -280,7 +281,7 @@ export default {
     this.loaded = false;
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + store.state.googleUser.id).then(result => {
+      fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.loaded = true
           this.user = result

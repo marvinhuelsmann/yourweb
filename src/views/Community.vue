@@ -7,6 +7,9 @@
       <router-link :to='"/"  + user.id + "?redirect=community"'>
         <ClipboardCopyIcon class="w-10 h-10" aria-hidden="false"/>
       </router-link>
+      <router-link :to='"/report?id="  + user.id + ""'>
+        <ShieldExclamationIcon class="w-10 h-10 text-gray-500" aria-hidden="false"/>
+      </router-link>
     </div>
     <div v-if="isLoaded">
       <Profile :verify="user.verify === '0' ? 'FALSE' : 'TRUE'" :id="user.id" :text='user.text'
