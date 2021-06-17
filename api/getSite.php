@@ -38,7 +38,12 @@ if (isset($_GET['i'])) {
         }
     }
 
-    if (!$count) return http_response_code(404);
+    if (!$count) {
+        echo json_encode([
+            'error' => "No YourWeb page with the UserID could be found"
+        ]);
+        return http_response_code(404);
+    }
 
 } else {
     echo json_encode([
