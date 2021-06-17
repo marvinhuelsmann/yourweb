@@ -16,9 +16,9 @@
           </p>
         </div>
         <div class="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-          <a href="https://twitter.com/marvhuelsmann" target="_blank"
+          <a href="https://discord.gg/vHdefPjSxQ" target="_blank"
              class="flex items-center justify-center px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-indigo-600 bg-white hover:bg-indigo-50">
-            Erfahre mehr
+            YourWeb auf Discord
           </a>
         </div>
         <div class="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
@@ -34,7 +34,7 @@
   </div>
   <Popover class="relative bg-white overflow-hidden">
     <div class="max-w-7xl mx-auto">
-      <div class="relative z-10 bg-white md:pb-20 lg:max-w-2xl lg:w-full">
+      <div class="relative z-10 pb-8 bg-white md:pb-20 lg:max-w-2xl lg:w-full">
         <svg class="hidden lg:block absolute right-0 inset-y-0 h-full w-48 text-white transform translate-x-1/2"
              fill="currentColor" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
           <polygon points="50,0 100,0 50,100 0,100"/>
