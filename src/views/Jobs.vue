@@ -206,7 +206,7 @@ export default {
   data() {
     return {
       user: store.state.user != null ? store.state.user : '',
-      userFullName: store.state.user != null ? store.state.user['Ue'] : ''
+      userFullName: store.state.googleUser.name != null ? store.state.googleUser.name : ''
     }
   },
   methods: {
@@ -230,6 +230,11 @@ export default {
         this.user = googleUser.getBasicProfile();
         this.userFullName = googleUser.getBasicProfile().getName();
 
+        store.mutations.SET_GOOGLE_USER_NAME(googleUser.getBasicProfile().getName())
+        store.mutations.SET_GOOGLE_USER_ID(googleUser.getBasicProfile().getId())
+        store.mutations.SET_GOOGLE_USER_EMAIL(googleUser.getBasicProfile().getEmail())
+        store.mutations.SET_GOOGLE_USER_IMAGE(googleUser.getBasicProfile().getImageUrl())
+
         store.mutations.SET_USER(googleUser.getBasicProfile())
         store.mutations.SET_TOKEN(this.$gAuth.instance.currentUser.get().getAuthResponse().id_token)
       } catch (error) {
@@ -243,8 +248,8 @@ export default {
       return store.state.user
     },
     signIn() {
-      if (this.user !== '') {
-        return this.user['Ue'] + "'s Profil";
+      if (this.userFullName !== '') {
+        return this.userFullName + "'s Profil";
       } else return "Mit Google anmelden"
     }
   },

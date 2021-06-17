@@ -3,7 +3,13 @@ import {OAuth2Client} from "google-auth-library";
 export const store = {
     state: {
         user: JSON.parse(localStorage.getItem('users')),
-        token: JSON.parse(localStorage.getItem('token'))
+        token: JSON.parse(localStorage.getItem('token')),
+        googleUser: {
+            id: localStorage.getItem('id'),
+            name: localStorage.getItem('name'),
+            image: localStorage.getItem('image'),
+            email: localStorage.getItem('email')
+        }
     },
     mutations: {
         SET_TOKEN(token) {
@@ -16,8 +22,25 @@ export const store = {
             localStorage.setItem('users', JSON.stringify(user));
             console.log("set user")
         },
+        SET_GOOGLE_USER_NAME(name) {
+            localStorage.setItem('name', name)
+        },
+        SET_GOOGLE_USER_ID(id) {
+            localStorage.setItem('id', id)
+        },
+        SET_GOOGLE_USER_EMAIL(email) {
+            localStorage.setItem('email', email)
+        },
+        SET_GOOGLE_USER_IMAGE(image) {
+            localStorage.setItem('image', image)
+        },
         REMOVE_USER() {
             localStorage.removeItem('users')
+
+            localStorage.removeItem('name')
+            localStorage.removeItem('id')
+            localStorage.removeItem('image')
+            localStorage.removeItem('email')
         },
         REMOVE_TOKEN() {
             localStorage.removeItem('token')

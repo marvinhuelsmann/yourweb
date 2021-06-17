@@ -125,8 +125,8 @@ export default {
       return this.loveButtonRed
     },
     googleUserID() {
-      if (this.googleUser != null) {
-        return this.googleUser["MT"]
+      if (store.state.googleUser.id != null) {
+        return store.state.googleUser.id
       } else {
         return "123456789"
       }

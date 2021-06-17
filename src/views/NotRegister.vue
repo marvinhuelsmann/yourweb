@@ -48,6 +48,12 @@ export default {
           return null;
         }
         store.mutations.SET_USER(googleUser.getBasicProfile())
+
+        store.mutations.SET_GOOGLE_USER_NAME(googleUser.getBasicProfile().getName())
+        store.mutations.SET_GOOGLE_USER_ID(googleUser.getBasicProfile().getId())
+        store.mutations.SET_GOOGLE_USER_EMAIL(googleUser.getBasicProfile().getEmail())
+        store.mutations.SET_GOOGLE_USER_IMAGE(googleUser.getBasicProfile().getImageUrl())
+
         store.mutations.SET_TOKEN(this.$gAuth.instance.currentUser.get().getAuthResponse().id_token)
         window.location.href = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/'  + this.redirect.replace('redirect=', '') : 'https://yourweb.monster/' + this.redirect.replace('redirect=', '')
       } catch (error) {

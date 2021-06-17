@@ -225,14 +225,14 @@ export default {
         success: null
       },
       user: {
-        name: store.state.user ? store.state.user["Ue"] : null,
+        name: store.state.googleUser.name ? store.state.googleUser.name : null,
         subHeadLine: null,
         color: null,
         text: null,
         birthday: null,
         place: null,
-        image: store.state.user ? store.state.user["uK"] : null,
-        email: store.state.user ? store.state.user['ou'] : null,
+        image: store.state.googleUser.image ? store.state.googleUser.image : null,
+        email: store.state.googleUser.email ? store.state.googleUser.email : null,
         link: null,
         socialmedia: {
           twitter: null,
@@ -273,6 +273,7 @@ export default {
   },
   mounted() {
     store.mutations.isInSession("create")
+    console.log(this.user.email)
   },
   methods: {
     nextView(goHome) {
@@ -287,7 +288,7 @@ export default {
     createWebsite() {
 
       this.loading = true;
-      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
           + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.discordModified + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
         headers: {

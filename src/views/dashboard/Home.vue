@@ -49,12 +49,12 @@
                   <div class="flex items-center">
                     <div>
                       <a target="_blank" :href="'https://yourweb.monster/' + user.id">
-                        <img class="inline-block h-10 w-10 rounded-full" :src="googleUser['uK']" alt=""/>
+                        <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
                     <div class="ml-3">
                       <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {{ googleUser["Ue"] }}
+                        {{ googleUserName}}
                       </p>
                       <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                         Ausloggen
@@ -99,12 +99,12 @@
                 <div class="flex items-center">
                   <div>
                     <a :href="'https://yourweb.monster/' + user.id">
-                      <img class="inline-block h-9 w-9 rounded-full" :src="googleUser['uK']" alt=""/>
+                      <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
                   <div class="ml-3">
                     <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {{ googleUser["Ue"] }}
+                      {{ googleUserName }}
                     </p>
                     <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                       Ausloggen
@@ -137,7 +137,7 @@
         <div class="flex-1 relative z-0 flex overflow-hidden">
           <div class="absolute inset-0 py-6 px-4 sm:px-6 lg:px-8">
             <div class="h-full  border-dashed rounded-lg">
-              <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ googleUser["Ue"] }}</h1>
+              <h1 class="font-bold text-4xl">{{ helloDayTime() }}, {{ googleUserName }}</h1>
               <div v-if="isLoaded">
                 <div v-if="user.name != null">
                   <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
@@ -146,7 +146,7 @@
                 </div>
                 <div v-else>
                   <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                   Du besitzt momentan keine YourWeb Seite!
+                    Du besitzt momentan keine YourWeb Seite!
                   </p>
                 </div>
               </div>
@@ -225,6 +225,12 @@ export default {
     googleUser() {
       return store.state.user
     },
+    googleUserImage() {
+      return store.state.googleUser.image
+    },
+    googleUserName() {
+      return store.state.googleUser.name
+    },
     googleToken() {
       return store.state.token
     }
@@ -234,12 +240,12 @@ export default {
     this.isLoaded = false
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser["MT"]).then(result => {
+      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
         }).catch(error => {
           console.error(error)
-        }).finally(()  => {
+        }).finally(() => {
           this.isLoaded = true
         })
       })

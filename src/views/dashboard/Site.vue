@@ -425,6 +425,12 @@ export default {
     googleToken() {
       return store.state.token
     },
+    googleUserImage() {
+      return store.state.googleUser.image
+    },
+    googleUserName() {
+      return store.state.googleUser.name
+    },
     discordModified() {
       return this.user.discord !== '' && this.user.discord != null ? this.user.discord.replace('#', '@') : this.user.discord
     }
@@ -435,7 +441,7 @@ export default {
     this.userLoaded = false;
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser['MT']).then(result => {
+      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
           this.userLoaded = true
@@ -463,7 +469,7 @@ export default {
       this.finish = false
       this.unSaveChanges = false
       this.loading = true
-      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + this.googleUser['MT'] + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
           + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" +  this.discordModified + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {

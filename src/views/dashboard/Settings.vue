@@ -49,12 +49,12 @@
                   <div class="flex items-center">
                     <div>
                       <a target="_blank" :href="'https://yourweb.monster/' + user.id">
-                        <img class="inline-block h-10 w-10 rounded-full" :src="googleUser['uK']" alt=""/>
+                        <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
                     <div class="ml-3">
                       <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {{ googleUser["MT"] }}
+                        {{ googleUserName }}
                       </p>
                       <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                         Ausloggen
@@ -99,12 +99,12 @@
                 <div class="flex items-center">
                   <div>
                     <a :href="'https://yourweb.monster/' + user.id">
-                      <img class="inline-block h-9 w-9 rounded-full" :src="googleUser['uK']" alt=""/>
+                      <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
                   <div class="ml-3">
                     <p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">
-                      {{ googleUser["Ue"] }}
+                      {{ googleUserName }}
                     </p>
                     <p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
                       Ausloggen
@@ -250,6 +250,12 @@ export default {
     googleUser() {
       return store.state.user
     },
+    googleUserImage() {
+      return store.state.googleUser.image
+    },
+    googleUserName() {
+      return store.state.googleUser.name
+    },
     googleToken() {
       return store.state.token
     }
@@ -259,7 +265,7 @@ export default {
     this.loaded = false
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' + this.googleUser["MT"]).then(result => {
+      fetch('https://yourweb.monster/api/v1/getSiteOneGaming?i=' +  store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
         }).catch(error => {
@@ -276,7 +282,7 @@ export default {
       store.mutations.isInSession("dashboard/settings")
       this.deleteLoading = true
 
-      fetch('https://yourweb.monster/api/v1/delete?user=' + this.googleUser["MT"], {
+      fetch('https://yourweb.monster/api/v1/delete?user=' +  store.state.googleUser.id, {
         headers: {
           'Authorization': 'Bearer ' + this.googleToken
         }
