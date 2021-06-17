@@ -51,8 +51,8 @@ if (isset($_GET['name']) &&
 
     if (checkIfIdIsValid($tokenResponse, $userID)) {
 
-        $queryIntoSites = "INSERT INTO `websites` (`ip`, `userID`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`, `twitter`, `minecraft`, `youtube`, `twitch`, `discord`, `instagram`, `snapchat`)
- VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $name) . "',
+        $queryIntoSites = "INSERT INTO `websites` (`ip`, `userID`,`moderator`, `name`, `subHeadLine`, `birthday`, `text`, `email`, `color`, `place`, `image`, `link`, `likes`, `views`, `verify`, `twitter`, `minecraft`, `youtube`, `twitch`, `discord`, `instagram`, `snapchat`)
+ VALUES ('" . mysqli_real_escape_string($db, $ip) . "', '" . mysqli_real_escape_string($db, $userID) . "', '" . mysqli_real_escape_string($db, $amountZero) . "', '" . mysqli_real_escape_string($db, $name) . "',
      '" . mysqli_real_escape_string($db, $subHeadLine) . "', '" . mysqli_real_escape_string($db, $birthday) . "',
       '" . mysqli_real_escape_string($db, $text) . "','" . mysqli_real_escape_string($db, $email) . "',
       '" . mysqli_real_escape_string($db, $color) . "','" . mysqli_real_escape_string($db, $place) . "',
