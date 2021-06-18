@@ -142,7 +142,7 @@
                 <div v-if="user.name != null">
                   <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
                     Du kannst deine <strong>mini Website mit der ID {{ user.id }}</strong> auf diesem Dashboard bearbeiten und editieren.
-                    <span v-if="user.moderator">
+                    <span v-if="user.moderator === '1'">
                       Außerdem besitzt Du einen <strong>YourWeb Moderator Account</strong> mit dem du andere YourWeb Seiten löschen und Nutzer Meldungen lösen kannst.
                     </span>
                   </p>
