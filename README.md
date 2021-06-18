@@ -1,4 +1,4 @@
-<p align="center"><a href="https://zeig.ml" target="_blank">
+<p align="center"><a href="https://yourweb.monster" target="_blank">
 <img src="https://i.imgur.com/z31us5N.png">
 </a></p>
 
