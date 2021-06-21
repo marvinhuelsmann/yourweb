@@ -9,4 +9,4 @@
 yourweb.monster is a socialmedia website creator. Create your own online YourWeb page and get some analytics about their usage.  
 [More features] are comming!
 
-This is a [Vue.js](https://vuejs.org/) project where the CSS part made with [TailwindCSS](https://tailwindcss.com) and hosted by [Vercel](https://vercel.com/).
+This is a [Vue.js](https://vuejs.org/) 3 project where the CSS part made with [TailwindCSS](https://tailwindcss.com) and hosted by [Vercel](https://vercel.com/).
