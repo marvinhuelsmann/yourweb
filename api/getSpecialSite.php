@@ -1,9 +1,9 @@
 <?php
 header('Access-Control-Allow-Origin: *');
 
-getUser(!isset($_GET['oldUser']) ? '' : $_GET['oldUser'], $_GET['fromID']);
+getUser(!isset($_GET['oldUser']) ? '' : $_GET['oldUser'], $_GET['fromID'], !isset($_GET['redirectUser']) ? null : $_GET['redirectUser']);
 
-function getUser($userID, $fromID)
+function getUser($userID, $fromID, $redirectUser)
 {
     $db = mysqli_connect($_ENV['DB_HOSTNAME'], $_ENV['DB_USERNAME'], $_ENV['DB_PASSWORD'], $_ENV['DB_USERNAME']);
     $user_check_query = "SELECT * FROM websites ORDER BY rand()";
@@ -13,7 +13,8 @@ function getUser($userID, $fromID)
     $likeFind = false;
 
     while ($row = mysqli_fetch_array($db_erg, MYSQLI_ASSOC)) {
-        if ($row['id'] !== $userID && $alreadyFind == false || $userID === '' && $alreadyFind == false) {
+
+        if ($redirectUser === null ? $row['id'] !== $userID && $alreadyFind == false || $userID === '' && $alreadyFind == false : $row['id'] === $redirectUser) {
             $user_check_query = "SELECT * FROM yourweb_likes";
             $db_erg = mysqli_query($db, $user_check_query);
 
@@ -24,8 +25,10 @@ function getUser($userID, $fromID)
             }
             $alreadyFind = true;
 
-            $queryIntoWebsites = "UPDATE websites SET `views` = `views`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $row['id']) . "'";
-            mysqli_query($db, $queryIntoWebsites);
+            if ($redirectUser === null) {
+                $queryIntoWebsites = "UPDATE websites SET `views` = `views`+1 WHERE `id` = '" . mysqli_real_escape_string($db, $row['id']) . "'";
+                mysqli_query($db, $queryIntoWebsites);
+            }
 
             echo json_encode([
                 'id' => $row['id'],
