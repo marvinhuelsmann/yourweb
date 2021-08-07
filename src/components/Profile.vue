@@ -59,7 +59,7 @@
         </div>
         <div class="mt-3" v-if="link !== '' && link !== null && link !== 'null'">
           <a class="text-blue-500" :href="'/leave?redirect=' + link">
-            Zu meiner Privaten Seite
+            Zu der Privaten Seite
           </a>
         </div>
       </div>
