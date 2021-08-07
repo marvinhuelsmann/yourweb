@@ -198,7 +198,7 @@ export default {
         this.alreadyLike = true
         return
       }
-      store.mutations.isInSession("community")
+      store.mutations.isInSession("community?redirectUser=" + this.user.id)
       this.user.likes++;
       this.loveButtonRed = true
 
@@ -221,7 +221,7 @@ export default {
           }
         })
       } else {
-        window.location = `https://yourweb.monster/not-login?redirect=community`
+        window.location = 'https://yourweb.monster/not-login?redirect=community&redirectUser=' + this.user.id
       }
     }
   }
