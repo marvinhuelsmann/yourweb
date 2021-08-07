@@ -37,6 +37,7 @@ export default {
   },
   mounted() {
       if (localStorage.getItem('token')) {
+        this.sessionExpired = true
         store.mutations.isInSession()
       }
     },
