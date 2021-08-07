@@ -35,25 +35,25 @@
           {{ text }}
         </p>
         <div class="mt-4">
-          <a v-if="youtube != null && youtube !== '' && youtube !== 'null'" class="text-red-500 pr-1 pl-1" :href="'/social?redirect=https://www.youtube.com/results?search_query=' + youtube + '&type=link&name=Youtube&from=https://yourweb.monster/' + id">
+          <a v-if="youtube != null && youtube !== '' && youtube !== 'null'" class="text-red-500 pr-1 pl-1" :href="'/social?redirect=https://www.youtube.com/results?search_query=' + youtube + '&type=link&name=Youtube&from=https://yourweb.monster/community?redirectUser=' + id">
             YouTube
           </a>
-          <a v-if="twitch != null && twitch !== '' && twitch !== 'null'" class="text-purple-500 pr-1 pl-1" :href="'/social?redirect=https://twitch.tv/' + twitch + '&type=link&name=Twitter&from=https://yourweb.monster/' + id">
+          <a v-if="twitch != null && twitch !== '' && twitch !== 'null'" class="text-purple-500 pr-1 pl-1" :href="'/social?redirect=https://twitch.tv/' + twitch + '&type=link&name=Twitter&from=https://yourweb.monster/community?redirectUser=' + id">
             Twitch
           </a>
-          <a v-if="minecraft != null && minecraft !== '' && minecraft !== 'null'" class="text-green-500 pr-1 pl-1" :href="'/social?redirect=' + minecraft + '&type=display&name=Minecraft&from=https://yourweb.monster/' + id">
+          <a v-if="minecraft != null && minecraft !== '' && minecraft !== 'null'" class="text-green-500 pr-1 pl-1" :href="'/social?redirect=' + minecraft + '&type=display&name=Minecraft&from=https://yourweb.monster/community?redirectUser=' + id">
             Minecraft
           </a>
-          <a v-if="twitter != null && twitter !== '' && twitter !== 'null'" class="text-blue-500 pr-1 pl-1" :href="'/social?redirect=https://twitter.com/' + twitter + '&type=link&name=Twitter&from=https://yourweb.monster/' + id">
+          <a v-if="twitter != null && twitter !== '' && twitter !== 'null'" class="text-blue-500 pr-1 pl-1" :href="'/social?redirect=https://twitter.com/' + twitter + '&type=link&name=Twitter&from=https://yourweb.monster/community?redirectUser=' + id">
             Twitter
           </a>
-          <a v-if="discord != null && discord !== '' && discord !== 'null'" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord.replace('#', '@') + '&type=display&name=Discord&from=https://yourweb.monster/' + id">
+          <a v-if="discord != null && discord !== '' && discord !== 'null'" class="text-blue-700 pr-1 pl-1" :href="'/social?redirect=' + discord.replace('#', '@') + '&type=display&name=Discord&from=https://yourweb.monster/community?redirectUser=' + id">
             Discord
           </a>
-          <a v-if="instagram != null && instagram !== '' && instagram !== 'null'" class="text-purple-600 pr-1 pl-1" :href="'/social?redirect=https://instagram.com/' + instagram + '&type=link&name=Instagram&from=https://yourweb.monster/' + id">
+          <a v-if="instagram != null && instagram !== '' && instagram !== 'null'" class="text-purple-600 pr-1 pl-1" :href="'/social?redirect=https://instagram.com/' + instagram + '&type=link&name=Instagram&from=https://yourweb.monster/community?redirectUser=' + id">
             Instagram
           </a>
-          <a v-if="snapchat != null && snapchat !== '' && snapchat !== 'null'" class="text-yellow-400 pr-1 pl-1" :href="'/social?redirect=https://snapchat.com/add/' + snapchat + '&type=link&name=SnapChat&from=https://yourweb.monster/' + id">
+          <a v-if="snapchat != null && snapchat !== '' && snapchat !== 'null'" class="text-yellow-400 pr-1 pl-1" :href="'/social?redirect=https://snapchat.com/add/' + snapchat + '&type=link&name=SnapChat&from=https://yourweb.monster/community?redirectUser=' + id">
             SnapChat
           </a>
         </div>

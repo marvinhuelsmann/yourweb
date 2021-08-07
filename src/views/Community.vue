@@ -4,7 +4,7 @@
       <router-link to="/">
         <XIcon class="w-10 h-10" aria-hidden="false"/>
       </router-link>
-      <router-link :to='"/"  + user.id + "?redirect=community"'>
+      <router-link :to='"/"  + user.id + "?redirect=community?redirectUser=" + user.id'>
         <ClipboardCopyIcon class="w-10 h-10" aria-hidden="false"/>
       </router-link>
       <router-link :to='"/report?id="  + user.id + ""'>
@@ -21,7 +21,7 @@
       <div class="mt-3 mb-4 justify-center flex">
         <button
             class="px-9 py-4 font-semibold rounded-sm block sm:w-auto border-purple-300 bg-purple-200 hover:bg-purple-300 text-purple-700"
-            v-on:click="reload">
+            v-on:click="reload(true)">
           nächste Seite
         </button>
         <div v-if="isLoveButtonRed">
@@ -104,6 +104,8 @@ export default {
       isLoaded: false,
       alreadyLike: false,
       loveButtonRed: false,
+      redirectParameter: new URLSearchParams(window.location.search).get('redirectUser'),
+      format:  new URLSearchParams(window.location.search).get('redirectUser') !== 'null' && new URLSearchParams(window.location.search).get('redirectUser') != null ? "&redirectUser=" + new URLSearchParams(window.location.search).get('redirectUser') : "",
       error: false
     }
   },
@@ -143,17 +145,28 @@ export default {
       }
     }
 
-    this.reload()
+    if (this.format !== '') {
+      history.pushState("", "YourWeb", "/community")
+    }
+
+    this.reload(false)
   },
   methods: {
-    reload() {
+    reload(click) {
       this.error = false
       this.alreadyLike = false
       this.loveButtonRed = false
       this.isLoaded = false
 
+      console.log(this.format)
+      console.log(this.redirectParameter)
+
+      if (click && this.format !== '') {
+        this.format = ""
+      }
+
       if (this.user.id === null || this.user.id === "null") {
-        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.googleUserID).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.googleUserID + this.format).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -166,7 +179,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.googleUserID).then(result => {
+        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.googleUserID + this.format).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
