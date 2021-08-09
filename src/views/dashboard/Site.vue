@@ -41,6 +41,14 @@
                                  aria-hidden="true"/>
                       {{ item.name }}
                     </a>
+                    <div v-if="user.moderator === '1'">
+                      <a href="/dashboard/moderator/home"
+                         class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <ExclamationIcon class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6"
+                                         aria-hidden="true"/>
+                        Moderation
+                      </a>
+                    </div>
                   </div>
                 </nav>
               </div>
@@ -90,6 +98,12 @@
                                :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 h-6 w-6']"
                                aria-hidden="true"/>
                     {{ item.name }}
+                  </a>
+                  <a v-if="user.moderator === '1'"
+                     href="/dashboard/moderator/home"
+                     class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <ExclamationIcon class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6"/>
+                    Moderation
                   </a>
                 </div>
               </nav>
@@ -364,7 +378,7 @@ import {
   XIcon,
   LockClosedIcon,
   ArrowDownIcon,
-  ClockIcon, CalculatorIcon, CheckIcon
+  ClockIcon, CalculatorIcon, CheckIcon, ExclamationIcon
 } from '@heroicons/vue/outline'
 
 export default {
@@ -412,7 +426,8 @@ export default {
     LockClosedIcon,
     ArrowDownIcon,
     ClockIcon,
-    CheckIcon
+    CheckIcon,
+    ExclamationIcon
   },
   setup() {
     return {

@@ -41,6 +41,14 @@
                                  aria-hidden="true"/>
                       {{ item.name }}
                     </a>
+                    <div v-if="user.moderator === '1'">
+                      <a href="/dashboard/moderator/home"
+                         class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-base font-medium rounded-md">
+                        <ExclamationIcon class="text-gray-400 group-hover:text-gray-500 mr-4 h-6 w-6"
+                                         aria-hidden="true"/>
+                        Moderation
+                      </a>
+                    </div>
                   </div>
                 </nav>
               </div>
@@ -54,7 +62,7 @@
                     </div>
                     <div class="ml-3">
                       <p class="text-base font-medium text-gray-700 group-hover:text-gray-900">
-                        {{ googleUserName}}
+                        {{ googleUserName }}
                       </p>
                       <p class="text-sm font-medium text-gray-500 group-hover:text-gray-700">
                         Ausloggen
@@ -90,6 +98,12 @@
                                :class="[item.current ? 'text-gray-500' : 'text-gray-400 group-hover:text-gray-500', 'mr-3 h-6 w-6']"
                                aria-hidden="true"/>
                     {{ item.name }}
+                  </a>
+                  <a v-if="user.moderator === '1'"
+                     href="/dashboard/moderator/home"
+                     class="text-gray-600 hover:bg-gray-50 hover:text-gray-900 group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <ExclamationIcon class="text-gray-400 group-hover:text-gray-500 mr-3 h-6 w-6"/>
+                    Moderation
                   </a>
                 </div>
               </nav>
@@ -141,7 +155,8 @@
               <div v-if="isLoaded">
                 <div v-if="user.name != null">
                   <p class="mt-3 text-base text-gray-500 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                    Du kannst deine <strong>mini Website mit der ID {{ user.id }}</strong> auf diesem Dashboard bearbeiten und editieren.
+                    Du kannst deine <strong>mini Website mit der ID {{ user.id }}</strong> auf diesem Dashboard
+                    bearbeiten und editieren.
                     <span v-if="user.moderator === '1'">
                       Außerdem besitzt Du einen <strong>YourWeb Moderator Account</strong> mit dem du andere YourWeb Seiten löschen und Nutzer Meldungen lösen kannst.
                     </span>
@@ -188,6 +203,7 @@ import {
   MenuIcon,
   SearchCircleIcon,
   XIcon,
+  ExclamationIcon,
 } from '@heroicons/vue/outline'
 
 export default {
@@ -219,6 +235,7 @@ export default {
     TransitionRoot,
     MenuIcon,
     XIcon,
+    ExclamationIcon
   },
   setup() {
     return {
