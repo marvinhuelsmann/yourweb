@@ -1,25 +1,25 @@
 {
   "functions": {
     "api/createSite.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/getSite.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/getSpecialSite.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/sendSiteLike.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/getSiteViaUserID.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/saveChanges.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     },
     "api/deleteSite.php": {
-      "runtime": "vercel-php@0.4.0"
+      "runtime": "vercel-php@0.5.2"
     }
   },
   "routes": [
