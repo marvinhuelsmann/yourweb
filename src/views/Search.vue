@@ -97,7 +97,7 @@ export default {
         }).finally(() => {
           this.loading = false;
           if (result.status === 200) {
-            window.location.href = "https://yourweb-liart.vercel.app//" + this.user.name  + "?redirect=search";
+            window.location.href = "https://yourweb-liart.vercel.app/" + this.user.name  + "?redirect=search";
           } else {
             this.siteInvalid = true
           }

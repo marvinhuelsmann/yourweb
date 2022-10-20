@@ -56,7 +56,7 @@
                 <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id">
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app/' + user.id">
                         <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
@@ -112,7 +112,7 @@
               <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
-                    <a :href="'https://yourweb-liart.vercel.app//' + user.id">
+                    <a :href="'https://yourweb-liart.vercel.app/' + user.id">
                       <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
@@ -259,7 +259,7 @@ export default {
           this.isLoaded = true
 
           if (this.user.moderator !== '1') {
-            window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home?' : 'https://yourweb-liart.vercel.app//dashboard/home'
+            window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home?' : 'https://yourweb-liart.vercel.app/dashboard/home'
           }
         })
       })

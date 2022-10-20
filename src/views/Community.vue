@@ -221,7 +221,7 @@ export default {
           }
         })
       } else {
-        window.location = 'https://yourweb-liart.vercel.app//not-login?redirect=community&redirectUser=' + this.user.id
+        window.location = 'https://yourweb-liart.vercel.app/not-login?redirect=community&redirectUser=' + this.user.id
       }
     }
   }

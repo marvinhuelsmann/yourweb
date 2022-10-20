@@ -56,7 +56,7 @@
                 <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id">
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app/' + user.id">
                         <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
@@ -112,7 +112,7 @@
               <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
-                    <a :href="'https://yourweb-liart.vercel.app//' + user.id">
+                    <a :href="'https://yourweb-liart.vercel.app/' + user.id">
                       <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
@@ -328,14 +328,14 @@
                     </div>
                     <div v-if="finish && !unSaveChanges" class="justify-center flex">
                       <CheckIcon class="text-green-900 h-8 mr-3 ..." viewBox="0 0 24 24"/>
-                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id"
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app/' + user.id"
                          class="text-center underline pt-1.5 text-sm text-gray-600">
                         Zu deinen Profil
                       </a>
                     </div>
                   </form>
                   <div v-else>
-                    <h1><a class="text-blue-500" href="https://yourweb-liart.vercel.app//create">Du besitzt keine YourWeb Seite du
+                    <h1><a class="text-blue-500" href="https://yourweb-liart.vercel.app/create">Du besitzt keine YourWeb Seite du
                       kannst dir hier eine erstellen</a></h1>
                   </div>
                 </div>
@@ -472,7 +472,7 @@ export default {
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app//'
+      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app/'
     },
     setNoSaveChanges(save) {
       this.unSaveChanges = save

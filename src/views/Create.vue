@@ -3,7 +3,7 @@
        class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <a :href="'https://yourweb-liart.vercel.app//'">
+        <a :href="'https://yourweb-liart.vercel.app/'">
         <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
              alt="Workflow"/>
         </a>
@@ -278,7 +278,7 @@ export default {
   methods: {
     nextView(goHome) {
       if (goHome) {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app//'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app/'
       }
       this.isSocialMediaView = !this.isSocialMediaView;
     },
@@ -307,7 +307,7 @@ export default {
             if (this.userIdentify.id === null) {
               this.alreadyExist = true;
             } else {
-              window.location.href = "https://yourweb-liart.vercel.app//dashboard/site";
+              window.location.href = "https://yourweb-liart.vercel.app/dashboard/site";
             }
 
           })
