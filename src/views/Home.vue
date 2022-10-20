@@ -222,7 +222,7 @@ export default {
     },
     goToDashBoard() {
       if (this.user !== '') {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb.monster/dashboard/home'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home' : 'https://yourweb-liart.vercel.app//dashboard/home'
       }
     },
     async handleClickSignIn() {

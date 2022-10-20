@@ -56,7 +56,7 @@ export default {
         store.mutations.SET_GOOGLE_USER_IMAGE(googleUser.getBasicProfile().getImageUrl())
 
         store.mutations.SET_TOKEN(this.$gAuth.instance.currentUser.get().getAuthResponse().id_token)
-        window.location.href = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/'  + this.redirect.replace('redirect=', '') : 'https://yourweb.monster/' + this.redirect.replace('redirect=', '')
+        window.location.href = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/'  + this.redirect.replace('redirect=', '') : 'https://yourweb-liart.vercel.app//' + this.redirect.replace('redirect=', '')
       } catch (error) {
         console.error(error);
         return null;

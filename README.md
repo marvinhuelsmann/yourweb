@@ -1,10 +1,10 @@
-<p align="center"><a href="https://yourweb.monster" target="_blank">
+<p align="center"><a href="https://yourweb-liart.vercel.app/" target="_blank">
 <img src="https://i.imgur.com/z31us5N.png">
 </a></p>
 
 # 🤟 YourWeb `SocialMedia Website Creator`
 
-🤲 [yourweb.monster](https://yourweb.monster)
+🤲 [yourweb.monster](https://yourweb-liart.vercel.app/)
 
 yourweb.monster is a socialmedia website creator. Create your own online YourWeb page and get some analytics about their usage.  
 [More features] are comming!

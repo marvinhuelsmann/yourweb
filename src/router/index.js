@@ -7,6 +7,7 @@ import Community from '../views/Community.vue'
 import Search from '../views/Search.vue'
 import YouWillLeave from '../views/YouWillLeave.vue'
 import Social from '../views/SocialMedia'
+import Max from '../views/shop/Max.vue'
 
 const routes = [
     {
@@ -53,6 +54,11 @@ const routes = [
         path: "/social",
         name: 'Zum SocialMedia',
         component: Social
+    },
+    {
+        path: "/max",
+        name: 'Max Seite',
+        component: Max
     },
     {
         path: "/dashboard/home",

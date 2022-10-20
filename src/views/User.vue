@@ -56,7 +56,7 @@ export default {
   mounted() {
     this.isLoaded = false;
     this.isNotCorrectLoading = false;
-    fetch('https://yourweb.monster/api/v1/getSite?i=' + window.location.pathname.replace("/", "")).then(result => {
+    fetch('https://yourweb-liart.vercel.app/api/v1/getSite?i=' + window.location.pathname.replace("/", "")).then(result => {
       if (result.ok) {
         result.json().then(result => {
           this.user = result

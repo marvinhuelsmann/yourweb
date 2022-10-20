@@ -49,7 +49,7 @@ export default {
   },
   mounted() {
     store.mutations.isInSession("report?id=" + this.id)
-    fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + this.id).then(result => {
+    fetch('https://yourweb-liart.vercel.app/api/v1/getSiteViaUserID?i=' + this.id).then(result => {
       if (result.ok) {
         result.json().then(result => {
           this.user = result
@@ -69,7 +69,7 @@ export default {
       console.log(reason)
     },
     goHome() {
-      window.location.href = "https://yourweb.monster"
+      window.location.href = "https://yourweb-liart.vercel.app/"
     }
   }
 }

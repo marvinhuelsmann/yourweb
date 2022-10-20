@@ -56,7 +56,7 @@
                 <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <a target="_blank" :href="'https://yourweb.monster/' + user.id">
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id">
                         <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
@@ -112,7 +112,7 @@
               <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
-                    <a :href="'https://yourweb.monster/' + user.id">
+                    <a :href="'https://yourweb-liart.vercel.app//' + user.id">
                       <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
@@ -176,7 +176,7 @@
                   <div v-else>
                     <div class="mt-32 text-center">
                       <h1 class="font-bold text-3xl">Du besitzt keine YourWeb Seite</h1>
-                      <h2 class=" text-3xl"><a href="https://yourweb.monster/create" class="text-blue-500">Du kannst dir
+                      <h2 class=" text-3xl"><a href="https://yourweb-liart.vercel.app//create" class="text-blue-500">Du kannst dir
                         hier deine eigene Seite erstellen</a></h2>
                     </div>
                   </div>
@@ -296,7 +296,7 @@ export default {
     this.loaded = false;
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
+      fetch('https://yourweb-liart.vercel.app/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.loaded = true
           this.user = result
@@ -313,7 +313,7 @@ export default {
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app//'
     }
   }
 }

@@ -27,7 +27,7 @@
   <div class="mt-10 text-center">
     <div class="justify-center text-center flex">
       <h2 class="text-center text-green-600 font-bold tracking-wide uppercase"><a
-          href="https://yourweb.monster">YourWeb</a>
+          href="https://yourweb-liart.vercel.app/">YourWeb</a>
         - {{ new Date().getFullYear() }}</h2>
     </div>
     <div class="content-center">

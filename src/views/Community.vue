@@ -166,7 +166,7 @@ export default {
       }
 
       if (this.user.id === null || this.user.id === "null") {
-        fetch('https://yourweb.monster/api/v1/getCommunity?fromID=' + this.googleUserID + this.format).then(result => {
+        fetch('https://yourweb-liart.vercel.app/api/v1/getCommunity?fromID=' + this.googleUserID + this.format).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -179,7 +179,7 @@ export default {
           console.error(error)
         })
       } else {
-        fetch('https://yourweb.monster/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.googleUserID + this.format).then(result => {
+        fetch('https://yourweb-liart.vercel.app/api/v1/getCommunity?oldUser=' + this.user.id + "&fromID=" + this.googleUserID + this.format).then(result => {
           result.json().then(result => {
             this.user = result
           }).finally(() => {
@@ -203,7 +203,7 @@ export default {
       this.loveButtonRed = true
 
       if (this.googleUser != null) {
-        fetch('https://yourweb.monster/api/v1/sendLike?id=' + this.user.id + '&user=' + this.googleUserID, {
+        fetch('https://yourweb-liart.vercel.app/api/v1/sendLike?id=' + this.user.id + '&user=' + this.googleUserID, {
           headers: {
             'Authorization': 'Bearer ' + this.tokenGoogleID
           }
@@ -221,7 +221,7 @@ export default {
           }
         })
       } else {
-        window.location = 'https://yourweb.monster/not-login?redirect=community&redirectUser=' + this.user.id
+        window.location = 'https://yourweb-liart.vercel.app//not-login?redirect=community&redirectUser=' + this.user.id
       }
     }
   }

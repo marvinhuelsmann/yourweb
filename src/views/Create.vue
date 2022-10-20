@@ -3,7 +3,7 @@
        class="min-h-screen flex items-center justify-center bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
     <div class="max-w-md w-full space-y-8">
       <div>
-        <a :href="'https://yourweb.monster/'">
+        <a :href="'https://yourweb-liart.vercel.app//'">
         <img class="mx-auto h-12 w-auto" src="../assets/images/yourweb.png"
              alt="Workflow"/>
         </a>
@@ -278,7 +278,7 @@ export default {
   methods: {
     nextView(goHome) {
       if (goHome) {
-        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+        window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app//'
       }
       this.isSocialMediaView = !this.isSocialMediaView;
     },
@@ -288,7 +288,7 @@ export default {
     createWebsite() {
 
       this.loading = true;
-      fetch('https://yourweb.monster/api/v1/createSite?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb-liart.vercel.app/api/v1/createSite?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&email=" + this.user.email + "&color=" + this.user.color + "&link=" + this.user.link
           + "&twitter=" + this.user.socialmedia.twitter + "&minecraft=" + this.user.socialmedia.minecraft + "&youtube=" + this.user.socialmedia.youtube + "&twitch=" + this.user.socialmedia.twitch + "&discord=" + this.discordModified + "&instagram=" + this.user.socialmedia.instagram + "&snapchat=" + this.user.socialmedia.snapchat, {
         headers: {
@@ -307,7 +307,7 @@ export default {
             if (this.userIdentify.id === null) {
               this.alreadyExist = true;
             } else {
-              window.location.href = "https://yourweb.monster/dashboard/site";
+              window.location.href = "https://yourweb-liart.vercel.app//dashboard/site";
             }
 
           })

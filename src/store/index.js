@@ -68,7 +68,7 @@ export const store = {
                 store.mutations.REMOVE_USER()
                 this.document.reload(true)
                 } else {
-                    window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?' + redirect : 'https://yourweb.monster/not-login?' + redirect
+                    window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/not-login?' + redirect : 'https://yourweb-liart.vercel.app//not-login?' + redirect
                 }
             });
         }

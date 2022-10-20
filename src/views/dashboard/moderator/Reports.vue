@@ -56,7 +56,7 @@
                 <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <a target="_blank" :href="'https://yourweb.monster/' + user.id">
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id">
                         <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
@@ -112,7 +112,7 @@
               <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
-                    <a :href="'https://yourweb.monster/' + user.id">
+                    <a :href="'https://yourweb-liart.vercel.app//' + user.id">
                       <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
@@ -250,7 +250,7 @@ export default {
     this.isLoaded = false
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
+      fetch('https://yourweb-liart.vercel.app/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
         }).catch(error => {
@@ -259,7 +259,7 @@ export default {
           this.isLoaded = true
 
           if (this.user.moderator !== '1') {
-            window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home?' : 'https://yourweb.monster/dashboard/home'
+            window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/dashboard/home?' : 'https://yourweb-liart.vercel.app//dashboard/home'
           }
         })
       })
@@ -292,7 +292,7 @@ export default {
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster'
+      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app/'
     }
   }
 }

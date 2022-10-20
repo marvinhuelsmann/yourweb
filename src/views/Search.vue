@@ -30,7 +30,7 @@
         </div>
         <div class="flex items-center justify-between">
           <div class="flex text-sm items-center justify-between">
-            <a href="https://yourweb.monster" @click="setPreview()"
+            <a href="https://yourweb-liart.vercel.app/" @click="setPreview()"
                class="font-medium text-indigo-600 hover:text-indigo-500">
               Zurück
             </a>
@@ -91,13 +91,13 @@ export default {
       this.siteInvalid = false
       this.loading = true
 
-      fetch('https://yourweb.monster/api/v1/getSite?i=' + this.user.name).then(result => {
+      fetch('https://yourweb-liart.vercel.app/api/v1/getSite?i=' + this.user.name).then(result => {
         result.json().then(result => {
           this.user = result
         }).finally(() => {
           this.loading = false;
           if (result.status === 200) {
-            window.location.href = "https://yourweb.monster/" + this.user.name  + "?redirect=search";
+            window.location.href = "https://yourweb-liart.vercel.app//" + this.user.name  + "?redirect=search";
           } else {
             this.siteInvalid = true
           }

@@ -56,7 +56,7 @@
                 <a href="#" @click="logout" class="flex-shrink-0 group block">
                   <div class="flex items-center">
                     <div>
-                      <a target="_blank" :href="'https://yourweb.monster/' + user.id">
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id">
                         <img class="inline-block h-10 w-10 rounded-full" :src="googleUserImage" alt=""/>
                       </a>
                     </div>
@@ -112,7 +112,7 @@
               <a href="#" @click="logout" class="flex-shrink-0 w-full group block">
                 <div class="flex items-center">
                   <div>
-                    <a :href="'https://yourweb.monster/' + user.id">
+                    <a :href="'https://yourweb-liart.vercel.app//' + user.id">
                       <img class="inline-block h-9 w-9 rounded-full" :src="googleUserImage" alt=""/>
                     </a>
                   </div>
@@ -328,14 +328,14 @@
                     </div>
                     <div v-if="finish && !unSaveChanges" class="justify-center flex">
                       <CheckIcon class="text-green-900 h-8 mr-3 ..." viewBox="0 0 24 24"/>
-                      <a target="_blank" :href="'https://yourweb.monster/' + user.id"
+                      <a target="_blank" :href="'https://yourweb-liart.vercel.app//' + user.id"
                          class="text-center underline pt-1.5 text-sm text-gray-600">
                         Zu deinen Profil
                       </a>
                     </div>
                   </form>
                   <div v-else>
-                    <h1><a class="text-blue-500" href="https://yourweb.monster/create">Du besitzt keine YourWeb Seite du
+                    <h1><a class="text-blue-500" href="https://yourweb-liart.vercel.app//create">Du besitzt keine YourWeb Seite du
                       kannst dir hier eine erstellen</a></h1>
                   </div>
                 </div>
@@ -457,7 +457,7 @@ export default {
     this.userLoaded = false;
 
     if (this.googleUser != null) {
-      fetch('https://yourweb.monster/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
+      fetch('https://yourweb-liart.vercel.app/api/v1/getSiteViaUserID?i=' + store.state.googleUser.id).then(result => {
         result.json().then(result => {
           this.user = result
           this.userLoaded = true
@@ -472,7 +472,7 @@ export default {
     logout() {
       store.mutations.REMOVE_USER()
       store.mutations.REMOVE_TOKEN()
-      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb.monster/'
+      window.location = process.env.NODE_ENV !== 'production' ? 'http://localhost:8080/' : 'https://yourweb-liart.vercel.app//'
     },
     setNoSaveChanges(save) {
       this.unSaveChanges = save
@@ -485,7 +485,7 @@ export default {
       this.finish = false
       this.unSaveChanges = false
       this.loading = true
-      fetch('https://yourweb.monster/api/v1/saveChanges?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
+      fetch('https://yourweb-liart.vercel.app/api/v1/saveChanges?name=' + this.user.name + "&userID=" + store.state.googleUser.id + "&subHeadLine=" + this.user.subHeadLine + "&text=" + this.user.text + "&birthday=" + this.user.birthday
           + "&place=" + this.user.place + "&image=" + this.user.image + "&link=" + this.user.link
           + "&twitter=" + this.user.twitter + "&minecraft=" + this.user.minecraft + "&youtube=" + this.user.youtube + "&twitch=" + this.user.twitch + "&discord=" +  this.discordModified + "&instagram=" + this.user.instagram + "&snapchat=" + this.user.snapchat, {
         headers: {
